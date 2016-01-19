@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:text="Valider"
         android:id="@+id/buttonValider"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="50dp"
         android:background="#66d070"
         android:layout_below="@+id/textNom"
         android:layout_alignStart="@+id/editText" />
