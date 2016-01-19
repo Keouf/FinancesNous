@@ -120,11 +120,11 @@
             android:layout_height="wrap_content"
             android:text="Valider"
             android:id="@+id/buttonValider"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="53dp"
             android:textSize="14dp"
+            android:background="#66d070"
             android:layout_below="@+id/editTextMontant"
-            android:layout_toEndOf="@+id/textMontant"
-            android:background="#66d070" />
+            android:layout_toEndOf="@+id/textMontant" />
 
         <Button
             android:layout_width="wrap_content"
