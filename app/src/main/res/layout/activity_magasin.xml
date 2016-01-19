@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.pcportablevidjay.financesnous.Magasin">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Créer un magasin"
+        android:id="@+id/textTitreMagasin"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Nom *"
+        android:id="@+id/textNom"
+        android:layout_marginTop="37dp"
+        android:layout_below="@+id/textTitreMagasin"
+        android:layout_alignParentStart="true"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Adresse *"
+        android:id="@+id/textAdresse"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/textNom"
+        android:layout_alignParentStart="true"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Site-Web"
+        android:id="@+id/textSiteWeb"
+        android:layout_marginTop="31dp"
+        android:layout_below="@+id/textAdresse"
+        android:layout_alignParentStart="true"
+        android:textSize="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valider"
+        android:id="@+id/buttonValider"
+        android:layout_marginTop="50dp"
+        android:textSize="14dp"
+        android:background="#66d070"
+        android:layout_below="@+id/textTel"
+        android:layout_toEndOf="@+id/textAdresse" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Annuler"
+        android:id="@+id/buttonAnnuler"
+        android:textSize="14dp"
+        android:background="#dd514c"
+        android:layout_alignTop="@+id/buttonValider"
+        android:layout_alignEnd="@+id/textTitreMagasin" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Téléphone"
+        android:id="@+id/textTel"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/textSiteWeb"
+        android:layout_alignParentStart="true"
+        android:textSize="20dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_above="@+id/textAdresse"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/textTel"
+        android:layout_alignStart="@+id/editText2"
+        android:textSize="14dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:layout_above="@+id/textSiteWeb"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/editText3"
+        android:textSize="14dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/editText3"
+        android:layout_above="@+id/textTel"
+        android:layout_alignParentEnd="true"
+        android:textSize="14dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:id="@+id/editText4"
+        android:layout_above="@+id/buttonValider"
+        android:layout_alignStart="@+id/editText3"
+        android:text="4"
+        android:textSize="14dp" />
+</RelativeLayout>

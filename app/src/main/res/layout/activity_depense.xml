@@ -38,7 +38,9 @@
             android:layout_marginRight="5dp"
             android:layout_alignEnd="@+id/buttonAnnuler"
             android:layout_toEndOf="@+id/textEnseigne"
-            android:layout_marginLeft="5dp" />
+            android:layout_marginLeft="5dp"
+            android:textColor="#888888"
+            android:textSize="14dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,7 +61,9 @@
             android:layout_alignBottom="@+id/textEnseigne"
             android:layout_marginRight="5dp"
             android:layout_alignEnd="@+id/buttonAnnuler"
-            android:layout_alignStart="@+id/editTextDomaine" />
+            android:layout_alignStart="@+id/editTextDomaine"
+            android:textSize="14dp"
+            android:textColor="#888888" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -92,7 +96,9 @@
             android:layout_alignBottom="@+id/textDate"
             android:layout_marginRight="5dp"
             android:layout_alignStart="@+id/editTextEnseigne"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:textColor="#888888"
+            android:textSize="14dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -113,17 +119,19 @@
             android:layout_alignBottom="@+id/textMontant"
             android:layout_marginRight="5dp"
             android:layout_alignStart="@+id/editTextEnseigne"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:textSize="14dp"
+            android:textColor="#888888" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Valider"
             android:id="@+id/buttonValider"
-            android:layout_marginTop="53dp"
+            android:layout_marginTop="50dp"
             android:textSize="14dp"
             android:background="#66d070"
-            android:layout_below="@+id/editTextMontant"
+            android:layout_below="@+id/textMontant"
             android:layout_toEndOf="@+id/textMontant" />
 
         <Button
@@ -132,9 +140,9 @@
             android:text="Annuler"
             android:id="@+id/buttonAnnuler"
             android:textSize="14dp"
+            android:background="#dd514c"
             android:layout_alignTop="@+id/buttonValider"
-            android:layout_alignEnd="@+id/textTitreDepense"
-            android:background="#dd514c" />
+            android:layout_alignEnd="@+id/textTitreDepense" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
@@ -169,7 +177,9 @@
             android:layout_alignBottom="@+id/textAdresse"
             android:layout_alignStart="@+id/editTextEnseigne"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="5dp" />
+            android:layout_marginRight="5dp"
+            android:textColor="#888888"
+            android:textSize="14dp" />
 
     </RelativeLayout>
 </LinearLayout>
