@@ -13,8 +13,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.json.JSONArray;
+
+import classes.AndroidConnectivity;
+import classes.MyDBHelper;
+
 public class Accueil extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    MyDBHelper myDBHelper = new MyDBHelper();
+    AndroidConnectivity androidConnectivity = new AndroidConnectivity(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +48,13 @@ public class Accueil extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if (androidConnectivity.getConnectivityStatus())
+        {
+            JSONArray mes10DerniersDepenses = myDBHelper.get10DerniersDepenses();
+
+            // Utilise le JSON : mes10DerniersDepenses!
+        }
     }
 
     @Override
