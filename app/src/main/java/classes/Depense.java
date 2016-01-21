@@ -7,7 +7,7 @@ public class Depense {
 
     private Integer idDepense;
     private Date dateDepense;
-    private float montant;
+    private double montant;
     private String pieceJoint;
     private Magasin magasin;
     private Domaine domaine;
@@ -25,10 +25,10 @@ public class Depense {
     public void setDateDepense(Date dateDepense) {
         this.dateDepense = dateDepense;
     }
-    public float getMontant() {
+    public double getMontant() {
         return montant;
     }
-    public void setMontant(float montant) {
+    public void setMontant(double montant) {
         this.montant = montant;
     }
     public String getPieceJoint() {
@@ -56,7 +56,7 @@ public class Depense {
         this.utilisatuer = utilisatuer;
     }
 
-    public Depense(Integer idDepense, Date dateDepense, float montant, Utilisateur utilisatuer, Domaine domaine, Magasin magasin, String pieceJoint) {
+    public Depense(Integer idDepense, Date dateDepense, double montant, Utilisateur utilisatuer, Domaine domaine, Magasin magasin, String pieceJoint) {
         this.idDepense = idDepense;
         this.dateDepense = dateDepense;
         this.montant = montant;

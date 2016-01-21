@@ -35,6 +35,10 @@ public class Utilisateur {
     public void setMesDepenses(Map<Integer, Depense> mesDepenses) {
         this.mesDepenses = mesDepenses;
     }
+    public void addDepense(Depense maDepense)
+    {
+        mesDepenses.put(maDepense.getIdDepense(), maDepense);
+    }
 
     public Utilisateur(int id_utilisateur, String mail, String test) {
         this.id_utilisateur = id_utilisateur;
