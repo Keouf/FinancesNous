@@ -88,11 +88,11 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/editTextNom"
         android:layout_above="@+id/textAdresse"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/textTel"
-        android:layout_alignStart="@+id/editText2"
+        android:layout_alignStart="@+id/editTextAdresse"
         android:textSize="14dp"
         android:textColor="#888888" />
 
@@ -101,10 +101,10 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/editTextAdresse"
         android:layout_above="@+id/textSiteWeb"
         android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/editText3"
+        android:layout_alignStart="@+id/editTextSiteWeb"
         android:textSize="14dp"
         android:textColor="#888888" />
 
@@ -113,11 +113,11 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/editText3"
+        android:id="@+id/editTextSiteWeb"
         android:layout_above="@+id/textTel"
         android:layout_alignParentEnd="true"
         android:textSize="14dp"
-        android:layout_alignStart="@+id/editText4"
+        android:layout_alignStart="@+id/editTextTel"
         android:textColor="#888888" />
 
     <EditText
@@ -125,7 +125,7 @@
         android:layout_height="wrap_content"
         android:inputType="phone"
         android:ems="10"
-        android:id="@+id/editText4"
+        android:id="@+id/editTextTel"
         android:layout_above="@+id/buttonValider"
         android:textSize="14dp"
         android:layout_alignParentEnd="true"
