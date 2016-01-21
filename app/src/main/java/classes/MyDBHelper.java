@@ -38,6 +38,8 @@ public class MyDBHelper {
         return jsonArray;
     }
 
+    //---------------------------------------------------------
+
     private JSONArray getDataInJson(String phpURL ) {
         JSONArray jsonArray = null;
         try {
