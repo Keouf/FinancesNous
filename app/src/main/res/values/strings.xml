@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">FinancesNous</string>
-    <string name="title_activity_accueil">F&amp;N - Accueil</string>
+    <string name="app_name">Finances &amp; Nous</string>
+    <string name="title_activity_accueil">Finances &amp; Nous</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
