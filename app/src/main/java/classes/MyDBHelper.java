@@ -4,6 +4,8 @@ import android.os.StrictMode;
 import android.util.Log;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -27,16 +29,27 @@ public class MyDBHelper {
         return jsonArray;
     }
 
-    public JSONArray getInfo() {
+
+    public Magasin getMagasinWithId(int idMagasin)
+    {
+        Magasin magasin = null;
         makeTaskAsynchrone();
 
-        String phpURL = "http://berghuis-peter.net/androidTest/JSONTest.php";
-        JSONArray jsonArray = null;
+        String phpURL = "http://berghuis-peter.net/FinanceNous/getMagasin.php?idMagasin="+idMagasin;
 
-        jsonArray = getDataInJson(phpURL);
+        JSONArray jsonArray = getDataInJson(phpURL);
 
-        return jsonArray;
+        try {
+            JSONObject json = jsonArray.getJSONObject(0);
+            magasin = new Magasin(json.getInt("id_magasin"), json.getString("ref_magasin"), json.getString("adresse_magasin1"), json.getString("adresse_magasin2"), json.getString("code_postal_magasin"), json.getString("site_web_magasin"), json.getString("telephone_magasin"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return magasin;
     }
+
+    //---------------------------------------------------------
 
     private JSONArray getDataInJson(String phpURL ) {
         JSONArray jsonArray = null;
