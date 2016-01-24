@@ -8,6 +8,6 @@ public class Domaine extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_domaine);
+        setContentView(R.layout.layout_domaine);
     }
 }

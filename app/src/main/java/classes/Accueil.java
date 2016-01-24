@@ -1,4 +1,4 @@
-package com.example.pcportablevidjay.financesnous;
+package classes;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.pcportablevidjay.financesnous.*;
 
 import org.json.JSONArray;
 
@@ -36,7 +38,7 @@ public class Accueil extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent depense = new Intent(getBaseContext(),Depense.class);
+                Intent depense = new Intent(getBaseContext(), com.example.pcportablevidjay.financesnous.Depense.class);
                 startActivity(depense);
             }
         });

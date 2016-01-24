@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".Accueil"
+            android:name="classes.Accueil"
             android:label="@string/title_activity_accueil"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
