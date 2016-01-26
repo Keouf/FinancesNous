@@ -16,8 +16,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme"
+        android:name="classes.Global">
+        
         <activity
             android:name=".Accueil_Activity"
             android:label="@string/title_activity_accueil"
@@ -32,12 +33,15 @@
             android:name=".Login_Activity"
             android:label="@string/title_activity_login" />
 
-        <activity android:name=".Depense_Activity"
-                android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".Depense_Activity"
+            android:theme="@style/AppTheme" />
 
         <activity android:name=".Magasin_Activity" />
 
-        <activity android:name=".Domaine_Activity"></activity>
+        <activity android:name=".Domaine_Activity" />
+
+
     </application>
 
 </manifest>
