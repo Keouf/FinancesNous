@@ -13,4 +13,20 @@
     tools:context=".Accueil_Activity"
     tools:showIn="@layout/app_bar_accueil">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Mes 10 derniers dépenses"
+        android:id="@+id/textView11"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/contentAccueil_listView_10Depenses"
+        android:layout_below="@+id/textView11"
+        android:layout_centerHorizontal="true"
+        android:choiceMode="singleChoice" />
 </RelativeLayout>

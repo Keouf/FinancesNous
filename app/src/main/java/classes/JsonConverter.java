@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class JsonConverter {
@@ -42,6 +43,15 @@ public class JsonConverter {
             e.printStackTrace();
         }
         return  myDate;
+    }
+
+    public ArrayList<Depense> ConvertDepensesToArrayList(Activity act)
+    {
+        Global g = (Global)act.getApplication();
+        ArrayList<Depense> Depenses = new ArrayList<Depense>();
+        for (int i=1; i <= g.getMainUtilisateur().getMesDepenses().size(); i++)
+                Depenses.add(g.getMainUtilisateur().getMesDepenses().get(i));
+        return Depenses;
     }
 
 }

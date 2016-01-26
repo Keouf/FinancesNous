@@ -13,11 +13,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+
 import classes.AndroidConnectivity;
+import classes.Depense;
+import classes.DepenseAdapter;
 import classes.Global;
 import classes.JsonConverter;
 import classes.MyDBHelper;
@@ -58,6 +63,7 @@ public class Accueil_Activity extends AppCompatActivity
 
         if (androidConnectivity.getConnectivityStatus())
         {
+            // get 10 derniers dépeses
             Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
             JSONArray mes10DerniersDepenses = myDBHelper.get10DerniersDepenses();
             Log.e("json", mes10DerniersDepenses.toString());
@@ -66,6 +72,12 @@ public class Accueil_Activity extends AppCompatActivity
             global = (Global)this.getApplication();
             Log.e("json", global.getMainUtilisateur().getMesDepenses().toString());
 
+
+            // remplire Listview
+            ArrayList<Depense> mesDepensesArray = jsonConverter.ConvertDepensesToArrayList(this);
+            DepenseAdapter adapater = new DepenseAdapter(this, mesDepensesArray);
+            ListView DepensesListView = (ListView) findViewById(R.id.contentAccueil_listView_10Depenses);
+            DepensesListView.setAdapter(adapater);
 
         }
     }
