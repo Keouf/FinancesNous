@@ -49,6 +49,25 @@ public class MyDBHelper {
         return magasin;
     }
 
+    public Domaine getDomaineWithId(int idDomaine)
+    {
+        Domaine domaine = null;
+        makeTaskAsynchrone();
+
+        String phpURL = "http://berghuis-peter.net/FinanceNous/getDomaine.php?idDomaine="+idDomaine;
+
+        JSONArray jsonArray = getDataInJson(phpURL);
+
+        try {
+            JSONObject json = jsonArray.getJSONObject(0);
+            domaine = new Domaine(json.getInt("id_domaine"), json.getString("ref_domaine"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return domaine;
+    }
+
     //---------------------------------------------------------
 
     private JSONArray getDataInJson(String phpURL ) {

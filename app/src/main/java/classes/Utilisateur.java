@@ -1,6 +1,7 @@
 package classes;
 
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Utilisateur {
@@ -44,5 +45,6 @@ public class Utilisateur {
         this.id_utilisateur = id_utilisateur;
         this.mail = mail;
         this.test = test;
+        this.mesDepenses = new HashMap<Integer, Depense>();
     }
 }

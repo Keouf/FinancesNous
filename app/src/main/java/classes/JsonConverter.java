@@ -2,6 +2,7 @@ package classes;
 
 
 import android.app.Activity;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,25 +16,24 @@ public class JsonConverter {
 
     MyDBHelper myDBHelper = new MyDBHelper();
 
-    public void convertToDepense(JSONArray myJsonArray, Activity act)
+    public void convertToDepense(JSONArray jsonArray, Activity act)
     {
         Global g = (Global)act.getApplication();
-        JSONObject myJsonObject;
-        for (int i=0; i < myJsonArray.length(); i++) {
+        JSONObject json;
+        Depense depense = null;
+        for (int i=0; i < jsonArray.length(); i++) {
             try {
-                myJsonObject = myJsonArray.getJSONObject(i);
-                g.getMainUtilisateur().addDepense(new Depense(myJsonObject.getInt("id_depense"), makeDate(myJsonObject.getString("date_depense")), myJsonObject.getDouble("montant_depense"), g.getMainUtilisateur() ,  new Domaine(0, "test"), myDBHelper.getMagasinWithId(myJsonObject.getInt("MAGASIN_id_magasin")) , myJsonObject.getString("piece_jointe")));
+                json = jsonArray.getJSONObject(i);
+                g.getMainUtilisateur().addDepense(new Depense(json.getInt("id_depense"), makeDate(json.getString("date_depense")), json.getDouble("montant_depense"), g.getMainUtilisateur(), myDBHelper.getDomaineWithId(json.getInt("domaine")), myDBHelper.getMagasinWithId(json.getInt("magasin")), json.getString("piece_jointe")));
             } catch (JSONException e) {
-                e.printStackTrace();
+                Log.e("json", "jsonExeption, vérifie le nomage des champs");
             }
-
         }
     }
 
     public Date makeDate(String date)
     {
         Date myDate = null;
-
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-mm");
 
         try {
@@ -41,7 +41,6 @@ public class JsonConverter {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         return  myDate;
     }
 

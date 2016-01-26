@@ -3,17 +3,23 @@ package com.example.pcportablevidjay.financesnous;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
+import org.json.JSONArray;
 
 import classes.AndroidConnectivity;
+import classes.Global;
+import classes.JsonConverter;
 import classes.MyDBHelper;
 
 public class Accueil_Activity extends AppCompatActivity
@@ -21,6 +27,8 @@ public class Accueil_Activity extends AppCompatActivity
 
     MyDBHelper myDBHelper = new MyDBHelper();
     AndroidConnectivity androidConnectivity = new AndroidConnectivity(this);
+    Global global = (Global)this.getApplication();
+    JsonConverter jsonConverter = new JsonConverter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +55,19 @@ public class Accueil_Activity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        /*if (androidConnectivity.getConnectivityStatus())
-        {
-            JSONArray mes10DerniersDepenses = myDBHelper.get10DerniersDepenses();
 
-            // Utilise le JSON : mes10DerniersDepenses!
-        }*/
+        if (androidConnectivity.getConnectivityStatus())
+        {
+            Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+            JSONArray mes10DerniersDepenses = myDBHelper.get10DerniersDepenses();
+            Log.e("json", mes10DerniersDepenses.toString());
+            jsonConverter.convertToDepense(mes10DerniersDepenses, this);
+
+            global = (Global)this.getApplication();
+            Log.e("json", global.getMainUtilisateur().getMesDepenses().toString());
+
+
+        }
     }
 
     @Override
