@@ -101,7 +101,8 @@
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/button"
         android:textColor="#888888"
-        android:textSize="14dp" />
+        android:textSize="14dp"
+        android:inputType="textPostalAddress" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -121,6 +122,7 @@
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/button"
         android:textSize="14dp"
-        android:textColor="#888888" />
+        android:textColor="#888888"
+        android:inputType="phone" />
 
 </RelativeLayout>
