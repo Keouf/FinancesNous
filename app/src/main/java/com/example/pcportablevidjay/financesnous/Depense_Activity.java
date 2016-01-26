@@ -1,14 +1,10 @@
 package com.example.pcportablevidjay.financesnous;
 
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class Depense_Activity extends AppCompatActivity{
 
@@ -24,5 +20,25 @@ public class Depense_Activity extends AppCompatActivity{
             }
         });
     }
+
+
+    public boolean tryToSendDepense()
+    {
+        boolean send = true;
+
+        //interactions
+        EditText domaineEdit = (EditText)findViewById(R.id.editTextDomaine);
+        EditText enseigneEdit = (EditText)findViewById(R.id.editTextEnseigne);
+        EditText adresse1Edit = (EditText)findViewById(R.id.editText_rue);
+        EditText adresse2Edit = (EditText)findViewById(R.id.editText_ville);
+        EditText codePostalEdit = (EditText)findViewById(R.id.editText_codePostal);
+        EditText montantEdit = (EditText)findViewById(R.id.editTextMontant);
+
+
+
+        return  send;
+    }
+
+
 }
 

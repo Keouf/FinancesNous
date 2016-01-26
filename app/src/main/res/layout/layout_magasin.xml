@@ -64,7 +64,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
+        android:id="@+id/editText_date"
         android:layout_above="@+id/textView12"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/textView13"
@@ -81,8 +81,8 @@
         android:inputType="textPostalAddress"
         android:hint="Rue"
         android:layout_alignBottom="@+id/textView12"
-        android:layout_alignStart="@+id/editText2"
-        android:layout_alignEnd="@+id/editText2" />
+        android:layout_alignStart="@+id/editText_date"
+        android:layout_alignEnd="@+id/editText_date" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -104,7 +104,7 @@
         android:layout_below="@+id/editText4"
         android:hint="Ville"
         android:layout_alignStart="@+id/editText4"
-        android:layout_alignEnd="@+id/editText2"
+        android:layout_alignEnd="@+id/editText_date"
         android:textColor="#888888"
         android:textSize="14dp" />
 
