@@ -94,7 +94,7 @@ public class Accueil_Activity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_depense) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_garantie) {
 
         } else if (id == R.id.nav_noteDeFrais) {
