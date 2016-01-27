@@ -64,7 +64,6 @@ public class Accueil_Activity extends AppCompatActivity
         if (androidConnectivity.getConnectivityStatus())
         {
             // get 10 derniers dépeses
-            Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
             JSONArray mes10DerniersDepenses = myDBHelper.get10DerniersDepenses();
             Log.e("json", mes10DerniersDepenses.toString());
             jsonConverter.convertToDepense(mes10DerniersDepenses, this);

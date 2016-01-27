@@ -45,7 +45,6 @@ public class MyDBHelper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return magasin;
     }
 

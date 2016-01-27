@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
 
     <TextView
@@ -24,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Domaine * :"
+        android:text="Domaine :"
         android:id="@+id/textDomaine"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="5dp"
@@ -47,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Enseigne * :"
+        android:text="Enseigne :"
         android:id="@+id/textEnseigne"
         android:layout_below="@+id/textDomaine"
         android:layout_alignParentStart="true"
@@ -70,36 +71,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Adresse :"
-        android:id="@+id/textAdresse"
-        android:layout_below="@+id/editTextEnseigne"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="5dp"
-        android:textSize="20dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Date * :"
-        android:id="@+id/textDate"
-        android:textSize="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/editText_ville"
-        android:layout_alignStart="@+id/textMontant" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Montant * :"
+        android:text="Montant :"
         android:id="@+id/textMontant"
-        android:layout_marginTop="20dp"
         android:layout_marginLeft="5dp"
         android:textSize="20dp"
-        android:layout_below="@+id/textDate"
-        android:layout_alignParentStart="true" />
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/textEnseigne" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -110,8 +87,8 @@
         android:layout_alignStart="@+id/editTextEnseigne"
         android:textSize="14dp"
         android:textColor="#888888"
-        android:inputType="number"
-        android:layout_alignEnd="@+id/button5" />
+        android:layout_alignEnd="@+id/button5"
+        android:inputType="numberDecimal" />
 
     <Button
         android:layout_width="wrap_content"
@@ -120,9 +97,11 @@
         android:id="@+id/buttonValider"
         android:textSize="14dp"
         android:background="#66d070"
-        android:layout_below="@+id/button3"
-        android:layout_toEndOf="@+id/textMontant"
-        android:layout_marginTop="18dp" />
+        android:onClick="tryToSendDepense"
+        android:nestedScrollingEnabled="false"
+        android:layout_marginBottom="106dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textTitreDepense" />
 
     <Button
         android:layout_width="wrap_content"
@@ -131,8 +110,9 @@
         android:id="@+id/buttonAnnuler"
         android:textSize="14dp"
         android:background="#dd514c"
+        android:onClick="annuler"
         android:layout_alignTop="@+id/buttonValider"
-        android:layout_alignEnd="@+id/textTitreDepense" />
+        android:layout_toStartOf="@+id/button4" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -157,76 +137,20 @@
         android:id="@+id/button5"
         android:layout_toEndOf="@+id/editTextEnseigne"
         android:layout_alignTop="@+id/editTextEnseigne"
-        android:layout_above="@+id/textAdresse"
         android:drawableTop="@drawable/ic_menu_add_white"
         android:background="#34b1e7"
         android:layout_marginLeft="20dp"
-        android:layout_marginBottom="1dp" />
+        android:layout_alignBottom="@+id/textEnseigne" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Pièce Jointe :"
-        android:id="@+id/textView15"
-        android:layout_below="@+id/textMontant"
-        android:layout_alignStart="@+id/textMontant"
-        android:layout_marginTop="20dp"
-        android:textSize="20dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText_rue"
-        android:layout_alignBottom="@+id/textAdresse"
-        android:layout_alignStart="@+id/editTextEnseigne"
-        android:layout_alignEnd="@+id/button5"
-        android:hint="Rue"
-        android:textColor="#888888"
-        android:textSize="14dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="5"
-        android:id="@+id/editText_codePostal"
-        android:maxLength="5"
-        android:hint="Code postal"
-        android:layout_below="@+id/editText_rue"
-        android:layout_alignStart="@+id/editText_rue"
-        android:textColor="#888888"
-        android:textSize="14dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText_ville"
-        android:hint="Ville"
-        android:layout_below="@+id/editText_codePostal"
-        android:layout_alignStart="@+id/editText_codePostal"
-        android:textColor="#888888"
-        android:textSize="14dp"
-        android:layout_alignEnd="@+id/button5" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Photo.."
-        android:id="@+id/button3"
-        android:layout_below="@+id/editTextMontant"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
-        android:background="#34b1e7" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Parcourir.."
-        android:id="@+id/button6"
-        android:background="#34b1e7"
-        android:layout_alignTop="@+id/button3"
-        android:layout_alignEnd="@+id/editText_ville" />
+        android:text="Date :"
+        android:id="@+id/textView16"
+        android:textSize="20dp"
+        android:layout_above="@+id/editTextMontant"
+        android:layout_alignStart="@+id/textMontant" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -234,9 +158,11 @@
         android:inputType="date"
         android:ems="10"
         android:id="@+id/editText_date"
-        android:layout_above="@+id/editTextMontant"
+        android:focusable="false"
+        android:onClick="selectDate"
+        android:textColor="#a3a3a3"
+        android:layout_alignBottom="@+id/textView16"
         android:layout_alignStart="@+id/editTextMontant"
-        android:layout_alignEnd="@+id/editText_ville"
-        android:hint="dd/mm/yyyy" />
+        android:layout_alignEnd="@+id/editTextMontant" />
 
 </RelativeLayout>
