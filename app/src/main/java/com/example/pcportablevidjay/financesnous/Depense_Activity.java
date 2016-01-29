@@ -1,24 +1,27 @@
 package com.example.pcportablevidjay.financesnous;
 
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.DatePicker;
-import android.support.v4.app.FragmentActivity;
-import android.app.Dialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import classes.AndroidConnectivity;
 import classes.Depense;
-import classes.Domaine;
 import classes.Global;
-import classes.Magasin;
 import classes.MyDBHelper;
 
 public class Depense_Activity extends FragmentActivity {
@@ -32,41 +35,56 @@ public class Depense_Activity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_depense);
 
-
+        // populate date
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         EditText dateEdit = (EditText)findViewById(R.id.editText_date);
         dateEdit.setText(dateFormat.format(date));
+
+
+        // populate domaine spinner
+        Spinner spinnerDomaine = (Spinner) findViewById(R.id.spinner_domaine);
+        ArrayAdapter<String> adapterDomaine = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, myDBHelper.getAllDomaines());
+        adapterDomaine.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerDomaine.setAdapter(adapterDomaine);
+
+        // populate magasin spinner
+        Spinner spinnerMagasin = (Spinner) findViewById(R.id.spinner_enseigne);
+        ArrayAdapter<String> adapterMagasin = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, myDBHelper.getAllMagasins());
+        adapterMagasin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerMagasin.setAdapter(adapterMagasin);
 
     }
 
 
     public void tryToSendDepense(View v)
     {
-        //interactions
-        EditText domaineEdit = (EditText)findViewById(R.id.editTextDomaine);
-        EditText enseigneEdit = (EditText)findViewById(R.id.editTextEnseigne);
         EditText montantEdit = (EditText)findViewById(R.id.editTextMontant);
-
+        Spinner domaineSpinner = (Spinner)findViewById(R.id.spinner_domaine);
+        Spinner magasinSpinner = (Spinner)findViewById(R.id.spinner_enseigne);
 
         boolean remplit = true;
         // check if they are empty
-        if (TextUtils.isEmpty(domaineEdit.getText())) {
-            domaineEdit.setError("choisis une domaine");
-            remplit = false;
-        }
-        if (TextUtils.isEmpty(enseigneEdit.getText())) {
-            enseigneEdit.setError("choisis un magasin");
-            remplit = false;
-        }
         if (TextUtils.isEmpty(montantEdit.getText())) {
             montantEdit.setError("veuiller saisir un montant svp");
+            montantEdit.setFocusable(true);
             remplit = false;
         }
 
         if (remplit) {
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-dd-MM");
-            Depense maDepense = new Depense(0, date, Double.parseDouble(montantEdit.getText().toString()), global.getMainUtilisateur(), myDBHelper.getDomaineWithId(1), myDBHelper.getMagasinWithId(1), "");
-            global.getMainUtilisateur().addDepense(maDepense);
+            AndroidConnectivity androidConnectivity = new AndroidConnectivity(this);
+            if (androidConnectivity.getConnectivityStatus())
+            {
+                global = (Global)this.getApplication();
+                Log.e("json", "test1");
+                Depense maDepense = new Depense(10, date, Double.parseDouble(montantEdit.getText().toString()), global.getMainUtilisateur(), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithId(1), "");
+                Log.e("json", "test2");
+                global.getMainUtilisateur().addDepense(maDepense);
+                Log.e("json", "test3");
+                myDBHelper.insertDepense(maDepense);
+                this.finish();
+            }
+            else
+                Toast.makeText(this,"Pas de connection internet, veiller esssaier plustard", Toast.LENGTH_LONG).show();
         }
 
 

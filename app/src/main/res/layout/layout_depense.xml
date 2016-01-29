@@ -27,22 +27,12 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Domaine :"
         android:id="@+id/textDomaine"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:layout_marginLeft="5dp"
+        android:textSize="20dp"
+        android:paddingTop="10dp"
         android:layout_below="@+id/textTitreDepense"
-        android:textSize="20dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextDomaine"
-        android:layout_alignBottom="@+id/textDomaine"
-        android:layout_marginRight="5dp"
-        android:layout_alignEnd="@+id/buttonAnnuler"
-        android:layout_toEndOf="@+id/textEnseigne"
-        android:layout_marginLeft="5dp"
-        android:textColor="#888888"
-        android:textSize="14dp" />
+        android:layout_toStartOf="@+id/spinner_domaine" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -54,18 +44,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="5dp"
-        android:textSize="20dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextEnseigne"
-        android:layout_alignBottom="@+id/textEnseigne"
-        android:layout_marginRight="5dp"
-        android:layout_alignEnd="@+id/buttonAnnuler"
-        android:layout_alignStart="@+id/editTextDomaine"
-        android:textSize="14dp"
-        android:textColor="#888888" />
+        android:textSize="20dp"
+        android:paddingTop="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -84,11 +64,11 @@
         android:id="@+id/editTextMontant"
         android:layout_alignBottom="@+id/textMontant"
         android:layout_marginRight="5dp"
-        android:layout_alignStart="@+id/editTextEnseigne"
         android:textSize="14dp"
         android:textColor="#888888"
         android:layout_alignEnd="@+id/button5"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:layout_alignStart="@+id/spinner_domaine" />
 
     <Button
         android:layout_width="wrap_content"
@@ -118,29 +98,25 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+"
         android:id="@+id/button4"
-        android:layout_toEndOf="@+id/textTitreDepense"
-        android:layout_above="@+id/textEnseigne"
-        android:layout_alignTop="@+id/editTextDomaine"
         android:drawableTop="@drawable/ic_menu_add_white"
         android:background="#34b1e7"
-        android:layout_alignParentEnd="false"
         android:layout_marginLeft="20dp"
-        android:layout_marginBottom="1dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/textEnseigne"
+        android:layout_alignTop="@+id/spinner_domaine" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="+"
         android:id="@+id/button5"
-        android:layout_toEndOf="@+id/editTextEnseigne"
-        android:layout_alignTop="@+id/editTextEnseigne"
         android:drawableTop="@drawable/ic_menu_add_white"
         android:background="#34b1e7"
         android:layout_marginLeft="20dp"
-        android:layout_alignBottom="@+id/textEnseigne" />
+        android:layout_alignBottom="@+id/spinner_enseigne"
+        android:layout_toEndOf="@+id/spinner_domaine"
+        android:layout_alignTop="@+id/spinner_enseigne" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -162,7 +138,25 @@
         android:onClick="selectDate"
         android:textColor="#a3a3a3"
         android:layout_alignBottom="@+id/textView16"
-        android:layout_alignStart="@+id/editTextMontant"
-        android:layout_alignEnd="@+id/editTextMontant" />
+        android:layout_alignEnd="@+id/editTextMontant"
+        android:layout_alignStart="@+id/spinner_domaine" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_domaine"
+        android:layout_alignBottom="@+id/textDomaine"
+        android:layout_toEndOf="@+id/textEnseigne"
+        android:layout_alignEnd="@+id/buttonAnnuler"
+        android:layout_alignTop="@+id/textDomaine" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_enseigne"
+        android:layout_alignBottom="@+id/textEnseigne"
+        android:layout_alignStart="@+id/spinner_domaine"
+        android:layout_alignTop="@+id/textEnseigne"
+        android:layout_alignEnd="@+id/buttonAnnuler" />
 
 </RelativeLayout>

@@ -45,13 +45,47 @@ public class JsonConverter {
         return  myDate;
     }
 
-    public ArrayList<Depense> ConvertDepensesToArrayList(Activity act)
+    public ArrayList<Depense> ConvertDepensesToDepenseArrayList(Activity act)
     {
         Global g = (Global)act.getApplication();
         ArrayList<Depense> Depenses = new ArrayList<Depense>();
         for (int i=1; i <= g.getMainUtilisateur().getMesDepenses().size(); i++)
                 Depenses.add(g.getMainUtilisateur().getMesDepenses().get(i));
         return Depenses;
+    }
+
+    public ArrayList<String> ConvertDomaineToStringArrayList(JSONArray myJsonarray)
+    {
+        ArrayList<String> Domaines = new ArrayList<String>();
+        JSONObject json = null;
+
+        for (int i=0; i <= myJsonarray.length(); i++)
+        {
+            try {
+                json = myJsonarray.getJSONObject(i);
+                Domaines.add(json.getString("ref_domaine"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return Domaines;
+    }
+
+    public ArrayList<String> ConvertMagasinToStringArrayList(JSONArray myJsonarray)
+    {
+        ArrayList<String> Magasins = new ArrayList<String>();
+        JSONObject json = null;
+
+        for (int i=0; i <= myJsonarray.length(); i++)
+        {
+            try {
+                json = myJsonarray.getJSONObject(i);
+                Magasins.add(json.getString("ref_magasin"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return Magasins;
     }
 
 }

@@ -10,7 +10,7 @@ public class Depense {
     private double montant;
     private String pieceJoint;
     private Magasin magasin;
-    private Domaine domaine;
+    private String domaine;
     private Utilisateur utilisatuer;
 
     public Integer getIdDepense() {
@@ -43,10 +43,10 @@ public class Depense {
     public void setMagasin(Magasin magasin) {
         this.magasin = magasin;
     }
-    public Domaine getDomaine() {
+    public String getDomaine() {
         return domaine;
     }
-    public void setDomaine(Domaine domaine) {
+    public void setDomaine(String domaine) {
         this.domaine = domaine;
     }
     public Utilisateur getUtilisatuer() {
@@ -56,7 +56,7 @@ public class Depense {
         this.utilisatuer = utilisatuer;
     }
 
-    public Depense(Integer idDepense, Date dateDepense, double montant, Utilisateur utilisatuer, Domaine domaine, Magasin magasin, String pieceJoint) {
+    public Depense(Integer idDepense, Date dateDepense, double montant, Utilisateur utilisatuer, String domaine, Magasin magasin, String pieceJoint) {
         this.idDepense = idDepense;
         this.dateDepense = dateDepense;
         this.montant = montant;

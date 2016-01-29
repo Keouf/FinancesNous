@@ -8,7 +8,7 @@ public class Utilisateur {
 
     private int id_utilisateur;
     private String mail;
-    private String test;
+    private String motDePasse;
     private Map<Integer, Depense> mesDepenses;
 
 
@@ -24,11 +24,11 @@ public class Utilisateur {
     public void setMail(String mail) {
         this.mail = mail;
     }
-    public String getTest() {
-        return test;
+    public String getMotDePasse() {
+        return motDePasse;
     }
-    public void setTest(String test) {
-        this.test = test;
+    public void setMotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
     }
     public Map<Integer, Depense> getMesDepenses() {
         return mesDepenses;
@@ -41,10 +41,10 @@ public class Utilisateur {
         mesDepenses.put(maDepense.getIdDepense(), maDepense);
     }
 
-    public Utilisateur(int id_utilisateur, String mail, String test) {
+    public Utilisateur(int id_utilisateur, String mail, String motDePasse) {
         this.id_utilisateur = id_utilisateur;
         this.mail = mail;
-        this.test = test;
+        this.motDePasse = motDePasse;
         this.mesDepenses = new HashMap<Integer, Depense>();
     }
 }
