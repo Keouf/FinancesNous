@@ -34,6 +34,7 @@ public class MyDBHelper {
 
     public void insertDepense(Depense depense) {
 
+
         makeTaskAsynchrone();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         sendData("http://berghuis-peter.net/FinanceNous/insertDepense.php?date=", dateFormat.format(depense.getDateDepense()) + "&montant=" + depense.getMontant() + "&pieceJoint=" + depense.getPieceJoint() + "&refMagasin=" + depense.getMagasin().getNom_managasin() + "&refDomaine=" + depense.getDomaine() + "&idUtilisateur=" + depense.getUtilisatuer().getId_utilisateur());

@@ -75,6 +75,7 @@ public class Magasin_Activity extends AppCompatActivity {
                 myDBHelper.ajoutMagasin(monMagasin);
                 Toast.makeText(this, "Magasin Crée!", Toast.LENGTH_LONG).show();
                 this.finish();
+
             }
             else
                 Toast.makeText(this, "Pas de connection internet, veuillez réessayer plus tard", Toast.LENGTH_LONG).show();
