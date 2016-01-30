@@ -50,21 +50,23 @@
         android:background="#66d070"
         android:layout_below="@+id/textView14"
         android:layout_toEndOf="@+id/textView12"
+        android:onClick="tryToSendMagasin"
         android:layout_marginTop="50dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Annuler"
+        android:onClick="annulerMagasin"
         android:id="@+id/button2"
         android:background="#dd514c"
         android:layout_alignTop="@+id/button"
-        android:layout_toEndOf="@+id/editText4" />
+        android:layout_toEndOf="@+id/editTextCPMag" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText_date"
+        android:id="@+id/editTextNomMag"
         android:layout_above="@+id/textView12"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/textView13"
@@ -75,23 +77,23 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText3"
+        android:id="@+id/editTextAdrMag"
         android:textColor="#888888"
         android:textSize="14dp"
         android:inputType="textPostalAddress"
         android:hint="Rue"
         android:layout_alignBottom="@+id/textView12"
-        android:layout_alignStart="@+id/editText_date"
-        android:layout_alignEnd="@+id/editText_date" />
+        android:layout_alignStart="@+id/editTextNomMag"
+        android:layout_alignEnd="@+id/editTextNomMag" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="5"
-        android:id="@+id/editText4"
-        android:layout_below="@+id/editText3"
-        android:layout_alignStart="@+id/editText3"
+        android:id="@+id/editTextCPMag"
+        android:layout_below="@+id/editTextAdrMag"
+        android:layout_alignStart="@+id/editTextAdrMag"
         android:maxLength="5"
         android:hint="Code postal"
         android:textColor="#888888"
@@ -100,11 +102,11 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText5"
-        android:layout_below="@+id/editText4"
+        android:id="@+id/editTextVilleMag"
+        android:layout_below="@+id/editTextCPMag"
         android:hint="Ville"
-        android:layout_alignStart="@+id/editText4"
-        android:layout_alignEnd="@+id/editText_date"
+        android:layout_alignStart="@+id/editTextCPMag"
+        android:layout_alignEnd="@+id/editTextNomMag"
         android:textColor="#888888"
         android:textSize="14dp" />
 
@@ -114,7 +116,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Site-web :"
         android:id="@+id/textView13"
-        android:layout_below="@+id/editText5"
+        android:layout_below="@+id/editTextVilleMag"
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp"
         android:textSize="20dp" />
@@ -122,13 +124,13 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText9"
+        android:id="@+id/editTextSiteMag"
         android:inputType="textUri"
         android:textColor="#888888"
         android:textSize="14dp"
         android:layout_alignBottom="@+id/textView13"
-        android:layout_alignStart="@+id/editText5"
-        android:layout_alignEnd="@+id/editText5"
+        android:layout_alignStart="@+id/editTextVilleMag"
+        android:layout_alignEnd="@+id/editTextVilleMag"
         android:hint="Exemple : www.magasin.com" />
 
     <TextView
@@ -137,7 +139,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Téléphone :"
         android:id="@+id/textView14"
-        android:layout_below="@+id/editText9"
+        android:layout_below="@+id/editTextSiteMag"
         android:layout_alignParentStart="true"
         android:layout_marginTop="20dp"
         android:textSize="20dp" />
@@ -147,9 +149,9 @@
         android:layout_height="wrap_content"
         android:inputType="phone"
         android:ems="10"
-        android:id="@+id/editText10"
+        android:id="@+id/editTextTelMag"
         android:layout_alignBottom="@+id/textView14"
-        android:layout_alignStart="@+id/editText9"
+        android:layout_alignStart="@+id/editTextSiteMag"
         android:maxLength="10"
         android:textColor="#888888"
         android:textSize="14dp" />
