@@ -75,16 +75,14 @@ public class Depense_Activity extends FragmentActivity {
             if (androidConnectivity.getConnectivityStatus())
             {
                 global = (Global)this.getApplication();
-                Log.e("json", "test1");
-                Depense maDepense = new Depense(10, date, Double.parseDouble(montantEdit.getText().toString()), global.getMainUtilisateur(), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithId(1), "");
-                Log.e("json", "test2");
+                Depense maDepense = new Depense(myDBHelper.getLastDepenseID(), date, Double.parseDouble(montantEdit.getText().toString()), global.getMainUtilisateur(), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithId(1), "");
                 global.getMainUtilisateur().addDepense(maDepense);
-                Log.e("json", "test3");
                 myDBHelper.insertDepense(maDepense);
+                Toast.makeText(this, "Dépense Crée!", Toast.LENGTH_LONG).show();
                 this.finish();
             }
             else
-                Toast.makeText(this,"Pas de connection internet, veiller esssaier plustard", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Pas de connection internet, veiller esssaier plustard", Toast.LENGTH_LONG).show();
         }
 
 

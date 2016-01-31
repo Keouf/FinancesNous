@@ -32,6 +32,17 @@ public class JsonConverter {
         }
     }
 
+    public Magasin jsonToMagasin(JSONObject json)
+    {
+        Magasin magasin = null;
+        try {
+            magasin = new Magasin(json.getInt("id_magasin"), json.getString("ref_magasin"), json.getString("adresse_magasin1"), json.getString("adresse_magasin2"), json.getString("code_postal_magasin"), json.getString("site_web_magasin"), json.getString("telephone_magasin"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return  magasin;
+    }
+
     public Date makeDate(String date)
     {
         Date myDate = null;
@@ -50,7 +61,7 @@ public class JsonConverter {
         Global g = (Global)act.getApplication();
         ArrayList<Depense> Depenses = new ArrayList<Depense>();
         for (int i=1; i <= g.getMainUtilisateur().getMesDepenses().size(); i++)
-                Depenses.add(g.getMainUtilisateur().getMesDepenses().get(i));
+            Depenses.add(g.getMainUtilisateur().getMesDepenses().get(i));
         return Depenses;
     }
 

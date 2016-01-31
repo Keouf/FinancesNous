@@ -7,14 +7,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -28,77 +24,80 @@ public class MyDBHelper {
         makeTaskAsynchrone();
 
         String phpURL = "http://berghuis-peter.net/FinanceNous/get10DerniersDepenses.php";
-        JSONArray jsonArray = null;
 
-        jsonArray = getDataInJson(phpURL);
-
-        return jsonArray;
+        return getDataInJson(phpURL);
     }
 
     public void insertDepense(Depense depense) {
+
+        makeTaskAsynchrone();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        sendData("http://berghuis-peter.net/FinanceNous/insertDepense.php?date=", dateFormat.format(depense.getDateDepense()) + "&montant=" + depense.getMontant() + "&pieceJoint=" + depense.getPieceJoint() + "&refMagasin=" + depense.getMagasin().getNom_managasin() + "&refDomaine=" + depense.getDomaine() + "&idUtilisateur=" + depense.getUtilisatuer().getId_utilisateur());
+    }
+
+    public int getLastDepenseID()
+    {
+        int id = 0;
+        JSONObject json = null;
+        String phpURL = "http://berghuis-peter.net/FinanceNous/getLastDepenseID.php";
+
+        makeTaskAsynchrone();
+
+        JSONArray jsonArray = getDataInJson(phpURL);
+
         try {
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            sendData("http://berghuis-peter.net/FinanceNous/insertDepense.php?date=" + dateFormat.format(depense.getDateDepense()) + "&montant=" + depense.getMontant() + "&pieceJoint=" + depense.getPieceJoint() + "&refMagasin=" + depense.getMagasin().getNom_managasin() + "&refDomaine=" + depense.getDomaine() + "&idUtilisateur=" + depense.getUtilisatuer().getId_utilisateur());
+            json = jsonArray.getJSONObject(0);
+            id = json.getInt("id_depense");
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        catch (Exception e)
-        {
-            Log.e("json", e.toString());
-        }
+
+        return id++;
     }
 
     public ArrayList<String> getAllDomaines()
     {
-        ArrayList<String> lesDomaines = null;
+        JSONArray jsonArray = null;
+        JsonConverter jsonConverter = new JsonConverter();
+        String phpURL = "http://berghuis-peter.net/FinanceNous/getAllDomaines.php";
 
         makeTaskAsynchrone();
 
-        String phpURL = "http://berghuis-peter.net/FinanceNous/getAllDomaines.php";
-        JSONArray jsonArray = null;
-
         jsonArray = getDataInJson(phpURL);
 
-        JsonConverter jsonConverter = new JsonConverter();
-
-        lesDomaines = jsonConverter.ConvertDomaineToStringArrayList(jsonArray);
-
-        return lesDomaines;
+        return jsonConverter.ConvertDomaineToStringArrayList(jsonArray);
     }
 
     public ArrayList<String> getAllMagasins()
     {
-        ArrayList<String> lesMagasins = null;
+        JsonConverter jsonConverter = new JsonConverter();
+        String phpURL = "http://berghuis-peter.net/FinanceNous/getAllMagasins.php";
 
         makeTaskAsynchrone();
 
-        String phpURL = "http://berghuis-peter.net/FinanceNous/getAllMagasins.php";
-        JSONArray jsonArray = null;
+        JSONArray jsonArray = getDataInJson(phpURL);
 
-        jsonArray = getDataInJson(phpURL);
-
-        JsonConverter jsonConverter = new JsonConverter();
-
-        lesMagasins = jsonConverter.ConvertMagasinToStringArrayList(jsonArray);
-
-        return lesMagasins;
+        return jsonConverter.ConvertMagasinToStringArrayList(jsonArray);
     }
 
 
     public Magasin getMagasinWithId(int idMagasin)
     {
-        Magasin magasin = null;
-        makeTaskAsynchrone();
-
+        JSONObject json = null;
+        JsonConverter jsonConverter = new JsonConverter();
         String phpURL = "http://berghuis-peter.net/FinanceNous/getMagasin.php?idMagasin="+idMagasin;
+
+        makeTaskAsynchrone();
 
         JSONArray jsonArray = getDataInJson(phpURL);
 
         try {
-            JSONObject json = jsonArray.getJSONObject(0);
-            magasin = new Magasin(json.getInt("id_magasin"), json.getString("ref_magasin"), json.getString("adresse_magasin1"), json.getString("adresse_magasin2"), json.getString("code_postal_magasin"), json.getString("site_web_magasin"), json.getString("telephone_magasin"));
+            json = jsonArray.getJSONObject(0);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return magasin;
+
+        return jsonConverter.jsonToMagasin(json);
     }
 
     public String getDomaineWithId(int idDomaine)
@@ -116,7 +115,6 @@ public class MyDBHelper {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return domaine;
     }
 
@@ -144,22 +142,16 @@ public class MyDBHelper {
         StrictMode.setThreadPolicy(policy);
     }
 
-    private void sendData(String phpURL) {
+    private void sendData(String phpURL, String urlParameters) {
+        HttpURLConnection urlConnection = null;
         try {
-            HttpURLConnection urlConnection = getHttpURLConnection(phpURL);
-            urlConnection.setDoOutput(true);
-            urlConnection.setChunkedStreamingMode(0);
-
-            OutputStream out = new BufferedOutputStream(urlConnection.getOutputStream());
-            Writer w = new OutputStreamWriter(out, "UTF-8");
-            w.write("Hello, World!");
-            w.close(); //close will auto-flush
-
-            
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            URL url = new URL(phpURL + urlParameters);
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.getInputStream();
+        } catch (Exception e) {
+            Log.e("json", "could not insert");
+        } finally {
+            urlConnection.disconnect();
         }
     }
 
