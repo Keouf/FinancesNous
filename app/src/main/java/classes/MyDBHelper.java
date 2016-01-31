@@ -23,7 +23,7 @@ public class MyDBHelper {
     public JSONArray get10DerniersDepenses() {
         makeTaskAsynchrone();
 
-        String phpURL = "http://berghuis-peter.net/FinanceNous/get10DerniersDepenses.php";
+        String phpURL = "http://berghuis-peter.net/FinanceNous/getMesDepenses.php?idUtilisateur=1";
 
         return getDataInJson(phpURL);
     }

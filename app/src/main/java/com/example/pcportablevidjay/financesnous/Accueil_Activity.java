@@ -73,7 +73,7 @@ public class Accueil_Activity extends AppCompatActivity
 
 
             // remplire Listview
-            ArrayList<Depense> mesDepensesArray = jsonConverter.ConvertDepensesToArrayList(this);
+            ArrayList<Depense> mesDepensesArray = jsonConverter.ConvertDepensesToDepenseArrayList(this);
             DepenseAdapter adapater = new DepenseAdapter(this, mesDepensesArray);
             ListView DepensesListView = (ListView) findViewById(R.id.contentAccueil_listView_10Depenses);
             DepensesListView.setAdapter(adapater);
