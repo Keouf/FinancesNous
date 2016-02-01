@@ -20,12 +20,16 @@ import java.util.ArrayList;
 
 public class MyDBHelper {
 
-    public JSONArray get10DerniersDepenses() {
+    JsonConverter jsonConverter = new JsonConverter();
+
+    public ArrayList<Depense> getMesDepenses(Global global) {
         makeTaskAsynchrone();
 
-        String phpURL = "http://berghuis-peter.net/FinanceNous/getMesDepenses.php?idUtilisateur=1";
+        String phpURL = "http://berghuis-peter.net/FinanceNous/getMesDepenses.php?idUtilisateur="+ global.getMainUtilisateur().getId_utilisateur();
 
-        return getDataInJson(phpURL);
+        JSONArray jsonArray = getDataInJson(phpURL);
+
+        return jsonConverter.convertJsonArrayToDepenseArray(jsonArray, global);
     }
 
     public void insertDepense(Depense depense) {

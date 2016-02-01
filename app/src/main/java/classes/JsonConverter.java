@@ -15,21 +15,21 @@ import java.util.Date;
 
 public class JsonConverter {
 
-    MyDBHelper myDBHelper = new MyDBHelper();
 
-    public void convertToDepense(JSONArray jsonArray, Activity act)
+    public ArrayList<Depense> convertJsonArrayToDepenseArray(JSONArray jsonArray, Global g)
     {
-        Global g = (Global)act.getApplication();
+        MyDBHelper myDBHelper =new MyDBHelper();
         JSONObject json;
-        Depense depense = null;
+        ArrayList<Depense> mesDepenses = new ArrayList<>();
         for (int i=0; i < jsonArray.length(); i++) {
             try {
                 json = jsonArray.getJSONObject(i);
-                g.getMainUtilisateur().addDepense(new Depense(json.getInt("id_depense"), makeDate(json.getString("date_depense")), json.getDouble("montant_depense"), g.getMainUtilisateur(), myDBHelper.getDomaineWithId(json.getInt("domaine")), myDBHelper.getMagasinWithId(json.getInt("magasin")), json.getString("piece_jointe")));
+                mesDepenses.add(new Depense(json.getInt("id_depense"), makeDate(json.getString("date_depense")), json.getDouble("montant_depense"), g.getMainUtilisateur(), myDBHelper.getDomaineWithId(json.getInt("domaine")), myDBHelper.getMagasinWithId(json.getInt("magasin")), json.getString("piece_jointe")));
             } catch (JSONException e) {
                 Log.e("json", "jsonExeption, vérifie le nomage des champs");
             }
         }
+        return mesDepenses;
     }
 
     public Magasin jsonToMagasin(JSONObject json)
@@ -46,7 +46,7 @@ public class JsonConverter {
     public Date makeDate(String date)
     {
         Date myDate = null;
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
 
         try {
             myDate = formatter.parse(date);
