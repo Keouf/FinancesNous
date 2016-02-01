@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_menu_euro"
             android:title="Dépenses" />
         <item
+            android:id="@+id/nav_stats"
+            android:icon="@drawable/ic_menu_avion"
+            android:title="Satistiques" />
+        <item
             android:id="@+id/nav_garantie"
             android:icon="@drawable/ic_menu_cadie"
             android:title="Garantie" />

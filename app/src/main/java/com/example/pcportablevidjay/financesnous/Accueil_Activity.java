@@ -30,11 +30,11 @@ public class Accueil_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
-    public Fragment currentFragment = null;
-    MyDBHelper myDBHelper = new MyDBHelper();
-    AndroidConnectivity androidConnectivity = new AndroidConnectivity(this);
+    public static Fragment currentFragment = null;
+    public static MyDBHelper myDBHelper = new MyDBHelper();
+    public AndroidConnectivity androidConnectivity = new AndroidConnectivity(this);
     Global global = (Global)this.getApplication();
-    JsonConverter jsonConverter = new JsonConverter();
+    public static JsonConverter jsonConverter = new JsonConverter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,26 +60,6 @@ public class Accueil_Activity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-
-        if (androidConnectivity.getConnectivityStatus())
-        {
-            // get 10 derniers dépeses
-            JSONArray mes10DerniersDepenses = myDBHelper.get10DerniersDepenses();
-            Log.e("json", mes10DerniersDepenses.toString());
-            jsonConverter.convertToDepense(mes10DerniersDepenses, this);
-
-            global = (Global)this.getApplication();
-            Log.e("json", global.getMainUtilisateur().getMesDepenses().toString());
-
-
-            // remplire Listview
-            ArrayList<Depense> mesDepensesArray = jsonConverter.ConvertDepensesToDepenseArrayList(this);
-            DepenseAdapter adapater = new DepenseAdapter(this, mesDepensesArray);
-            ListView DepensesListView = (ListView) findViewById(R.id.contentAccueil_listView_10Depenses);
-            DepensesListView.setAdapter(adapater);
-
-        }
     }
 
     @Override
