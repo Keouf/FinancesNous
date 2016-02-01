@@ -10,7 +10,7 @@
             android:title="Dépenses" />
         <item
             android:id="@+id/nav_stats"
-            android:icon="@drawable/ic_menu_avion"
+            android:icon="@drawable/ic_menu_stats"
             android:title="Satistiques" />
         <item
             android:id="@+id/nav_garantie"

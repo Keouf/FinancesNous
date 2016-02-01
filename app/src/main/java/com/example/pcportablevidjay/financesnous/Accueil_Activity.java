@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import org.json.JSONArray;
 import java.util.ArrayList;
 import classes.AndroidConnectivity;
@@ -25,6 +27,7 @@ import classes.DepenseAdapter;
 import classes.Global;
 import classes.JsonConverter;
 import classes.MyDBHelper;
+import layout.Fragment_Recherche_Depense;
 
 public class Accueil_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -101,7 +104,17 @@ public class Accueil_Activity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_depense) {
-
+            Toast.makeText(getApplicationContext(), "Dépenses", Toast.LENGTH_SHORT).show();
+            Fragment_Recherche_Depense fragment = new Fragment_Recherche_Depense();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();;
+            fragmentTransaction.replace(R.id.frame,fragment);
+            fragmentTransaction.commit();
+        } else if (id == R.id.nav_stats) {
+            Toast.makeText(getApplicationContext(), "Statistiques", Toast.LENGTH_SHORT).show();
+            Fragment_Recherche_Depense fragment = new Fragment_Recherche_Depense();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();;
+            fragmentTransaction.replace(R.id.frame,fragment);
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_garantie) {
 
         } else if (id == R.id.nav_noteDeFrais) {
