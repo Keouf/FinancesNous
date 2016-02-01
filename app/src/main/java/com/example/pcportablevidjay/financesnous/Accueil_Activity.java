@@ -1,5 +1,8 @@
 package com.example.pcportablevidjay.financesnous;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,12 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
-
 import org.json.JSONArray;
-
 import java.util.ArrayList;
-
 import classes.AndroidConnectivity;
 import classes.Depense;
 import classes.DepenseAdapter;
@@ -30,6 +29,8 @@ import classes.MyDBHelper;
 public class Accueil_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    public Fragment currentFragment = null;
     MyDBHelper myDBHelper = new MyDBHelper();
     AndroidConnectivity androidConnectivity = new AndroidConnectivity(this);
     Global global = (Global)this.getApplication();
@@ -134,5 +135,24 @@ public class Accueil_Activity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void changerFragment(Fragment fragment){
+        if(currentFragment != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.remove(currentFragment);
+            fragmentTransaction.add(R.id.fragment_container, fragment);
+            currentFragment = fragment;
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
+        else{
+            currentFragment = fragment;
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.fragment_container, currentFragment);
+            fragmentTransaction.commit();
+        }
     }
 }
