@@ -70,7 +70,7 @@ public class JsonConverter {
         ArrayList<String> Domaines = new ArrayList<String>();
         JSONObject json = null;
 
-        for (int i=0; i <= myJsonarray.length(); i++)
+        for (int i = 0; i < myJsonarray.length(); i++)
         {
             try {
                 json = myJsonarray.getJSONObject(i);
@@ -87,7 +87,7 @@ public class JsonConverter {
         ArrayList<String> Magasins = new ArrayList<String>();
         JSONObject json = null;
 
-        for (int i=0; i <= myJsonarray.length(); i++)
+        for (int i = 0; i < myJsonarray.length(); i++)
         {
             try {
                 json = myJsonarray.getJSONObject(i);

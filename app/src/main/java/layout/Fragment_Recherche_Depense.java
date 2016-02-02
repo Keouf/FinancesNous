@@ -8,17 +8,15 @@ import android.view.ViewGroup;
 
 import com.example.pcportablevidjay.financesnous.R;
 
-import classes.Global;
-
 public class Fragment_Recherche_Depense extends Fragment {
+
+    //private View myFragmentView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_recherche_depense, container, false);
+        View view = inflater.inflate(R.layout.fragment_recherche_depense, container, false);
+        //myView = view.findViewById(R.id.rechercheDepense_listView_10Depenses);
+        return view;
     }
 
-    public void Remplir10DerniersDepensesListe(Global global)
-    {
-
-    }
 }

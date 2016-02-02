@@ -19,13 +19,11 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import java.util.ArrayList;
-import classes.AndroidConnectivity;
+
 import classes.Depense;
 import classes.DepenseAdapter;
 import classes.Global;
-import classes.JsonConverter;
 import classes.MyDBHelper;
 import layout.Fragment_Recherche_Depense;
 
@@ -35,9 +33,8 @@ public class Accueil_Activity extends AppCompatActivity
 
     public static Fragment currentFragment = null;
     public static MyDBHelper myDBHelper = new MyDBHelper();
-    public AndroidConnectivity androidConnectivity = new AndroidConnectivity(this);
-    Global global = (Global)this.getApplication();
-    public static JsonConverter jsonConverter = new JsonConverter();
+    Global global;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +60,13 @@ public class Accueil_Activity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        global = (Global) getApplication();
+        global.getMainUtilisateur().setMesDepenses(myDBHelper.getMesDepenses(global));
+        Log.e("json", "arraylist of all depenses = " + global.getMainUtilisateur().getMesDepenses().toString());
+
+
+
     }
 
     @Override
@@ -106,13 +110,31 @@ public class Accueil_Activity extends AppCompatActivity
         if (id == R.id.nav_depense) {
             Toast.makeText(getApplicationContext(), "Dépenses", Toast.LENGTH_SHORT).show();
             Fragment_Recherche_Depense fragment = new Fragment_Recherche_Depense();
-            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();;
-            fragmentTransaction.replace(R.id.frame,fragment);
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame, fragment);
             fragmentTransaction.commit();
+
+            // get 10 all depenses
+            ArrayList<Depense> mes10DernierDepenses = global.getMainUtilisateur().get10DernierDepenses();
+            Log.e("json", "arraylist of 10 depenses = " + mes10DernierDepenses.toString());
+
+            // remplire Listview
+            DepenseAdapter adapater = new DepenseAdapter(this, mes10DernierDepenses);
+            try {
+                View myView = getFragmentManager().findFragmentById(R.id.fragment_recherche_depense).getView().findViewById(R.id.rechercheDepense_listView_10Depenses);
+                ListView depensesListView = (ListView) myView;
+                Log.e("json", Integer.toString(depensesListView.getId()));
+                //depensesListView.setAdapter(adapater);
+            } catch (Exception e) {
+                Log.e("json", e.toString());
+            }
+
+
+
         } else if (id == R.id.nav_stats) {
             Toast.makeText(getApplicationContext(), "Statistiques", Toast.LENGTH_SHORT).show();
             Fragment_Recherche_Depense fragment = new Fragment_Recherche_Depense();
-            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();;
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame,fragment);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_garantie) {
