@@ -2,6 +2,7 @@ package com.example.pcportablevidjay.financesnous;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -9,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -34,6 +36,22 @@ public class Depense_Activity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_depense);
+
+        final Button btnAjouterDomaine = (Button) findViewById(R.id.btnAjouterDomaine);
+        btnAjouterDomaine.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent creerDomaine = new Intent(getBaseContext(), Domaine_Activity.class);
+                startActivity(creerDomaine);
+            }
+        });
+
+        final Button btnAjouterEnseigne = (Button) findViewById(R.id.btnAjouterEnseigne);
+        btnAjouterEnseigne.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent creerEnseigne = new Intent(getBaseContext(), Magasin_Activity.class);
+                startActivity(creerEnseigne);
+            }
+        });
 
         // populate date
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

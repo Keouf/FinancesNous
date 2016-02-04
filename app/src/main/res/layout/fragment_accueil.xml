@@ -30,4 +30,5 @@
         android:text="Page temporaire"
         android:id="@+id/textView18"
         android:layout_gravity="center" />
+
 </FrameLayout>
