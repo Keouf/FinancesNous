@@ -34,7 +34,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/editTextNomDom"
         android:layout_alignBottom="@+id/textNom"
         android:layout_alignParentEnd="true"
         android:layout_alignStart="@+id/textTitreDomaine"
@@ -45,16 +45,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Valider"
+        android:onClick="tryToSendDomaine"
         android:id="@+id/buttonValider"
         android:layout_marginTop="50dp"
         android:background="#66d070"
         android:layout_below="@+id/textNom"
-        android:layout_alignStart="@+id/editText" />
+        android:layout_alignStart="@+id/editTextNomDom" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Annuler"
+        android:onClick="annulerDomaine"
         android:id="@+id/buttonAnnuler"
         android:background="#dd514c"
         android:layout_alignTop="@+id/buttonValider"
