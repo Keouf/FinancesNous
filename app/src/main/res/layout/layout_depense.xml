@@ -17,11 +17,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Créer une dépense"
         android:id="@+id/textTitreDepense"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
         android:textSize="22dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -81,20 +80,9 @@
         android:background="#66d070"
         android:onClick="tryToSendDepense"
         android:nestedScrollingEnabled="false"
-        android:layout_marginBottom="106dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/textTitreDepense" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Annuler"
-        android:id="@+id/buttonAnnuler"
-        android:textSize="14dp"
-        android:background="#dd514c"
-        android:onClick="annuler"
-        android:layout_alignTop="@+id/buttonValider"
-        android:layout_toStartOf="@+id/btnAjouterDomaine" />
+        android:layout_below="@+id/editTextMontant"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -104,9 +92,10 @@
         android:drawableTop="@drawable/ic_menu_add_white"
         android:background="#34b1e7"
         android:layout_marginLeft="20dp"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/textEnseigne"
-        android:layout_alignTop="@+id/spinner_domaine" />
+        android:layout_alignParentEnd="false"
+        android:layout_alignTop="@+id/spinner_domaine"
+        android:layout_toEndOf="@+id/spinner_domaine"
+        android:layout_alignBottom="@+id/spinner_domaine" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -149,8 +138,9 @@
         android:id="@+id/spinner_domaine"
         android:layout_alignBottom="@+id/textDomaine"
         android:layout_toEndOf="@+id/textEnseigne"
-        android:layout_alignEnd="@+id/buttonAnnuler"
-        android:layout_alignTop="@+id/textDomaine" />
+        android:layout_alignEnd="@+id/textTitreDepense"
+        android:layout_alignTop="@+id/textDomaine"
+        android:layout_toStartOf="@+id/textEnseigne" />
 
     <Spinner
         android:layout_width="wrap_content"
@@ -159,6 +149,6 @@
         android:layout_alignBottom="@+id/textEnseigne"
         android:layout_alignStart="@+id/spinner_domaine"
         android:layout_alignTop="@+id/textEnseigne"
-        android:layout_alignEnd="@+id/buttonAnnuler" />
+        android:layout_alignEnd="@+id/spinner_domaine" />
 
 </RelativeLayout>

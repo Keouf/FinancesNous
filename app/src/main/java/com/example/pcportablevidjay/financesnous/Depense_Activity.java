@@ -1,13 +1,17 @@
 package com.example.pcportablevidjay.financesnous;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -26,7 +30,7 @@ import classes.Depense;
 import classes.Global;
 import classes.MyDBHelper;
 
-public class Depense_Activity extends FragmentActivity {
+public class Depense_Activity extends AppCompatActivity {
 
     Global global = (Global)this.getApplication();
     MyDBHelper myDBHelper = new MyDBHelper();
@@ -36,6 +40,9 @@ public class Depense_Activity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_depense);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         final Button btnAjouterDomaine = (Button) findViewById(R.id.btnAjouterDomaine);
         btnAjouterDomaine.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +80,30 @@ public class Depense_Activity extends FragmentActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+            /*case R.id.menu_about:
+                // Comportement du bouton "A Propos"
+                return true;
+            case R.id.menu_help:
+                // Comportement du bouton "Aide"
+                return true;
+            case R.id.menu_refresh:
+                // Comportement du bouton "Rafraichir"
+                return true;
+            case R.id.menu_search:
+                // Comportement du bouton "Recherche"
+                return true;
+            case R.id.menu_settings:
+                // Comportement du bouton "Paramétres"
+                return true;*/
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     public void tryToSendDepense(View v)
     {
@@ -83,7 +114,7 @@ public class Depense_Activity extends FragmentActivity {
         boolean remplit = true;
         // check if they are empty
         if (TextUtils.isEmpty(montantEdit.getText())) {
-            montantEdit.setError("veuiller saisir un montant svp");
+            montantEdit.setError("Veuillez saisir un montant.");
             montantEdit.setFocusable(true);
             remplit = false;
         }
@@ -96,11 +127,11 @@ public class Depense_Activity extends FragmentActivity {
                 Depense maDepense = new Depense(myDBHelper.getLastDepenseID(), date, Double.parseDouble(montantEdit.getText().toString()), global.getMainUtilisateur(), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithId(1), "");
                 global.getMainUtilisateur().addDepense(maDepense);
                 myDBHelper.insertDepense(maDepense);
-                Toast.makeText(this, "Dépense Crée!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Dépense Créée !", Toast.LENGTH_LONG).show();
                 this.finish();
             }
             else
-                Toast.makeText(this, "Pas de connection internet, veiller esssaier plustard", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Erreur ! Verifiez votre connection internet.", Toast.LENGTH_LONG).show();
         }
 
 
@@ -124,6 +155,8 @@ public class Depense_Activity extends FragmentActivity {
         date.setMonth(month);
         date.setDate(day);
     }
+
+    @SuppressLint("ValidFragment")
     public class SelectDateFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {

@@ -41,9 +41,8 @@
 
         <activity
             android:name=".About_Activity"
-            android:uiOptions="splitActionBarWhenNarrow"
             android:theme="@style/AppTheme"/>
-        
+
     </application>
 
 </manifest>
