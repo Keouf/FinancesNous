@@ -11,4 +11,110 @@
     tools:context="com.example.pcportablevidjay.financesnous.About_Activity">
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="À PROPOS DE NOUS"
+        android:id="@+id/textView19"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="#7f7f7f"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nous sommes une petite équipe de Toulouse qui travaillons sur ce projet afin de valider notre troisième année post-BAC. Nous éspérons que l&apos;application aura réussi a subvenir a vos besoins et vous aura aidé au quotidien. Nous avons pris beaucoup de plaisir a travailler dessus."
+        android:id="@+id/textView20"
+        android:layout_marginTop="16dp"
+        android:textColor="#232323"
+        android:layout_below="@+id/textView19"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Antoine - Chef de projet"
+        android:id="@+id/textView21"
+        android:layout_marginTop="19dp"
+        android:textStyle="italic"
+        android:textSize="10dp"
+        android:textColor="#585858"
+        android:layout_below="@+id/textView20"
+        android:layout_alignEnd="@+id/textView22" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Assma - Dévellopeur"
+        android:id="@+id/textView22"
+        android:textStyle="italic"
+        android:textSize="10dp"
+        android:textColor="#585858"
+        android:layout_below="@+id/textView23"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jonathan - Dévellopeur"
+        android:id="@+id/textView23"
+        android:textStyle="italic"
+        android:textSize="10dp"
+        android:textColor="#585858"
+        android:layout_below="@+id/textView21"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nicolas - Dévellopeur"
+        android:id="@+id/textView24"
+        android:textStyle="italic"
+        android:textSize="10dp"
+        android:textColor="#585858"
+        android:layout_below="@+id/textView25"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Peter - Dévellopeur"
+        android:id="@+id/textView25"
+        android:textStyle="italic"
+        android:textSize="10dp"
+        android:textColor="#585858"
+        android:layout_below="@+id/textView26"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vidjay - Dévellopeur"
+        android:id="@+id/textView26"
+        android:textStyle="italic"
+        android:textSize="10dp"
+        android:textColor="#585858"
+        android:layout_below="@+id/textView22"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notez-nous !"
+        android:id="@+id/textView27"
+        android:textStyle="bold"
+        android:textColor="#7f7f7f"
+        android:textSize="20dp"
+        android:layout_above="@+id/ratingBar"
+        android:layout_centerHorizontal="true" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingBar"
+        android:layout_marginBottom="14dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

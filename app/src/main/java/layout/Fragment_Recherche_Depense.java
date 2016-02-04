@@ -2,10 +2,7 @@ package layout;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -66,7 +63,7 @@ public class Fragment_Recherche_Depense extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.about_menu, menu);
+        inflater.inflate(R.menu.fragment_recherche_menu, menu);
     }
 
 

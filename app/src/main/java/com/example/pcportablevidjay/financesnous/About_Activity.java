@@ -3,7 +3,6 @@ package com.example.pcportablevidjay.financesnous;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -20,7 +19,7 @@ public class About_Activity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.about_menu, menu);
+        getMenuInflater().inflate(R.menu.fragment_recherche_menu, menu);
         return true;
     }
 
