@@ -1,7 +1,6 @@
 package com.example.pcportablevidjay.financesnous;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,13 +15,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
-import classes.Depense;
-import classes.DepenseAdapter;
 import classes.Global;
 import classes.MyDBHelper;
 import layout.Fragment_Recherche_Depense;
@@ -65,6 +59,7 @@ public class Accueil_Activity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         global = (Global) getApplication();
+        global.setMyContext(this);
         global.getMainUtilisateur().setMesDepenses(myDBHelper.getMesDepenses(global));
         Log.e("json", "arraylist of all depenses = " + global.getMainUtilisateur().getMesDepenses().toString());
 
@@ -111,23 +106,6 @@ public class Accueil_Activity extends AppCompatActivity
         if (id == R.id.nav_depense) {
             Fragment_Recherche_Depense fragment = new Fragment_Recherche_Depense();
             changerFragment(fragment, "Dépenses");
-
-            // get 10 all depenses
-            ArrayList<Depense> mes10DernierDepenses = global.getMainUtilisateur().get10DernierDepenses();
-            Log.e("json", "arraylist of 10 depenses = " + mes10DernierDepenses.toString());
-
-            // remplire Listview
-            DepenseAdapter adapater = new DepenseAdapter(this, mes10DernierDepenses);
-            try {
-                View myView = getFragmentManager().findFragmentById(R.id.fragment_recherche_depense).getView().findViewById(R.id.rechercheDepense_listView_10Depenses);
-                ListView depensesListView = (ListView) myView;
-                Log.e("json", Integer.toString(depensesListView.getId()));
-                //depensesListView.setAdapter(adapater);
-            } catch (Exception e) {
-                Log.e("json", e.toString());
-            }
-
-
 
         } else if (id == R.id.nav_stats) {
             Fragment_Statistique fragment = new Fragment_Statistique();
