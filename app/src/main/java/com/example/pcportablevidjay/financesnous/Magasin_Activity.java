@@ -10,6 +10,7 @@ import android.widget.Toast;
 import classes.AndroidConnectivity;
 import classes.Depense;
 import classes.Global;
+import classes.Magasin;
 import classes.MyDBHelper;
 
 public class Magasin_Activity extends AppCompatActivity {
@@ -70,7 +71,11 @@ public class Magasin_Activity extends AppCompatActivity {
             AndroidConnectivity androidConnectivity = new AndroidConnectivity(this);
             if (androidConnectivity.getConnectivityStatus())
             {
-                // à compléter
+                Magasin monMagasin = new Magasin(2,nomMagasinEdit.getText().toString(), adresseMagasinEdit.getText().toString(), villeMagasinEdit.getText().toString(), codePostalMagasinEdit.getText().toString(), siteMagasinEdit.getText().toString(),telMagasinEdit.getText().toString());
+                myDBHelper.ajoutMagasin(monMagasin);
+                Toast.makeText(this, "Magasin Crée!", Toast.LENGTH_LONG).show();
+                this.finish();
+
             }
             else
                 Toast.makeText(this, "Pas de connection internet, veuillez réessayer plus tard", Toast.LENGTH_LONG).show();
