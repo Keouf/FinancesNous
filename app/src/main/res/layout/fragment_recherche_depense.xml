@@ -25,7 +25,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView11"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="#ffffff"
+        android:smoothScrollbar="false"
+        android:layout_marginTop="5dp" />
 
 
 </RelativeLayout>

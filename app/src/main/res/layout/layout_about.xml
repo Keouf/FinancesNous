@@ -10,4 +10,5 @@
     android:title="Test"
     tools:context="com.example.pcportablevidjay.financesnous.About_Activity">
 
+
 </RelativeLayout>
