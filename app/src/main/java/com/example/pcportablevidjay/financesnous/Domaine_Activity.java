@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import classes.AndroidConnectivity;
+import classes.Domaine;
 import classes.Global;
 import classes.MyDBHelper;
 
@@ -38,7 +39,10 @@ public class Domaine_Activity extends AppCompatActivity {
             AndroidConnectivity androidConnectivity = new AndroidConnectivity(this);
             if (androidConnectivity.getConnectivityStatus())
             {
-                // à compléter
+                Domaine monDomaine = new Domaine(0,nomDomaineEdit.getText().toString());
+                myDBHelper.ajoutDomaine(monDomaine);
+                Toast.makeText(this, "Le domaine a bien été crée", Toast.LENGTH_LONG).show();
+                this.finish();
             }
             else
                 Toast.makeText(this, "Pas de connection internet, veuillez réessayer plus tard", Toast.LENGTH_LONG).show();
