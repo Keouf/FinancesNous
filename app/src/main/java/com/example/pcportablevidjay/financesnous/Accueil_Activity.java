@@ -58,14 +58,15 @@ public class Accueil_Activity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        Fragment_Accueil fragment = new Fragment_Accueil();
+        changerFragment(fragment, "Accueil");
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         global = (Global) getApplication();
         global.getMainUtilisateur().setMesDepenses(myDBHelper.getMesDepenses(global));
         Log.e("json", "arraylist of all depenses = " + global.getMainUtilisateur().getMesDepenses().toString());
-
-
 
     }
 
@@ -108,11 +109,8 @@ public class Accueil_Activity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_depense) {
-            Toast.makeText(getApplicationContext(), "Dépenses", Toast.LENGTH_SHORT).show();
             Fragment_Recherche_Depense fragment = new Fragment_Recherche_Depense();
-            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frame, fragment);
-            fragmentTransaction.commit();
+            changerFragment(fragment, "Dépenses");
 
             // get 10 all depenses
             ArrayList<Depense> mes10DernierDepenses = global.getMainUtilisateur().get10DernierDepenses();
@@ -132,11 +130,8 @@ public class Accueil_Activity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_stats) {
-            Toast.makeText(getApplicationContext(), "Statistiques", Toast.LENGTH_SHORT).show();
-            Fragment_Recherche_Depense fragment = new Fragment_Recherche_Depense();
-            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frame,fragment);
-            fragmentTransaction.commit();
+            Fragment_Statistique fragment = new Fragment_Statistique();
+            changerFragment(fragment, "Statistiques");
         } else if (id == R.id.nav_garantie) {
 
         } else if (id == R.id.nav_noteDeFrais) {
@@ -152,22 +147,10 @@ public class Accueil_Activity extends AppCompatActivity
         return true;
     }
 
-    public void changerFragment(Fragment fragment){
-        if(currentFragment != null) {
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.remove(currentFragment);
-            fragmentTransaction.add(R.id.fragment_container, fragment);
-            currentFragment = fragment;
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-        }
-        else{
-            currentFragment = fragment;
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.fragment_container, currentFragment);
-            fragmentTransaction.commit();
-        }
+    public void changerFragment(Fragment fragment, String text){
+        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame,fragment);
+        fragmentTransaction.commit();
     }
 }
