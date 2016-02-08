@@ -24,71 +24,112 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Domaine :"
-        android:id="@+id/textDomaine"
-        android:textSize="20dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textTel"
-        android:layout_alignParentLeft="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Enseigne :"
-        android:id="@+id/textEnseigne"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textSiteWeb"
-        android:layout_alignParentLeft="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Adresse :"
-        android:id="@+id/textAdresse"
+        android:text="Domaine"
+        android:id="@+id/depense_detail_tv_domaine"
         android:layout_below="@+id/textTitreDepenseDetail"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="23dp"
+        android:layout_marginBottom="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Site-web :"
-        android:id="@+id/textSiteWeb"
+        android:text="Enseigne"
+        android:id="@+id/depense_detail_tv_enseigne"
+        android:layout_below="@+id/depense_detail_tv_domaine"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textDomaine"
-        android:layout_alignParentLeft="true" />
+        android:layout_marginBottom="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Téléphone :"
-        android:id="@+id/textTel"
+        android:text="Adresse"
+        android:id="@+id/depense_detail_tv_adresse"
+        android:layout_below="@+id/depense_detail_tv_enseigne"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textDate"
-        android:layout_alignParentLeft="true" />
+        android:layout_marginBottom="60dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Date :"
-        android:id="@+id/textDate"
+        android:text="Site"
+        android:id="@+id/depense_detail_tv_site"
+        android:layout_below="@+id/depense_detail_tv_adresse"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textAdresse"
-        android:layout_alignParentLeft="true" />
+        android:layout_marginBottom="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Montant :"
-        android:id="@+id/textMontant"
+        android:text="Téléphone"
+        android:id="@+id/depense_detail_tv_telephone"
+        android:layout_below="@+id/depense_detail_tv_site"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textEnseigne"
-        android:layout_alignParentLeft="true" />
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Date"
+        android:id="@+id/depense_detail_tv_date"
+        android:layout_below="@+id/depense_detail_tv_telephone"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Montant"
+        android:id="@+id/depense_detail_tv_montant"
+        android:layout_below="@+id/depense_detail_tv_date"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Pièce Joint"
+        android:id="@+id/depense_detail_tv_pc"
+        android:layout_below="@+id/depense_detail_tv_montant"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/depense_detail_et_domaine"
+        android:layout_alignBottom="@+id/depense_detail_tv_domaine"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/depense_detail_tv_pc" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/depense_detail_et_enseigne"
+        android:layout_above="@+id/depense_detail_tv_adresse"
+        android:layout_alignEnd="@+id/depense_detail_et_domaine"
+        android:layout_alignStart="@+id/depense_detail_et_domaine" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/depense_detail_et_adresse"
+        android:layout_below="@+id/depense_detail_et_enseigne"
+        android:layout_alignEnd="@+id/depense_detail_et_enseigne"
+        android:layout_alignStart="@+id/depense_detail_et_enseigne" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText2"
+        android:layout_below="@+id/depense_detail_et_adresse"
+        android:layout_alignStart="@+id/depense_detail_et_adresse"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

@@ -34,9 +34,12 @@ public class DepenseAdapter extends ArrayAdapter<Depense> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), DepenseDetail_Activity.class);
-                //intent.putExtra("Depense", depense);
+                intent.putExtra("Depense", depense);
+                getContext().startActivity(intent);
             }
+
         });
+
 
         TextView tvNom = (TextView) convertView.findViewById(R.id.tvNom);
         TextView tvDate = (TextView) convertView.findViewById(R.id.tvDate);

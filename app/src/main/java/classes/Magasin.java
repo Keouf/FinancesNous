@@ -1,7 +1,9 @@
 package classes;
 
 
-public class Magasin {
+import java.io.Serializable;
+
+public class Magasin implements Serializable {
 
     private int id;
     private String nom_managasin;

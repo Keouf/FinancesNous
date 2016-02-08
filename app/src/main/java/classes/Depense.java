@@ -1,9 +1,10 @@
 package classes;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Depense{
+public class Depense implements Serializable{
 
     private Integer idDepense;
     private Date dateDepense;
@@ -79,26 +80,5 @@ public class Depense{
         this.pieceJoint = pieceJoint;
     }
 
-//    @Override
-//    public int describeContents() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public void writeToParcel(Parcel dest, int flags) {
-//        dest.writeValue(this);
-//    }
-//
-//    public static final Parcelable.Creator<Depense> CREATOR = new Parcelable.Creator<Depense>() {
-//        public Depense createFromParcel(Parcel in) {
-//            //return new Depense(in);
-//            return null;
-//        }
-//    }
-//
-//    @Override
-//    public Depense[] newArray(int size) {
-//        return new Depense[size];
-//    }
 }
 

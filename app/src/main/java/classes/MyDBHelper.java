@@ -22,6 +22,16 @@ public class MyDBHelper {
 
     JsonConverter jsonConverter = new JsonConverter();
 
+    public Utilisateur getUtilisateur(String userMail) {
+        makeTaskAsynchrone();
+
+        String phpURL = "http://berghuis-peter.net/FinanceNous/userLogin.php?idUtilisateur=" + userMail;
+
+        JSONArray jsonArray = getDataInJson(phpURL);
+
+        return jsonConverter.ConvertJsonArrayToUtilisateur(jsonArray);
+    }
+
     public ArrayList<Depense> getMesDepenses(Global global) {
         makeTaskAsynchrone();
 
