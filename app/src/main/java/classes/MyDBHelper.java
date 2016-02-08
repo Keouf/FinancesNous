@@ -148,6 +148,12 @@ public class MyDBHelper {
         return domaine;
     }
 
+    public void creerCompte(String email, String pass){
+        makeTaskAsynchrone();
+        String phpURL = "http://berghuis-peter.net/FinanceNous/inscription.php";
+        sendData(phpURL, "?mail="+email+"&mdp="+pass);
+    }
+    
     //---------------------------------------------------------
 
     private JSONArray getDataInJson(String phpURL ) {
