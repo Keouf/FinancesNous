@@ -99,8 +99,7 @@ public class JsonConverter {
         return Magasins;
     }
 
-    public Utilisateur ConvertJsonArrayToUtilisateur(JSONArray myJsonarray)
-    {
+    public Utilisateur ConvertJsonArrayToUtilisateur(JSONArray myJsonarray) throws Exception {
         Utilisateur utilisateur = null;
         JSONObject json = null;
 
@@ -111,6 +110,7 @@ public class JsonConverter {
                 utilisateur = new Utilisateur(json.getInt("id_utilisateur"), json.getString("mail_utilisateur"), json.getString("mot_de_passe"));
             } catch (JSONException e) {
                 e.printStackTrace();
+                throw new Exception();
             }
         }
         return utilisateur;

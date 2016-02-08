@@ -49,7 +49,7 @@
         android:id="@+id/depense_detail_tv_adresse"
         android:layout_below="@+id/depense_detail_tv_enseigne"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="60dp"/>
+        android:layout_marginBottom="70dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -112,17 +112,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/depense_detail_et_enseigne"
-        android:layout_above="@+id/depense_detail_tv_adresse"
-        android:layout_alignEnd="@+id/depense_detail_et_domaine"
-        android:layout_alignStart="@+id/depense_detail_et_domaine" />
+        android:layout_alignBottom="@+id/depense_detail_tv_enseigne"
+        android:layout_alignStart="@+id/depense_detail_et_domaine"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/depense_detail_et_adresse"
-        android:layout_below="@+id/depense_detail_et_enseigne"
-        android:layout_alignEnd="@+id/depense_detail_et_enseigne"
-        android:layout_alignStart="@+id/depense_detail_et_enseigne" />
+        android:layout_alignBottom="@+id/depense_detail_tv_adresse"
+        android:layout_alignStart="@+id/depense_detail_et_enseigne"
+        android:layout_alignEnd="@+id/depense_detail_et_enseigne" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -130,6 +130,38 @@
         android:id="@+id/editText2"
         android:layout_below="@+id/depense_detail_et_adresse"
         android:layout_alignStart="@+id/depense_detail_et_adresse"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/depense_detail_et_site"
+        android:layout_alignBottom="@+id/depense_detail_tv_site"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/editText2" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/depense_detail_et_telephone"
+        android:layout_above="@+id/depense_detail_tv_date"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/depense_detail_et_site" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_above="@+id/depense_detail_tv_montant"
+        android:layout_alignStart="@+id/depense_detail_et_telephone"
+        android:layout_alignEnd="@+id/depense_detail_et_telephone" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText3"
+        android:layout_above="@+id/depense_detail_tv_pc"
+        android:layout_alignStart="@+id/editText"
         android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
