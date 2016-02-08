@@ -308,6 +308,7 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
                 user = myDBHelper.getUtilisateur(mEmail);
             } catch (Exception e) {
                 e.printStackTrace();
+                finish();
             }
 
             return user.getMotDePasse().equals(mPassword);
