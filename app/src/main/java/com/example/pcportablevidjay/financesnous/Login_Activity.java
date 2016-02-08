@@ -299,13 +299,11 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
 
             try {
                 user = myDBHelper.getUtilisateur(mEmail);
             } catch (Exception e) {
-                e.printStackTrace();
-                finish();
+                return false;
             }
 
             return user.getMotDePasse().equals(mPassword);
@@ -317,11 +315,12 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
             showProgress(false);
 
             if (success) {
+                global.setMainUtilisateur(user);
                 Intent accueil = new Intent(getBaseContext(), Accueil_Activity.class);
                 startActivity(accueil);
                 finish();
             } else {
-                mPasswordView.setError(/*getString(R.string.error_incorrect_password)+*/" Pass entrée : "+mPassword+" Pass recuperé : "+user.getMotDePasse());
+                mPasswordView.setError("E-mail ou mot de passe incorrect.");
                 mPasswordView.requestFocus();
             }
         }
