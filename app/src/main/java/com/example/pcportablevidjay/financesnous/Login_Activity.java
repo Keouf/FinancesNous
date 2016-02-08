@@ -29,12 +29,14 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import classes.Global;
 import classes.MyDBHelper;
+import classes.Utilisateur;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -44,10 +46,9 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
 
     private static final int REQUEST_READ_CONTACTS = 0;
     Global global;
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
     private UserLoginTask mAuthTask = null;
+    public static MyDBHelper myDBHelper = new MyDBHelper();
+    private Utilisateur user;
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -184,19 +185,15 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute();
-            Intent accueil = new Intent(getBaseContext(), Accueil_Activity.class);
-            startActivity(accueil);
         }
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 0;
     }
 
     /**
@@ -308,22 +305,12 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
             // TODO: attempt authentication against a network service.
 
             try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
+                user = myDBHelper.getUtilisateur(mEmail);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            // TODO: register the new account here.
-            return true;
+            return user.getMotDePasse().equals(mPassword);
         }
 
         @Override
@@ -332,9 +319,11 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
             showProgress(false);
 
             if (success) {
+                Intent accueil = new Intent(getBaseContext(), Accueil_Activity.class);
+                startActivity(accueil);
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                mPasswordView.setError(/*getString(R.string.error_incorrect_password)+*/" Pass entrée : "+mPassword+" Pass recuperé : "+user.getMotDePasse());
                 mPasswordView.requestFocus();
             }
         }

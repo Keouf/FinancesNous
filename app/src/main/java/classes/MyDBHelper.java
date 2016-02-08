@@ -22,19 +22,21 @@ public class MyDBHelper {
 
     JsonConverter jsonConverter = new JsonConverter();
 
-    public Utilisateur getUtilisateur(String userMail) {
+    public Utilisateur getUtilisateur(String userMail) throws Exception{
         makeTaskAsynchrone();
 
-        String phpURL = "http://berghuis-peter.net/FinanceNous/userLogin.php?idUtilisateur=" + userMail;
+        String phpURL = "http://berghuis-peter.net/FinanceNous/userLogin.php?mailUtilisateur=" + userMail;
 
         JSONArray jsonArray = getDataInJson(phpURL);
 
         try{
-            return jsonConverter.ConvertJsonArrayToUtilisateur(jsonArray);
+            Utilisateur user = jsonConverter.ConvertJsonArrayToUtilisateur(jsonArray);
+            if(user == null)
+                throw new Exception("Utilisateur introuvable");
+            return user;
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         }
-        return null;
     }
 
     public ArrayList<Depense> getMesDepenses(Global global) {
