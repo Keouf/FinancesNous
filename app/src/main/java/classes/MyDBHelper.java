@@ -29,7 +29,12 @@ public class MyDBHelper {
 
         JSONArray jsonArray = getDataInJson(phpURL);
 
-        return jsonConverter.ConvertJsonArrayToUtilisateur(jsonArray);
+        try{
+            return jsonConverter.ConvertJsonArrayToUtilisateur(jsonArray);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public ArrayList<Depense> getMesDepenses(Global global) {
