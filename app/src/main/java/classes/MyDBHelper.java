@@ -25,7 +25,7 @@ public class MyDBHelper {
     public Utilisateur getUtilisateur(String userMail) {
         makeTaskAsynchrone();
 
-        String phpURL = "http://berghuis-peter.net/FinanceNous/userLogin.php?idUtilisateur=" + userMail;
+        String phpURL = "http://berghuis-peter.net/FinanceNous/userLogin.php?mailUtilisateur=" + userMail;
 
         JSONArray jsonArray = getDataInJson(phpURL);
 
