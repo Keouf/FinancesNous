@@ -45,6 +45,10 @@
             android:name=".About_Activity"
             android:theme="@style/AppTheme"/>
 
+        <activity
+            android:name=".DepenseDetail_Activity"
+            android:theme="@style/AppTheme"/>
+
     </application>
 
 </manifest>
