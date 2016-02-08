@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import classes.Global;
@@ -24,11 +25,9 @@ import layout.Fragment_Recherche_Depense;
 public class Accueil_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
-    public static Fragment currentFragment = null;
-    public static MyDBHelper myDBHelper = new MyDBHelper();
     Global global;
 
+    public static MyDBHelper myDBHelper = new MyDBHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +78,10 @@ public class Accueil_Activity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.accueil, menu);
+
+        TextView t = (TextView)findViewById(R.id.TV_IDUser);
+        t.setText(global.getMainUtilisateur().getMail());
+
         return true;
     }
 
