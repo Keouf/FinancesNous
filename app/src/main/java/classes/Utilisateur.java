@@ -1,9 +1,10 @@
 package classes;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Utilisateur {
+public class Utilisateur implements Serializable{
 
     private int id_utilisateur;
     private String mail;

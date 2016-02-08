@@ -28,7 +28,9 @@
         android:layout_centerHorizontal="true"
         android:background="#ffffff"
         android:smoothScrollbar="false"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="5dp"
+        android:choiceMode="singleChoice"
+        android:focusable="true"/>
 
 
 </RelativeLayout>

@@ -99,4 +99,21 @@ public class JsonConverter {
         return Magasins;
     }
 
+    public Utilisateur ConvertJsonArrayToUtilisateur(JSONArray myJsonarray)
+    {
+        Utilisateur utilisateur = null;
+        JSONObject json = null;
+
+        for (int i = 0; i < myJsonarray.length(); i++)
+        {
+            try {
+                json = myJsonarray.getJSONObject(i);
+                utilisateur = new Utilisateur(json.getInt("id_utilisateur"), json.getString("mail_utilisateur"), json.getString("mot_de_passe"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return utilisateur;
+    }
+
 }
