@@ -107,7 +107,7 @@ public class JsonConverter {
         {
             try {
                 json = myJsonarray.getJSONObject(i);
-                utilisateur = new Utilisateur(json.getInt("id_utilisateur"), json.getString("mail_utilisateur"), json.getString("mot_de_passe"));
+                utilisateur = new Utilisateur(json.getInt("id_utilisateur"), json.getString("mail_utilisateur"), json.getString("mot_de_passe_utilisateur"));
             } catch (JSONException e) {
                 e.printStackTrace();
                 throw new Exception();
