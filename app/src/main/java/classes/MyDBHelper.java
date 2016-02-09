@@ -153,7 +153,7 @@ public class MyDBHelper {
         String phpURL = "http://berghuis-peter.net/FinanceNous/inscription.php";
         sendData(phpURL, "?mail="+email+"&mdp="+pass);
     }
-    
+
     //---------------------------------------------------------
 
     private JSONArray getDataInJson(String phpURL ) {

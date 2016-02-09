@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -28,6 +29,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +50,7 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
     private Utilisateur user;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
+        private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
@@ -283,10 +285,6 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
         int IS_PRIMARY = 1;
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
@@ -302,7 +300,10 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
 
             try {
                 user = myDBHelper.getUtilisateur(mEmail);
-            } catch (Exception e) {
+            }catch(UnknownHostException e){
+                return false;
+            }
+            catch (Exception e) {
                 return false;
             }
 
@@ -320,8 +321,8 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
                 startActivity(accueil);
                 finish();
             } else {
-                mPasswordView.setError("E-mail ou mot de passe incorrect.");
-                mPasswordView.requestFocus();
+                mEmailView.setError(getString(R.string.error_incorrect_combo));
+                mEmailView.requestFocus();
             }
         }
 
