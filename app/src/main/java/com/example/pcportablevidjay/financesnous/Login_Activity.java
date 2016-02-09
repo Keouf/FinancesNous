@@ -9,6 +9,7 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -57,6 +58,10 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
+
+
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.music_fond);
+        mp.start();
 
         global = (Global) getApplication();
         global.setMyContext(this);
