@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textTitreDepenseDetail"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginTop="23dp"
         android:text="Domaine"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/depense_detail_tv_site"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="15dp"
         android:text="Téléphone"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -106,7 +106,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/depense_detail_tv_domaine"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/depense_detail_tv_pc" />
+        android:layout_toEndOf="@+id/depense_detail_tv_pc"
+        android:focusable="false" />
 
     <EditText
         android:id="@+id/depense_detail_et_enseigne"
@@ -114,7 +115,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/depense_detail_tv_enseigne"
         android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/depense_detail_et_domaine" />
+        android:layout_alignStart="@+id/depense_detail_et_domaine"
+        android:focusable="false" />
 
     <EditText
         android:id="@+id/depense_detail_et_adresse"
@@ -122,7 +124,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/depense_detail_tv_adresse"
         android:layout_alignEnd="@+id/depense_detail_et_enseigne"
-        android:layout_alignStart="@+id/depense_detail_et_enseigne" />
+        android:layout_alignStart="@+id/depense_detail_et_enseigne"
+        android:focusable="false" />
 
     <EditText
         android:id="@+id/depense_detail_et_adresse2"
@@ -130,7 +133,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignStart="@+id/depense_detail_et_adresse"
-        android:layout_below="@+id/depense_detail_et_adresse" />
+        android:layout_below="@+id/depense_detail_et_adresse"
+        android:focusable="false" />
 
     <EditText
         android:id="@+id/depense_detail_et_site"
@@ -138,15 +142,17 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/depense_detail_tv_site"
         android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/depense_detail_et_adresse2" />
+        android:layout_alignStart="@+id/depense_detail_et_adresse2"
+        android:focusable="false" />
 
     <EditText
         android:id="@+id/depense_detail_et_telephone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/depense_detail_tv_date"
-        android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/depense_detail_et_site" />
+        android:focusable="false"
+        android:layout_alignBottom="@+id/depense_detail_tv_telephone"
+        android:layout_alignStart="@+id/depense_detail_et_site"
+        android:layout_alignEnd="@+id/depense_detail_et_site" />
 
     <EditText
         android:id="@+id/depense_detail_et_date"
@@ -154,7 +160,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/depense_detail_tv_montant"
         android:layout_alignEnd="@+id/depense_detail_et_telephone"
-        android:layout_alignStart="@+id/depense_detail_et_telephone" />
+        android:layout_alignStart="@+id/depense_detail_et_telephone"
+        android:focusable="false" />
 
     <EditText
         android:id="@+id/depense_detail_et_montant"
@@ -162,6 +169,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/depense_detail_tv_pc"
         android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/depense_detail_et_date" />
+        android:layout_alignStart="@+id/depense_detail_et_date"
+        android:focusable="false" />
 
 </RelativeLayout>

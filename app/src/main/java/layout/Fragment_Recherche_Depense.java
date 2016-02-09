@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pcportablevidjay.financesnous.R;
 
@@ -21,8 +23,10 @@ import classes.Global;
 
 public class Fragment_Recherche_Depense extends Fragment {
 
-    //private View myFragmentView;
     Global global;
+    TextView tvMessage;
+    ListView depensesListView;
+    DepenseAdapter adapater;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,21 +36,45 @@ public class Fragment_Recherche_Depense extends Fragment {
 
         //ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
 
+        tvMessage = (TextView)view.findViewById(R.id.recherche_tv_messageHolder);
+        depensesListView = (ListView)view.findViewById(R.id.rechercheDepense_listView_10Depenses);
+
         // get 10 all depenses
         global = (Global)getActivity().getApplication();
         ArrayList<Depense> mes10DernierDepenses = global.getMainUtilisateur().get10DernierDepenses();
         Log.e("json", "arraylist of 10 depenses = " + mes10DernierDepenses.toString());
 
-        // remplire Listview
-        DepenseAdapter adapater = new DepenseAdapter(global.getMyContext(), mes10DernierDepenses);
-        try {
-            ListView depensesListView = (ListView)view.findViewById(R.id.rechercheDepense_listView_10Depenses);
-            depensesListView.setAdapter(adapater);
-        } catch (Exception e) {
-            Log.e("json", e.toString());
+        if (mes10DernierDepenses == null || mes10DernierDepenses.isEmpty())
+        {
+            depensesListView.setVisibility(View.GONE);
+            tvMessage.setVisibility(view.VISIBLE);
+            tvMessage.setText("Vous n'avez pas de depenses crée");
+        }
+        else
+        {
+            try {
+                tvMessage.setVisibility(view.INVISIBLE);
+                adapater = new DepenseAdapter(global.getMyContext(), mes10DernierDepenses);
+                depensesListView.setAdapter(adapater);
+            } catch (Exception e) {
+                Log.e("json", e.toString());
+            }
         }
 
+
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        global = (Global)getActivity().getApplication();
+        Toast.makeText(getActivity(), "update!", Toast.LENGTH_SHORT).show();
+        adapater.clear();
+        adapater.addAll(global.getMainUtilisateur().get10DernierDepenses());
+        adapater.notifyDataSetChanged();
+        depensesListView.setAdapter(adapater);
+        depensesListView.invalidateViews();
     }
 
     @Override
@@ -66,5 +94,8 @@ public class Fragment_Recherche_Depense extends Fragment {
         inflater.inflate(R.menu.fragment_recherche_menu, menu);
     }
 
+    public DepenseAdapter getAdapater() {
+        return adapater;
+    }
 
 }

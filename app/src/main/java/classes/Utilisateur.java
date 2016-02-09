@@ -3,6 +3,7 @@ package classes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Utilisateur implements Serializable{
 
@@ -60,9 +61,15 @@ public class Utilisateur implements Serializable{
     {
         ArrayList<Depense> mes10Depenses = new ArrayList<>();
 
-        // get last 10 depenses
-        for (int i = getMesDepenses().size() - 1; i > (getMesDepenses().size() - 10); i--) {
-            mes10Depenses.add(mesDepenses.get(i));
+        if (getMesDepenses().size() >= 10) {
+            // get last 10 depenses
+            for (int i = getMesDepenses().size() - 1; i > (getMesDepenses().size() - 11); i--) {
+                mes10Depenses.add(mesDepenses.get(i));
+            }
+        }
+        else {
+            mes10Depenses = getMesDepenses();
+            Collections.reverse(mes10Depenses);
         }
 
         return mes10Depenses;

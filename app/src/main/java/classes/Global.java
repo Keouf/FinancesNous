@@ -9,7 +9,7 @@ public class Global extends Application {
     private Context myContext;
 
     // attributs privé
-    private Utilisateur mainUtilisateur;
+    private Utilisateur mainUtilisateur = new Utilisateur(1,"test@fn.fr", "test");
 
     // getter/setter
     public Utilisateur getMainUtilisateur() {

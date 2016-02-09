@@ -22,6 +22,16 @@ public class MyDBHelper {
 
     JsonConverter jsonConverter = new JsonConverter();
 
+
+    public void supprimerDepense(Depense depensaASupprimer)
+    {
+        makeTaskAsynchrone();
+        Log.e("json", Integer.toString(depensaASupprimer.getIdDepense()));
+        String phpURL = "http://berghuis-peter.net/FinanceNous/deleteDepense.php?idDepense=";
+
+        sendData(phpURL, Integer.toString(depensaASupprimer.getIdDepense()));
+    }
+
     public Utilisateur getUtilisateur(String userMail) throws Exception{
         makeTaskAsynchrone();
 

@@ -1,19 +1,28 @@
 package com.example.pcportablevidjay.financesnous;
 
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import classes.Depense;
+import classes.Global;
+import classes.MyDBHelper;
 
 public class DepenseDetail_Activity extends AppCompatActivity {
 
-
+    MyDBHelper myDBHelper = new MyDBHelper();
     Depense depense;
+    Global global;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +33,39 @@ public class DepenseDetail_Activity extends AppCompatActivity {
         depense = (Depense) i.getSerializableExtra("Depense");
         populateLayout();
 
+        global = (Global)getApplication();
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.depense_detail_menu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.depense_detail_bt_supprimer) {
+            AlertDialog.Builder adb=new AlertDialog.Builder(this);
+            adb.setTitle("Delete?");
+            adb.setMessage("Are you sure you want to delete ");
+            adb.setNegativeButton("Cancel", null);
+            adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // if accepted
+                    myDBHelper.supprimerDepense(depense);
+                    global.getMainUtilisateur().getMesDepenses().remove(depense);
+                    Log.e("json", global.getMainUtilisateur().getMesDepenses().toString());
+                    finish();
+                }
+            });
+            adb.show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void populateLayout() {
