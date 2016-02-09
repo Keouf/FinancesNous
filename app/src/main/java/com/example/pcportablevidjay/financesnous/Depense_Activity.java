@@ -6,11 +6,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -25,10 +23,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import classes.AndroidConnectivity;
 import classes.Depense;
 import classes.Global;
 import classes.MyDBHelper;
+import classes.Utils;
 
 public class Depense_Activity extends AppCompatActivity {
 
@@ -120,8 +118,7 @@ public class Depense_Activity extends AppCompatActivity {
         }
 
         if (remplit) {
-            AndroidConnectivity androidConnectivity = new AndroidConnectivity(this);
-            if (androidConnectivity.getConnectivityStatus())
+            if (Utils.getConnectivityStatus(getApplicationContext()))
             {
                 global = (Global)this.getApplication();
                 Depense maDepense = new Depense(myDBHelper.getLastDepenseID(), date, Double.parseDouble(montantEdit.getText().toString()), global.getMainUtilisateur(), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithId(1), "");

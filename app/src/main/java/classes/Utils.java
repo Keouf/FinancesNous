@@ -4,12 +4,12 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-public class AndroidConnectivity {
+/**
+ * Created by Vidjay Seganti on 09/02/2016.
+ */
+public final class Utils {
 
-    private Context myContext;
-
-    // tester si une connection est détecté
-    public boolean getConnectivityStatus() {
+    public static boolean getConnectivityStatus(Context myContext) {
         ConnectivityManager cm = (ConnectivityManager) myContext.getSystemService(myContext.CONNECTIVITY_SERVICE);
         NetworkInfo nInfo = cm.getActiveNetworkInfo();
 
@@ -19,7 +19,4 @@ public class AndroidConnectivity {
         return false;
     }
 
-    public AndroidConnectivity(Context myContext) {
-        this.myContext = myContext;
-    }
 }

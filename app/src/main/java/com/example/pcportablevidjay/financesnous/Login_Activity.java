@@ -4,10 +4,13 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -24,6 +27,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -32,6 +36,7 @@ import java.util.List;
 import classes.Global;
 import classes.MyDBHelper;
 import classes.Utilisateur;
+import classes.Utils;
 
 
 public class Login_Activity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
@@ -49,6 +54,7 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
 
@@ -74,7 +80,13 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                if(!Utils.getConnectivityStatus(getApplicationContext())){
+                    Toast toast = Toast.makeText(getApplicationContext(), "Activer internet", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                else {
+                    attemptLogin();
+                }
             }
         });
 
@@ -89,8 +101,6 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
 
         mProgressView = findViewById(R.id.login_progress);
     }
-
-
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -281,6 +291,7 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
             mAuthTask = null;
             showProgress(false);
         }
+
     }
 }
 

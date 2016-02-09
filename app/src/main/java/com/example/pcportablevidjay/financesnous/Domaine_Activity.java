@@ -7,10 +7,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import classes.AndroidConnectivity;
 import classes.Domaine;
 import classes.Global;
 import classes.MyDBHelper;
+import classes.Utils;
 
 public class Domaine_Activity extends AppCompatActivity {
 
@@ -36,8 +36,7 @@ public class Domaine_Activity extends AppCompatActivity {
             remplit = false;
         }
         if (remplit) {
-            AndroidConnectivity androidConnectivity = new AndroidConnectivity(this);
-            if (androidConnectivity.getConnectivityStatus())
+            if (Utils.getConnectivityStatus(getApplicationContext()))
             {
                 Domaine monDomaine = new Domaine(0,nomDomaineEdit.getText().toString());
                 myDBHelper.ajoutDomaine(monDomaine);

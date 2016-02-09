@@ -7,11 +7,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import classes.AndroidConnectivity;
-import classes.Depense;
 import classes.Global;
 import classes.Magasin;
 import classes.MyDBHelper;
+import classes.Utils;
 
 public class Magasin_Activity extends AppCompatActivity {
 
@@ -68,8 +67,7 @@ public class Magasin_Activity extends AppCompatActivity {
         }
 
         if (remplit) {
-            AndroidConnectivity androidConnectivity = new AndroidConnectivity(this);
-            if (androidConnectivity.getConnectivityStatus())
+            if (Utils.getConnectivityStatus(getApplicationContext()))
             {
                 Magasin monMagasin = new Magasin(2,nomMagasinEdit.getText().toString(), adresseMagasinEdit.getText().toString(), villeMagasinEdit.getText().toString(), codePostalMagasinEdit.getText().toString(), siteMagasinEdit.getText().toString(),telMagasinEdit.getText().toString());
                 myDBHelper.ajoutMagasin(monMagasin);
