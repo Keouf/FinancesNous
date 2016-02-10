@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatImageButton;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,12 +38,12 @@ public class Depense_Activity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_depense);
+        setContentView(R.layout.layout_depense_bis);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        final Button btnAjouterDomaine = (Button) findViewById(R.id.btnAjouterDomaine);
+        final AppCompatImageButton btnAjouterDomaine = (AppCompatImageButton) findViewById(R.id.btnAjouterDomaine);
         btnAjouterDomaine.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent creerDomaine = new Intent(getBaseContext(), Domaine_Activity.class);
@@ -50,7 +51,7 @@ public class Depense_Activity extends AppCompatActivity {
             }
         });
 
-        final Button btnAjouterEnseigne = (Button) findViewById(R.id.btnAjouterEnseigne);
+        final AppCompatImageButton btnAjouterEnseigne = (AppCompatImageButton) findViewById(R.id.btnAjouterEnseigne);
         btnAjouterEnseigne.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent creerEnseigne = new Intent(getBaseContext(), Magasin_Activity.class);
@@ -83,21 +84,6 @@ public class Depense_Activity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-            /*case R.id.menu_about:
-                // Comportement du bouton "A Propos"
-                return true;
-            case R.id.menu_help:
-                // Comportement du bouton "Aide"
-                return true;
-            case R.id.menu_refresh:
-                // Comportement du bouton "Rafraichir"
-                return true;
-            case R.id.menu_search:
-                // Comportement du bouton "Recherche"
-                return true;
-            case R.id.menu_settings:
-                // Comportement du bouton "Paramétres"
-                return true;*/
             default:
                 return super.onOptionsItemSelected(item);
         }

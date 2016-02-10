@@ -60,8 +60,8 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
         setContentView(R.layout.layout_login);
 
 
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.music_fond);
-        mp.start();
+        //final MediaPlayer mp = MediaPlayer.create(this, R.raw.music_fond);
+        //mp.start();
 
         global = (Global) getApplication();
         global.setMyContext(this);

@@ -27,5 +27,6 @@
 
     <!-- Strings related to login -->
     <string name="creerUneDepense">Créer une dépense</string>
+    <string name="title_activity_depense_bis">depense_bis</string>
 
 </resources>
