@@ -1,154 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/drawer_layout"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".Depense_Activity">
+    android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Créer une dépense"
-        android:id="@+id/textTitreDepense"
-        android:textSize="22dp"
-        android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Domaine :"
-        android:id="@+id/textDomaine"
-        android:layout_marginTop="24dp"
-        android:layout_marginLeft="5dp"
-        android:textSize="20dp"
-        android:paddingTop="10dp"
-        android:layout_below="@+id/textTitreDepense"
-        android:layout_toStartOf="@+id/spinner_domaine" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CRÉER UNE DÉPENSE"
+                android:id="@+id/textTitreDepense"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:layout_marginBottom="5dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Enseigne :"
-        android:id="@+id/textEnseigne"
-        android:layout_below="@+id/textDomaine"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="5dp"
-        android:textSize="20dp"
-        android:paddingTop="10dp" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:layout_marginTop="10dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Montant :"
-        android:id="@+id/textMontant"
-        android:layout_marginLeft="5dp"
-        android:textSize="20dp"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/textEnseigne" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Date :"
+                    android:id="@+id/textView8"
+                    android:autoText="false"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="5dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextMontant"
-        android:layout_alignBottom="@+id/textMontant"
-        android:layout_marginRight="5dp"
-        android:textSize="14dp"
-        android:textColor="#888888"
-        android:layout_alignEnd="@+id/btnAjouterEnseigne"
-        android:inputType="numberDecimal"
-        android:layout_alignStart="@+id/spinner_domaine" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="date"
+                    android:ems="10"
+                    android:id="@+id/editText_date"
+                    android:focusable="false"
+                    android:onClick="selectDate"
+                    android:textColor="#a3a3a3"
+                    android:layout_alignBottom="@+id/textView16"
+                    android:layout_alignEnd="@+id/editTextMontant"
+                    android:layout_alignStart="@+id/spinner_domaine"
+                    android:layout_marginRight="20dp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Valider"
-        android:id="@+id/buttonValider"
-        android:textSize="14dp"
-        android:background="#66d070"
-        android:onClick="tryToSendDepense"
-        android:nestedScrollingEnabled="false"
-        android:layout_below="@+id/editTextMontant"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="65dp" />
+            </LinearLayout>
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnAjouterDomaine"
-        android:drawableTop="@drawable/ic_menu_add_white"
-        android:background="#34b1e7"
-        android:layout_marginLeft="20dp"
-        android:layout_alignParentEnd="false"
-        android:layout_alignTop="@+id/spinner_domaine"
-        android:layout_toEndOf="@+id/spinner_domaine"
-        android:layout_alignBottom="@+id/spinner_domaine" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:layout_marginTop="10dp">
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnAjouterEnseigne"
-        android:drawableTop="@drawable/ic_menu_add_white"
-        android:background="#34b1e7"
-        android:layout_marginLeft="20dp"
-        android:layout_alignBottom="@+id/spinner_enseigne"
-        android:layout_toEndOf="@+id/spinner_domaine"
-        android:layout_alignTop="@+id/spinner_enseigne" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Montant :"
+                    android:id="@+id/textMontant"
+                    android:autoText="false"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="5dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Date :"
-        android:id="@+id/textView16"
-        android:textSize="20dp"
-        android:layout_above="@+id/editTextMontant"
-        android:layout_alignStart="@+id/textMontant" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editTextMontant"
+                    android:layout_alignBottom="@+id/textMontant"
+                    android:layout_marginRight="20dp"
+                    android:textSize="14dp"
+                    android:textColor="#888888"
+                    android:layout_alignEnd="@+id/btnAjouterEnseigne"
+                    android:inputType="numberDecimal"
+                    android:layout_alignStart="@+id/spinner_domaine" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="date"
-        android:ems="10"
-        android:id="@+id/editText_date"
-        android:focusable="false"
-        android:onClick="selectDate"
-        android:textColor="#a3a3a3"
-        android:layout_alignBottom="@+id/textView16"
-        android:layout_alignEnd="@+id/editTextMontant"
-        android:layout_alignStart="@+id/spinner_domaine" />
+            </LinearLayout>
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner_domaine"
-        android:layout_alignBottom="@+id/textDomaine"
-        android:layout_toEndOf="@+id/textEnseigne"
-        android:layout_alignEnd="@+id/textTitreDepense"
-        android:layout_alignTop="@+id/textDomaine"
-        android:layout_toStartOf="@+id/textEnseigne" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:layout_marginTop="10dp">
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner_enseigne"
-        android:layout_alignBottom="@+id/textEnseigne"
-        android:layout_alignStart="@+id/spinner_domaine"
-        android:layout_alignTop="@+id/textEnseigne"
-        android:layout_alignEnd="@+id/spinner_domaine" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Domaine :"
+                    android:id="@+id/textView5"
+                    android:autoText="false"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="5dp" />
 
-</RelativeLayout>
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnAjouterDomaine"
+                    android:src="@android:drawable/ic_menu_add"
+                    android:background="#0066d070"
+                    android:adjustViewBounds="false"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/spinner_domaine"
+                    android:layout_gravity="left" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Enseigne :"
+                    android:id="@+id/textEnseigne"
+                    android:autoText="false"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="5dp" />
+
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnAjouterEnseigne"
+                    android:src="@android:drawable/ic_menu_add"
+                    android:backgroundTintMode="src_over"
+                    android:background="#00ffffff"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp" />
+
+                <Spinner
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/spinner_enseigne" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/formPhoto"
+                android:layout_marginTop="10dp">
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Prendre une photo"
+                    android:id="@+id/buttonPrendrePhoto"
+                    android:layout_gravity="left"
+                    android:background="#0990d9"
+                    style="?android:textAppearanceSmall"
+                    android:layout_marginLeft="10dp" />
+
+                <Button
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Parcourir"
+                    android:id="@+id/buttonParcourir"
+                    android:layout_gravity="right"
+                    android:layout_alignParentEnd="true"
+                    android:background="#0990d9"
+                    style="?android:textAppearanceSmall"
+                    android:layout_marginRight="10dp" />
+            </RelativeLayout>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Garantie"
+                android:id="@+id/CBGarantie"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:id="@+id/form_garantie">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Debut :"
+                        android:id="@+id/textDebutGarantie"
+                        android:autoText="false"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="5dp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="date"
+                        android:ems="10"
+                        android:id="@+id/editText_DebutGarantie"
+                        android:focusable="false"
+                        android:onClick="selectDate"
+                        android:textColor="#a3a3a3"
+                        android:layout_alignBottom="@+id/textView16"
+                        android:layout_alignEnd="@+id/editTextMontant"
+                        android:layout_alignStart="@+id/spinner_domaine"
+                        android:layout_marginRight="20dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Durée :"
+                        android:id="@+id/text_DureeGarantie"
+                        android:autoText="false"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="5dp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="date"
+                        android:ems="10"
+                        android:id="@+id/editText_DureeGarantie"
+                        android:focusable="false"
+                        android:onClick="selectDate"
+                        android:textColor="#a3a3a3"
+                        android:layout_alignBottom="@+id/textView16"
+                        android:layout_alignEnd="@+id/editTextMontant"
+                        android:layout_alignStart="@+id/spinner_domaine"
+                        android:layout_marginRight="20dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Note de Frais"
+                android:id="@+id/CBNoteDeFrais"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:id="@+id/form_noteDeFrais" >
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="A COMPLETER"
+                        android:id="@+id/textView6"
+                        android:autoText="false"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="5dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                style="?android:textAppearanceSmall"
+                android:id="@+id/buttonValider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Valider"
+                android:textStyle="bold"
+                android:background="#66d070"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:onClick="tryToSendDepense" />
+
+            <Space
+                android:layout_width="20px"
+                android:layout_height="20dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
