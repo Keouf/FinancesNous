@@ -86,7 +86,7 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:weightSum="1"
         android:layout_marginTop="10dp"
@@ -97,27 +97,30 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="Domaine :"
-            android:id="@+id/textDomaine"
+            android:id="@+id/textView5"
             android:autoText="false"
             android:gravity="center_vertical"
             android:textStyle="bold"
             android:textSize="20dp"
             android:layout_marginLeft="5dp" />
 
-        <Spinner
-            android:layout_width="199dp"
-            android:layout_height="match_parent"
-            android:id="@+id/spinner_domaine"
-            android:layout_weight="0.46" />
-
         <ImageButton
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:id="@+id/btnAjouterDomaine"
             android:src="@android:drawable/ic_menu_add"
-            android:background="#66d070"
-            android:layout_weight="0.48"
-            android:layout_margin="5dp" />
+            android:background="#0066d070"
+            android:adjustViewBounds="false"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/spinner_domaine"
+            android:layout_gravity="left" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -139,20 +142,21 @@
             android:textSize="20dp"
             android:layout_marginLeft="5dp" />
 
-        <Spinner
-            android:layout_width="199dp"
-            android:layout_height="match_parent"
-            android:id="@+id/spinner_enseigne"
-            android:layout_weight="0.46" />
-
         <ImageButton
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:id="@+id/btnAjouterEnseigne"
             android:src="@android:drawable/ic_menu_add"
-            android:background="#66d070"
-            android:layout_weight="0.48"
-            android:layout_margin="5dp" />
+            android:backgroundTintMode="src_over"
+            android:background="#00ffffff"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/spinner_enseigne" />
+
     </LinearLayout>
 
     <ScrollView
@@ -180,7 +184,8 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone">
+                android:visibility="gone"
+                android:id="@+id/form_garantie">
 
                 <LinearLayout
                     android:orientation="horizontal"

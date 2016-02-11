@@ -47,19 +47,9 @@
         android:text="Valider"
         android:onClick="tryToSendDomaine"
         android:id="@+id/buttonValider"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="49dp"
         android:background="#66d070"
-        android:layout_below="@+id/textNom"
+        android:layout_below="@+id/editTextNomDom"
         android:layout_alignStart="@+id/editTextNomDom" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Annuler"
-        android:onClick="annulerDomaine"
-        android:id="@+id/buttonAnnuler"
-        android:background="#dd514c"
-        android:layout_alignTop="@+id/buttonValider"
-        android:layout_toEndOf="@+id/buttonValider"
-        android:layout_marginStart="33dp" />
 </RelativeLayout>

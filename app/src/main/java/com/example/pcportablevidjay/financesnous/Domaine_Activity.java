@@ -1,8 +1,10 @@
 package com.example.pcportablevidjay.financesnous;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,18 +22,31 @@ public class Domaine_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_domaine);
+        setContentView(R.layout.layout_domaine_bis);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void tryToSendDomaine(View v) {
 
-        EditText nomDomaineEdit = (EditText) findViewById(R.id.editTextNomDom);
+        EditText nomDomaineEdit = (EditText) findViewById(R.id.editTextNomDomaine);
 
         boolean remplit = true;
 
         // Vérifier si les champs ont bien été rempli
         if (TextUtils.isEmpty(nomDomaineEdit.getText())) {
-            nomDomaineEdit.setError("Veuillez entrer le nom du domaine svp");
+            nomDomaineEdit.setError("Veuillez entrer un nom de domaine");
             nomDomaineEdit.setFocusable(true);
             remplit = false;
         }
@@ -40,17 +55,14 @@ public class Domaine_Activity extends AppCompatActivity {
             {
                 Domaine monDomaine = new Domaine(0,nomDomaineEdit.getText().toString());
                 myDBHelper.ajoutDomaine(monDomaine);
-                Toast.makeText(this, "Le domaine a bien été crée", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Le domaine a bien été créé.", Toast.LENGTH_LONG).show();
                 this.finish();
             }
-            else
-                Toast.makeText(this, "Pas de connection internet, veuillez réessayer plus tard", Toast.LENGTH_LONG).show();
+            else {
+                Toast.makeText(this, "Pas de connexion internet, veuillez réessayer plus tard.", Toast.LENGTH_LONG).show();
+                this.finish();
+            }
         }
 
     }
-
-    public void annulerDomaine (View v) {
-        this.finish();
-    }
-
 }
