@@ -66,10 +66,21 @@ public class Depense_Activity extends AppCompatActivity {
         final CheckBox checkGarantie = (CheckBox) findViewById(R.id.CBGarantie);
         checkGarantie.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 if (checkGarantie.isChecked())
-                    affichagetest(true);
+                    affichagetest(true,findViewById(R.id.form_garantie));
                 else
-                    affichagetest(false);
+                    affichagetest(false,findViewById(R.id.form_garantie));
+            }
+        });
+
+        final CheckBox checkNoteDeFrais = (CheckBox) findViewById(R.id.CBNoteDeFrais);
+        checkNoteDeFrais.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (checkNoteDeFrais.isChecked())
+                    affichagetest(true,findViewById(R.id.form_noteDeFrais));
+                else
+                    affichagetest(false,findViewById(R.id.form_noteDeFrais));
             }
         });
 
@@ -103,24 +114,23 @@ public class Depense_Activity extends AppCompatActivity {
         }
     }
 
-    public void affichagetest(final boolean show){
-        final View mFormGarantie = findViewById(R.id.form_garantie);
+    public void affichagetest(final boolean show,final View mForm){
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_mediumAnimTime);
 
-            mFormGarantie.setVisibility(show ? View.VISIBLE : View.GONE);
-            mFormGarantie.animate().setDuration(shortAnimTime).alpha(
+            mForm.setVisibility(show ? View.VISIBLE : View.GONE);
+            mForm.animate().setDuration(shortAnimTime).alpha(
                     show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    mFormGarantie.setVisibility(show ? View.VISIBLE : View.GONE);
+                    mForm.setVisibility(show ? View.VISIBLE : View.GONE);
                 }
             });
         } else {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
-            mFormGarantie.setVisibility(show ? View.VISIBLE : View.GONE);
+            mForm.setVisibility(show ? View.VISIBLE : View.GONE);
         }
     }
 
