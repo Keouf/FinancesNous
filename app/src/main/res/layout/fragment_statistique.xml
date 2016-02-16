@@ -15,10 +15,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Statistiques [TO DO]"
+            android:text="Statistiques"
             android:id="@+id/textView15"
-            android:layout_marginTop="47dp"
+            android:layout_marginTop="30dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Février :"
+            android:id="@+id/textView19"
+            android:layout_marginTop="56dp"
+            android:layout_below="@+id/textView15"
+            android:layout_toStartOf="@+id/textView15" />
     </RelativeLayout>
 </FrameLayout>
