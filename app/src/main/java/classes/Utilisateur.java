@@ -12,7 +12,6 @@ public class Utilisateur implements Serializable{
     private String motDePasse;
     private ArrayList<Depense> mesDepenses;
 
-
     public Utilisateur(int id_utilisateur, String mail, String motDePasse) {
         this.id_utilisateur = id_utilisateur;
         this.mail = mail;

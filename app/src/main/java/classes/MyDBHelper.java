@@ -70,6 +70,11 @@ public class MyDBHelper {
         sendData("http://berghuis-peter.net/FinanceNous/ajoutDomaine.php?nom=", domaine.getNomDomaine());
     }
 
+    public void creerCompte(Utilisateur utilisateur) {
+        makeTaskAsynchrone();
+        sendData("http://berghuis-peter.net/FinanceNous/creerCompte.php?mail=", utilisateur.getMail() + "&mdp=" + utilisateur.getMotDePasse());
+    }
+
     public void ajoutMagasin(Magasin magasin) {
         makeTaskAsynchrone();
         sendData("http://berghuis-peter.net/FinanceNous/ajoutMagasin.php?id=", magasin.getId() + "&nom=" + magasin.getNom_managasin() + "&adresse=" + magasin.getAdresse1() + "&ville=" + magasin.getAdresse2() + "&codePostal=" + magasin.getCodePostal() + "&site=" + magasin.getSiteWeb() + "&tel=" + magasin.getTelephone());
