@@ -16,8 +16,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class DepenseAdapter extends ArrayAdapter<Depense> {
-    public DepenseAdapter(Context context, ArrayList<Depense> depenses){
+
+    Context context;
+
+    public DepenseAdapter(Context context, ArrayList<Depense> depenses) {
         super(context, 0, depenses);
+        this.context = context;
     }
 
     @Override
@@ -27,15 +31,15 @@ public class DepenseAdapter extends ArrayAdapter<Depense> {
         final Depense depense = getItem(position);
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.depense_item, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.depense_item, parent, false);
         }
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), DepenseDetail_Activity.class);
+                Intent intent = new Intent(context, DepenseDetail_Activity.class);
                 intent.putExtra("Depense", depense);
-                getContext().startActivity(intent);
+                context.startActivity(intent);
             }
 
         });
@@ -47,7 +51,7 @@ public class DepenseAdapter extends ArrayAdapter<Depense> {
 
         tvNom.setText(depense.getMagasin().getNom_managasin());
         tvDate.setText(formatter.format(depense.getDateDepense()));
-        tvMontant.setText(Double.toString(depense.getMontant())+" €");
+        tvMontant.setText(Double.toString(depense.getMontant()) + " €");
         return convertView;
     }
 

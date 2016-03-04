@@ -18,16 +18,17 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import classes.Global;
 import classes.MyDBHelper;
+import classes.StorageHelper;
+import classes.Utilisateur;
 import layout.Fragment_Recherche_Depense;
 
 public class Accueil_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Global global;
-
-    public static MyDBHelper myDBHelper = new MyDBHelper();
+    public MyDBHelper myDBHelper = new MyDBHelper(this);
+    StorageHelper storageHelper;
+    Utilisateur mainUtilisateur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +58,13 @@ public class Accueil_Activity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        global = (Global) getApplication();
-        global.setMyContext(this);
-        global.getMainUtilisateur().setMesDepenses(myDBHelper.getMesDepenses(global));
-        Log.e("json", "arraylist of all depenses = " + global.getMainUtilisateur().getMesDepenses().toString());
+        storageHelper = new StorageHelper(this);
+        mainUtilisateur = storageHelper.getUtilisateur();
+        mainUtilisateur.setMesDepenses(myDBHelper.getMesDepenses(this));
+        storageHelper.storeObject(mainUtilisateur);
+
+//        global.getMainUtilisateur().setMesDepenses(myDBHelper.getMesDepenses(global));
+        Log.e("json", "arraylist of all depenses = " + mainUtilisateur.getMesDepenses().toString());
 
     }
 
@@ -79,8 +83,8 @@ public class Accueil_Activity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.accueil, menu);
 
-        TextView t = (TextView)findViewById(R.id.TV_IDUser);
-        t.setText(global.getMainUtilisateur().getMail());
+        TextView t = (TextView) findViewById(R.id.TV_IDUser);
+        t.setText(mainUtilisateur.getMail());
 
         return true;
     }
@@ -129,10 +133,10 @@ public class Accueil_Activity extends AppCompatActivity
         return true;
     }
 
-    public void changerFragment(Fragment fragment, String text){
+    public void changerFragment(Fragment fragment, String text) {
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frame,fragment);
+        fragmentTransaction.replace(R.id.frame, fragment);
         fragmentTransaction.commit();
     }
 }

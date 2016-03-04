@@ -13,49 +13,6 @@ public class Magasin implements Serializable {
     private String siteWeb;
     private String telephone;
 
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public String getNom_managasin() {
-        return nom_managasin;
-    }
-    public void setNom_managasin(String nom_managasin) {
-        this.nom_managasin = nom_managasin;
-    }
-    public String getAdresse1() {
-        return adresse1;
-    }
-    public void setAdresse1(String adresse1) {
-        this.adresse1 = adresse1;
-    }
-    public String getAdresse2() {
-        return adresse2;
-    }
-    public void setAdresse2(String adresse2) {
-        this.adresse2 = adresse2;
-    }
-    public String getCodePostal() {
-        return codePostal;
-    }
-    public void setCodePostal(String codePostal) {
-        this.codePostal = codePostal;
-    }
-    public String getSiteWeb() {
-        return siteWeb;
-    }
-    public void setSiteWeb(String siteWeb) {
-        this.siteWeb = siteWeb;
-    }
-    public String getTelephone() {
-        return telephone;
-    }
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
     public Magasin(int id, String nom_managasin, String adresse1, String adresse2, String codePostal, String siteWeb, String telephone) {
         this.id = id;
         this.nom_managasin = nom_managasin;
@@ -63,6 +20,62 @@ public class Magasin implements Serializable {
         this.adresse2 = adresse2;
         this.codePostal = codePostal;
         this.siteWeb = siteWeb;
+        this.telephone = telephone;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNom_managasin() {
+        return nom_managasin;
+    }
+
+    public void setNom_managasin(String nom_managasin) {
+        this.nom_managasin = nom_managasin;
+    }
+
+    public String getAdresse1() {
+        return adresse1;
+    }
+
+    public void setAdresse1(String adresse1) {
+        this.adresse1 = adresse1;
+    }
+
+    public String getAdresse2() {
+        return adresse2;
+    }
+
+    public void setAdresse2(String adresse2) {
+        this.adresse2 = adresse2;
+    }
+
+    public String getCodePostal() {
+        return codePostal;
+    }
+
+    public void setCodePostal(String codePostal) {
+        this.codePostal = codePostal;
+    }
+
+    public String getSiteWeb() {
+        return siteWeb;
+    }
+
+    public void setSiteWeb(String siteWeb) {
+        this.siteWeb = siteWeb;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 }

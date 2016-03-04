@@ -1,8 +1,8 @@
 package com.example.pcportablevidjay.financesnous;
 
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,14 +12,13 @@ import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import classes.Domaine;
 import classes.MyDBHelper;
 import classes.Utilisateur;
 import classes.Utils;
 
 public class CreerCompte_Activity extends AppCompatActivity {
 
-    MyDBHelper myDBHelper = new MyDBHelper();
+    MyDBHelper myDBHelper = new MyDBHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +40,7 @@ public class CreerCompte_Activity extends AppCompatActivity {
         }
     }
 
-    public void tryToCreerCompte(View v){
+    public void tryToCreerCompte(View v) {
 
         EditText emailEdit = (EditText) findViewById(R.id.editTextCreerEmail);
         EditText mdpEdit = (EditText) findViewById(R.id.editTextCreerMdp);
@@ -75,14 +74,12 @@ public class CreerCompte_Activity extends AppCompatActivity {
         }
 
         if (remplit) {
-            if (Utils.getConnectivityStatus(getApplicationContext()))
-            {
-                Utilisateur newUser = new Utilisateur(0,emailEdit.getText().toString(),mdpEdit.getText().toString());
+            if (Utils.getConnectivityStatus(getApplicationContext())) {
+                Utilisateur newUser = new Utilisateur(0, emailEdit.getText().toString(), mdpEdit.getText().toString());
                 myDBHelper.creerCompte(newUser);
                 Toast.makeText(this, "L'utilisateur a bien été créé.", Toast.LENGTH_LONG).show();
                 this.finish();
-            }
-            else {
+            } else {
                 Toast.makeText(this, "Pas de connexion internet, veuillez réessayer plus tard.", Toast.LENGTH_LONG).show();
                 this.finish();
             }

@@ -3,7 +3,6 @@
 
     <item
         android:id="@+id/depense_detail_bt_supprimer"
-        android:title="Supprimer"
-        />
+        android:title="Supprimer" />
 
 </menu>

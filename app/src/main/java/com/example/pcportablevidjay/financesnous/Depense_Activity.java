@@ -5,13 +5,11 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageButton;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,14 +26,15 @@ import java.util.Calendar;
 import java.util.Date;
 
 import classes.Depense;
-import classes.Global;
 import classes.MyDBHelper;
+import classes.StorageHelper;
+import classes.Utilisateur;
 import classes.Utils;
 
 public class Depense_Activity extends AppCompatActivity {
 
-    Global global = (Global)this.getApplication();
-    MyDBHelper myDBHelper = new MyDBHelper();
+    StorageHelper storageHelper;
+    MyDBHelper myDBHelper = new MyDBHelper(this);
     Date date = new Date();
 
     @Override
@@ -46,30 +45,30 @@ public class Depense_Activity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        final AppCompatImageButton btnAjouterDomaine = (AppCompatImageButton) findViewById(R.id.btnAjouterDomaine);
-        btnAjouterDomaine.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent creerDomaine = new Intent(getBaseContext(), Domaine_Activity.class);
-                startActivity(creerDomaine);
-            }
-        });
-
-        final AppCompatImageButton btnAjouterEnseigne = (AppCompatImageButton) findViewById(R.id.btnAjouterEnseigne);
-        btnAjouterEnseigne.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent creerEnseigne = new Intent(getBaseContext(), Magasin_Activity.class);
-                startActivity(creerEnseigne);
-            }
-        });
+//        final AppCompatImageButton btnAjouterDomaine = (AppCompatImageButton) findViewById(R.id.btnAjouterDomaine);
+//        btnAjouterDomaine.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Intent creerDomaine = new Intent(getBaseContext(), Domaine_Activity.class);
+//                startActivity(creerDomaine);
+//            }
+//        });
+//
+//        final AppCompatImageButton btnAjouterEnseigne = (AppCompatImageButton) findViewById(R.id.btnAjouterEnseigne);
+//        btnAjouterEnseigne.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Intent creerEnseigne = new Intent(getBaseContext(), Magasin_Activity.class);
+//                startActivity(creerEnseigne);
+//            }
+//        });
 
         final CheckBox checkGarantie = (CheckBox) findViewById(R.id.CBGarantie);
         checkGarantie.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 if (checkGarantie.isChecked())
-                    affichagetest(true,findViewById(R.id.form_garantie));
+                    affichagetest(true, findViewById(R.id.form_garantie));
                 else
-                    affichagetest(false,findViewById(R.id.form_garantie));
+                    affichagetest(false, findViewById(R.id.form_garantie));
             }
         });
 
@@ -77,15 +76,17 @@ public class Depense_Activity extends AppCompatActivity {
         checkNoteDeFrais.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (checkNoteDeFrais.isChecked())
-                    affichagetest(true,findViewById(R.id.form_noteDeFrais));
+                    affichagetest(true, findViewById(R.id.form_noteDeFrais));
                 else
-                    affichagetest(false,findViewById(R.id.form_noteDeFrais));
+                    affichagetest(false, findViewById(R.id.form_noteDeFrais));
             }
         });
 
+        storageHelper = new StorageHelper(this);
+
         // populate date
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        EditText dateEdit = (EditText)findViewById(R.id.editText_date);
+        EditText dateEdit = (EditText) findViewById(R.id.editText_date);
         dateEdit.setText(dateFormat.format(date));
 
 
@@ -113,7 +114,7 @@ public class Depense_Activity extends AppCompatActivity {
         }
     }
 
-    public void affichagetest(final boolean show,final View mForm){
+    public void affichagetest(final boolean show, final View mForm) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_mediumAnimTime);
@@ -133,11 +134,10 @@ public class Depense_Activity extends AppCompatActivity {
         }
     }
 
-    public void tryToSendDepense(View v)
-    {
-        EditText montantEdit = (EditText)findViewById(R.id.editTextMontant);
-        Spinner domaineSpinner = (Spinner)findViewById(R.id.spinner_domaine);
-        Spinner magasinSpinner = (Spinner)findViewById(R.id.spinner_enseigne);
+    public void tryToSendDepense(View v) {
+        EditText montantEdit = (EditText) findViewById(R.id.editTextMontant);
+        Spinner domaineSpinner = (Spinner) findViewById(R.id.spinner_domaine);
+        Spinner magasinSpinner = (Spinner) findViewById(R.id.spinner_enseigne);
 
         boolean remplit = true;
         // check if they are empty
@@ -148,16 +148,16 @@ public class Depense_Activity extends AppCompatActivity {
         }
 
         if (remplit) {
-            if (Utils.getConnectivityStatus(getApplicationContext()))
-            {
-                global = (Global)this.getApplication();
-                Depense maDepense = new Depense(myDBHelper.getLastDepenseID(), date, Double.parseDouble(montantEdit.getText().toString()), global.getMainUtilisateur(), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithId(1), "");
-                global.getMainUtilisateur().addDepense(maDepense);
+            if (Utils.getConnectivityStatus(getApplicationContext())) {
+                Utilisateur mainUtilisateur = storageHelper.getUtilisateur();
+                Depense maDepense = new Depense(myDBHelper.getLastDepenseID(), date, Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithId(1), "");
+                mainUtilisateur.addDepense(maDepense);
+                storageHelper.storeObject(mainUtilisateur);
+
                 myDBHelper.insertDepense(maDepense);
                 Toast.makeText(this, "Dépense Créée !", Toast.LENGTH_LONG).show();
                 this.finish();
-            }
-            else
+            } else
                 Toast.makeText(this, "Erreur ! Verifiez votre connection internet.", Toast.LENGTH_LONG).show();
         }
 
@@ -169,9 +169,10 @@ public class Depense_Activity extends AppCompatActivity {
         DialogFragment newFragment = new SelectDateFragment();
         newFragment.show(getSupportFragmentManager(), "DatePicker");
     }
+
     public void populateSetDate(int year, int month, int day) {
-        EditText dateEdit = (EditText)findViewById(R.id.editText_date);
-        dateEdit.setText(year+"-"+month+"-"+day);
+        EditText dateEdit = (EditText) findViewById(R.id.editText_date);
+        dateEdit.setText(year + "-" + month + "-" + day);
         date.setYear(year);
         date.setMonth(month);
         date.setDate(day);
@@ -189,7 +190,7 @@ public class Depense_Activity extends AppCompatActivity {
         }
 
         public void onDateSet(DatePicker view, int yy, int mm, int dd) {
-            populateSetDate(yy, mm+1, dd);
+            populateSetDate(yy, mm + 1, dd);
         }
     }
     //-------------end datepicker------------

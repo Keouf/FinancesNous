@@ -1,23 +1,21 @@
 package com.example.pcportablevidjay.financesnous;
 
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import classes.Global;
 import classes.Magasin;
 import classes.MyDBHelper;
 import classes.Utils;
 
 public class Magasin_Activity extends AppCompatActivity {
 
-    Global global = (Global)this.getApplication();
-    MyDBHelper myDBHelper = new MyDBHelper();
+    MyDBHelper myDBHelper = new MyDBHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +36,14 @@ public class Magasin_Activity extends AppCompatActivity {
         }
     }
 
-    public void tryToSendMagasin (View v) {
+    public void tryToSendMagasin(View v) {
 
-        EditText nomMagasinEdit = (EditText)findViewById(R.id.editTextNomMag);
-        EditText adresseMagasinEdit = (EditText)findViewById(R.id.editTextAdrMag);
-        EditText codePostalMagasinEdit = (EditText)findViewById(R.id.editTextCPMag);
-        EditText villeMagasinEdit = (EditText)findViewById(R.id.editTextVilleMag);
-        EditText siteMagasinEdit = (EditText)findViewById(R.id.editTextSiteMag);
-        EditText telMagasinEdit = (EditText)findViewById(R.id.editTextTelMag);
+        EditText nomMagasinEdit = (EditText) findViewById(R.id.editTextNomMag);
+        EditText adresseMagasinEdit = (EditText) findViewById(R.id.editTextAdrMag);
+        EditText codePostalMagasinEdit = (EditText) findViewById(R.id.editTextCPMag);
+        EditText villeMagasinEdit = (EditText) findViewById(R.id.editTextVilleMag);
+        EditText siteMagasinEdit = (EditText) findViewById(R.id.editTextSiteMag);
+        EditText telMagasinEdit = (EditText) findViewById(R.id.editTextTelMag);
 
         boolean remplit = true;
 
@@ -82,21 +80,19 @@ public class Magasin_Activity extends AppCompatActivity {
         }
 
         if (remplit) {
-            if (Utils.getConnectivityStatus(getApplicationContext()))
-            {
-                Magasin monMagasin = new Magasin(2,nomMagasinEdit.getText().toString(), adresseMagasinEdit.getText().toString(), villeMagasinEdit.getText().toString(), codePostalMagasinEdit.getText().toString(), siteMagasinEdit.getText().toString(),telMagasinEdit.getText().toString());
+            if (Utils.getConnectivityStatus(getApplicationContext())) {
+                Magasin monMagasin = new Magasin(2, nomMagasinEdit.getText().toString(), adresseMagasinEdit.getText().toString(), villeMagasinEdit.getText().toString(), codePostalMagasinEdit.getText().toString(), siteMagasinEdit.getText().toString(), telMagasinEdit.getText().toString());
                 myDBHelper.ajoutMagasin(monMagasin);
                 Toast.makeText(this, "Magasin Crée!", Toast.LENGTH_LONG).show();
                 this.finish();
 
-            }
-            else
+            } else
                 Toast.makeText(this, "Pas de connection internet, veuillez réessayer plus tard", Toast.LENGTH_LONG).show();
         }
 
     }
 
-    public void annulerMagasin (View v) {
+    public void annulerMagasin(View v) {
         this.finish();
     }
 

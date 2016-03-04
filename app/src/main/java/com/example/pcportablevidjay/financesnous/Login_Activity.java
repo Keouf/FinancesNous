@@ -4,14 +4,10 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.media.MediaPlayer;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -34,8 +30,8 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-import classes.Global;
 import classes.MyDBHelper;
+import classes.StorageHelper;
 import classes.Utilisateur;
 import classes.Utils;
 
@@ -43,9 +39,9 @@ import classes.Utils;
 public class Login_Activity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
 
-    Global global;
+    public MyDBHelper myDBHelper = new MyDBHelper(this);
+    StorageHelper storageHelper;
     private UserLoginTask mAuthTask = null;
-    public static MyDBHelper myDBHelper = new MyDBHelper();
     private Utilisateur user;
 
     // UI references.
@@ -63,8 +59,7 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
         //final MediaPlayer mp = MediaPlayer.create(this, R.raw.music_fond);
         //mp.start();
 
-        global = (Global) getApplication();
-        global.setMyContext(this);
+        storageHelper = new StorageHelper(this);
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -85,11 +80,10 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!Utils.getConnectivityStatus(getApplicationContext())){
+                if (!Utils.getConnectivityStatus(getApplicationContext())) {
                     Toast toast = Toast.makeText(getApplicationContext(), "Activer internet", Toast.LENGTH_SHORT);
                     toast.show();
-                }
-                else {
+                } else {
                     attemptLogin();
                 }
             }
@@ -106,6 +100,7 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
 
         mProgressView = findViewById(R.id.login_progress);
     }
+
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -265,10 +260,9 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
 
             try {
                 user = myDBHelper.getUtilisateur(mEmail);
-            }catch(UnknownHostException e){
+            } catch (UnknownHostException e) {
                 return false;
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 return false;
             }
 
@@ -281,7 +275,8 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
             showProgress(false);
 
             if (success) {
-                global.setMainUtilisateur(user);
+                storageHelper.storeObject(user);
+//                global.setMainUtilisateur(user);
                 Intent accueil = new Intent(getBaseContext(), Accueil_Activity.class);
                 startActivity(accueil);
                 finish();

@@ -3,34 +3,34 @@
 
     <item android:title="Gestion">
         <menu>
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_depense"
-            android:icon="@drawable/ic_menu_euro"
-            android:title="Dépenses" />
-        <item
-            android:id="@+id/nav_stats"
-            android:icon="@drawable/ic_menu_stats"
-            android:title="Satistiques" />
-        <item
-            android:id="@+id/nav_garantie"
-            android:icon="@drawable/ic_menu_cadie"
-            android:title="Garantie" />
-        <item
-            android:id="@+id/nav_noteDeFrais"
-            android:icon="@drawable/ic_menu_avion"
-            android:title="Notes de frais" />
-    </group>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_depense"
+                    android:icon="@drawable/ic_menu_euro"
+                    android:title="Dépenses" />
+                <item
+                    android:id="@+id/nav_stats"
+                    android:icon="@drawable/ic_menu_stats"
+                    android:title="Satistiques" />
+                <item
+                    android:id="@+id/nav_garantie"
+                    android:icon="@drawable/ic_menu_cadie"
+                    android:title="Garantie" />
+                <item
+                    android:id="@+id/nav_noteDeFrais"
+                    android:icon="@drawable/ic_menu_avion"
+                    android:title="Notes de frais" />
+            </group>
         </menu>
     </item>
 
-            <item
-                android:id="@+id/nav_about"
-                android:icon="@drawable/ic_menu_about"
-                android:title="A propos" />
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Partager" />
+    <item
+        android:id="@+id/nav_about"
+        android:icon="@drawable/ic_menu_about"
+        android:title="A propos" />
+    <item
+        android:id="@+id/nav_share"
+        android:icon="@drawable/ic_menu_share"
+        android:title="Partager" />
 
 </menu>

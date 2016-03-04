@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -15,14 +14,15 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import classes.Depense;
-import classes.Global;
 import classes.MyDBHelper;
+import classes.StorageHelper;
+import classes.Utilisateur;
 
 public class DepenseDetail_Activity extends AppCompatActivity {
 
-    MyDBHelper myDBHelper = new MyDBHelper();
+    MyDBHelper myDBHelper = new MyDBHelper(this);
     Depense depense;
-    Global global;
+    StorageHelper storageHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class DepenseDetail_Activity extends AppCompatActivity {
         depense = (Depense) i.getSerializableExtra("Depense");
         populateLayout();
 
-        global = (Global)getApplication();
+        storageHelper = new StorageHelper(this);
     }
 
     @Override
@@ -48,16 +48,19 @@ public class DepenseDetail_Activity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.depense_detail_bt_supprimer) {
-            AlertDialog.Builder adb=new AlertDialog.Builder(this);
+            AlertDialog.Builder adb = new AlertDialog.Builder(this);
             adb.setTitle("Delete?");
             adb.setMessage("Are you sure you want to delete ");
             adb.setNegativeButton("Cancel", null);
             adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // if accepted
+
                     myDBHelper.supprimerDepense(depense);
-                    global.getMainUtilisateur().getMesDepenses().remove(depense);
-                    Log.e("json", global.getMainUtilisateur().getMesDepenses().toString());
+                    Utilisateur mainUtilisateur = storageHelper.getUtilisateur();
+                    mainUtilisateur.removeDepense(depense);
+                    storageHelper.storeObject(mainUtilisateur);
+
                     finish();
                 }
             });

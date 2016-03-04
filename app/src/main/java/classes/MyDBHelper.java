@@ -1,11 +1,13 @@
 package classes;
 
+import android.app.Activity;
 import android.os.StrictMode;
 import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,10 +23,13 @@ import java.util.ArrayList;
 public class MyDBHelper {
 
     JsonConverter jsonConverter = new JsonConverter();
+    StorageHelper storageHelper;
 
+    public MyDBHelper(Activity act) {
+        this.storageHelper = new StorageHelper(act);
+    }
 
-    public void supprimerDepense(Depense depensaASupprimer)
-    {
+    public void supprimerDepense(Depense depensaASupprimer) {
         makeTaskAsynchrone();
         Log.e("json", Integer.toString(depensaASupprimer.getIdDepense()));
         String phpURL = "http://berghuis-peter.net/FinanceNous/deleteDepense.php?idDepense=";
@@ -32,16 +37,16 @@ public class MyDBHelper {
         sendData(phpURL, Integer.toString(depensaASupprimer.getIdDepense()));
     }
 
-    public Utilisateur getUtilisateur(String userMail) throws Exception{
+    public Utilisateur getUtilisateur(String userMail) throws Exception {
         makeTaskAsynchrone();
 
         String phpURL = "http://berghuis-peter.net/FinanceNous/userLogin.php?mailUtilisateur=" + userMail;
 
         JSONArray jsonArray = getDataInJson(phpURL);
 
-        try{
+        try {
             Utilisateur user = jsonConverter.ConvertJsonArrayToUtilisateur(jsonArray);
-            if(user == null)
+            if (user == null)
                 throw new Exception("Utilisateur introuvable");
             return user;
         } catch (Exception e) {
@@ -49,14 +54,14 @@ public class MyDBHelper {
         }
     }
 
-    public ArrayList<Depense> getMesDepenses(Global global) {
+    public ArrayList<Depense> getMesDepenses(Activity act) {
         makeTaskAsynchrone();
 
-        String phpURL = "http://berghuis-peter.net/FinanceNous/getMesDepenses.php?idUtilisateur="+ global.getMainUtilisateur().getId_utilisateur();
+        String phpURL = "http://berghuis-peter.net/FinanceNous/getMesDepenses.php?idUtilisateur=" + storageHelper.getUtilisateur().getId_utilisateur();
 
         JSONArray jsonArray = getDataInJson(phpURL);
 
-        return jsonConverter.convertJsonArrayToDepenseArray(jsonArray, global);
+        return jsonConverter.convertJsonArrayToDepenseArray(jsonArray, act);
     }
 
     public void insertDepense(Depense depense) {
@@ -80,8 +85,7 @@ public class MyDBHelper {
         sendData("http://berghuis-peter.net/FinanceNous/ajoutMagasin.php?id=", magasin.getId() + "&nom=" + magasin.getNom_managasin() + "&adresse=" + magasin.getAdresse1() + "&ville=" + magasin.getAdresse2() + "&codePostal=" + magasin.getCodePostal() + "&site=" + magasin.getSiteWeb() + "&tel=" + magasin.getTelephone());
     }
 
-    public int getLastDepenseID()
-    {
+    public int getLastDepenseID() {
         int id = 0;
         JSONObject json = null;
         String phpURL = "http://berghuis-peter.net/FinanceNous/getLastDepenseID.php";
@@ -100,8 +104,7 @@ public class MyDBHelper {
         return id++;
     }
 
-    public ArrayList<String> getAllDomaines()
-    {
+    public ArrayList<String> getAllDomaines() {
         JSONArray jsonArray = null;
         JsonConverter jsonConverter = new JsonConverter();
         String phpURL = "http://berghuis-peter.net/FinanceNous/getAllDomaines.php";
@@ -113,8 +116,7 @@ public class MyDBHelper {
         return jsonConverter.ConvertDomaineToStringArrayList(jsonArray);
     }
 
-    public ArrayList<String> getAllMagasins()
-    {
+    public ArrayList<String> getAllMagasins() {
         JsonConverter jsonConverter = new JsonConverter();
         String phpURL = "http://berghuis-peter.net/FinanceNous/getAllMagasins.php";
 
@@ -126,11 +128,10 @@ public class MyDBHelper {
     }
 
 
-    public Magasin getMagasinWithId(int idMagasin)
-    {
+    public Magasin getMagasinWithId(int idMagasin) {
         JSONObject json = null;
         JsonConverter jsonConverter = new JsonConverter();
-        String phpURL = "http://berghuis-peter.net/FinanceNous/getMagasin.php?idMagasin="+idMagasin;
+        String phpURL = "http://berghuis-peter.net/FinanceNous/getMagasin.php?idMagasin=" + idMagasin;
 
         makeTaskAsynchrone();
 
@@ -145,12 +146,11 @@ public class MyDBHelper {
         return jsonConverter.jsonToMagasin(json);
     }
 
-    public String getDomaineWithId(int idDomaine)
-    {
+    public String getDomaineWithId(int idDomaine) {
         String domaine = null;
         makeTaskAsynchrone();
 
-        String phpURL = "http://berghuis-peter.net/FinanceNous/getDomaine.php?idDomaine="+idDomaine;
+        String phpURL = "http://berghuis-peter.net/FinanceNous/getDomaine.php?idDomaine=" + idDomaine;
 
         JSONArray jsonArray = getDataInJson(phpURL);
 
@@ -163,15 +163,15 @@ public class MyDBHelper {
         return domaine;
     }
 
-    public void creerCompte(String email, String pass){
+    public void creerCompte(String email, String pass) {
         makeTaskAsynchrone();
         String phpURL = "http://berghuis-peter.net/FinanceNous/inscription.php";
-        sendData(phpURL, "?mail="+email+"&mdp="+pass);
+        sendData(phpURL, "?mail=" + email + "&mdp=" + pass);
     }
 
     //---------------------------------------------------------
 
-    private JSONArray getDataInJson(String phpURL ) {
+    private JSONArray getDataInJson(String phpURL) {
         JSONArray jsonArray = null;
         try {
             HttpURLConnection urlConnection = getHttpURLConnection(phpURL);
@@ -214,7 +214,7 @@ public class MyDBHelper {
         StringBuilder sb = new StringBuilder();
         String line;
         while ((line = br.readLine()) != null) {
-            sb.append(line+"\n");
+            sb.append(line + "\n");
         }
         br.close();
         urlConnection.disconnect();

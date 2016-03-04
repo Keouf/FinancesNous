@@ -8,21 +8,24 @@ public class Domaine {
     private int idDomaine;
     private String nomDomaine;
 
-    public void setIdDepense (int idDomaine){
+    public Domaine(int idDomaine, String nomDomaine) {
         this.idDomaine = idDomaine;
-    }
-    public int getIdDomaine(){
-        return this.idDomaine;
-    }
-    public void setNomDomaine (String nomDomaine){
         this.nomDomaine = nomDomaine;
     }
-    public String getNomDomaine(){
+
+    public void setIdDepense(int idDomaine) {
+        this.idDomaine = idDomaine;
+    }
+
+    public int getIdDomaine() {
+        return this.idDomaine;
+    }
+
+    public String getNomDomaine() {
         return this.nomDomaine;
     }
 
-    public Domaine (int idDomaine, String nomDomaine){
-        this.idDomaine = idDomaine;
+    public void setNomDomaine(String nomDomaine) {
         this.nomDomaine = nomDomaine;
     }
 

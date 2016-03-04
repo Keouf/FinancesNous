@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Utilisateur implements Serializable{
+public class Utilisateur implements Serializable {
 
     private int id_utilisateur;
     private String mail;
@@ -51,13 +51,11 @@ public class Utilisateur implements Serializable{
         this.mesDepenses = mesDepenses;
     }
 
-    public void addDepense(Depense maDepense)
-    {
-        mesDepenses.add(maDepense.getIdDepense(), maDepense);
+    public void addDepense(Depense maDepense) {
+        mesDepenses.add(maDepense);
     }
 
-    public ArrayList<Depense> get10DernierDepenses()
-    {
+    public ArrayList<Depense> get10DernierDepenses() {
         ArrayList<Depense> mes10Depenses = new ArrayList<>();
 
         if (getMesDepenses().size() >= 10) {
@@ -65,12 +63,29 @@ public class Utilisateur implements Serializable{
             for (int i = getMesDepenses().size() - 1; i > (getMesDepenses().size() - 11); i--) {
                 mes10Depenses.add(mesDepenses.get(i));
             }
-        }
-        else {
+        } else {
             mes10Depenses = getMesDepenses();
             Collections.reverse(mes10Depenses);
         }
 
         return mes10Depenses;
+    }
+
+    public void removeDepense(Depense depense) {
+        for (int i = 0; i < mesDepenses.size(); i++) {
+            if (mesDepenses.get(i).getIdDepense().equals(depense.getIdDepense())) {
+                mesDepenses.remove(i);
+            }
+        }
+    }
+
+    public String getAllDepensesInString() {
+        String depenses = "";
+
+        for (Depense maDepense : mesDepenses) {
+            depenses += (Integer.toString(maDepense.getIdDepense())) + " - ";
+        }
+
+        return depenses;
     }
 }

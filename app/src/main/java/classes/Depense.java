@@ -4,7 +4,7 @@ package classes;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Depense implements Serializable{
+public class Depense implements Serializable {
 
     private Integer idDepense;
     private Date dateDepense;
@@ -13,6 +13,16 @@ public class Depense implements Serializable{
     private Magasin magasin;
     private String domaine;
     private Utilisateur utilisatuer;
+
+    public Depense(Integer idDepense, Date dateDepense, double montant, Utilisateur utilisatuer, String domaine, Magasin magasin, String pieceJoint) {
+        this.idDepense = idDepense;
+        this.dateDepense = dateDepense;
+        this.montant = montant;
+        this.utilisatuer = utilisatuer;
+        this.domaine = domaine;
+        this.magasin = magasin;
+        this.pieceJoint = pieceJoint;
+    }
 
     public Integer getIdDepense() {
         return idDepense;
@@ -68,16 +78,6 @@ public class Depense implements Serializable{
 
     public void setUtilisatuer(Utilisateur utilisatuer) {
         this.utilisatuer = utilisatuer;
-    }
-
-    public Depense(Integer idDepense, Date dateDepense, double montant, Utilisateur utilisatuer, String domaine, Magasin magasin, String pieceJoint) {
-        this.idDepense = idDepense;
-        this.dateDepense = dateDepense;
-        this.montant = montant;
-        this.utilisatuer = utilisatuer;
-        this.domaine = domaine;
-        this.magasin = magasin;
-        this.pieceJoint = pieceJoint;
     }
 
 }
