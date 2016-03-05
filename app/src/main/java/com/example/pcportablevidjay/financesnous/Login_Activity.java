@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -76,6 +77,16 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
             }
         });
 
+        TextView link_login_activity = (TextView)findViewById(R.id.link_new_account);
+        link_login_activity.setClickable(true);
+        link_login_activity.setMovementMethod(LinkMovementMethod.getInstance());
+        link_login_activity.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent creerCompte = new Intent(getBaseContext(), CreerCompte_Activity.class);
+                startActivity(creerCompte);
+            }
+        });
+
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -99,6 +110,7 @@ public class Login_Activity extends AppCompatActivity implements LoaderCallbacks
         });
 
         mProgressView = findViewById(R.id.login_progress);
+        showProgress(false);
     }
 
     /**
