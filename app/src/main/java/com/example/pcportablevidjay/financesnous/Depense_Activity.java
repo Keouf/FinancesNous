@@ -5,11 +5,13 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatImageButton;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,21 +47,21 @@ public class Depense_Activity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-//        final AppCompatImageButton btnAjouterDomaine = (AppCompatImageButton) findViewById(R.id.btnAjouterDomaine);
-//        btnAjouterDomaine.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                Intent creerDomaine = new Intent(getBaseContext(), Domaine_Activity.class);
-//                startActivity(creerDomaine);
-//            }
-//        });
-//
-//        final AppCompatImageButton btnAjouterEnseigne = (AppCompatImageButton) findViewById(R.id.btnAjouterEnseigne);
-//        btnAjouterEnseigne.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                Intent creerEnseigne = new Intent(getBaseContext(), Magasin_Activity.class);
-//                startActivity(creerEnseigne);
-//            }
-//        });
+        final AppCompatImageButton btnAjouterDomaine = (AppCompatImageButton) findViewById(R.id.btnAjouterDomaine);
+        btnAjouterDomaine.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent creerDomaine = new Intent(getBaseContext(), Domaine_Activity.class);
+                startActivity(creerDomaine);
+            }
+        });
+
+        final AppCompatImageButton btnAjouterEnseigne = (AppCompatImageButton) findViewById(R.id.btnAjouterEnseigne);
+        btnAjouterEnseigne.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent creerEnseigne = new Intent(getBaseContext(), Magasin_Activity.class);
+                startActivity(creerEnseigne);
+            }
+        });
 
         final CheckBox checkGarantie = (CheckBox) findViewById(R.id.CBGarantie);
         checkGarantie.setOnClickListener(new View.OnClickListener() {
