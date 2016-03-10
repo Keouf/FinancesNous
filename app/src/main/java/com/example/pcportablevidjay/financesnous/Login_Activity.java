@@ -247,7 +247,7 @@ public class Login_Activity extends AppCompatActivity  {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        Intent accueil = new Intent(getBaseContext(), Accueil_Activity.class);
+                        Intent accueil = new Intent(getBaseContext(), LoadingScreenActivity.class);
                         startActivity(accueil);
                     }
                 }).start();

@@ -43,6 +43,7 @@
             android:name=".DepenseDetail_Activity"
             android:theme="@style/AppTheme" />
         <activity android:name=".CreerCompte_Activity" />
+        <activity android:name=".LoadingScreenActivity"></activity>
     </application>
 
 </manifest>
