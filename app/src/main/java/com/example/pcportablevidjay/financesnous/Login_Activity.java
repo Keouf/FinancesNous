@@ -3,6 +3,7 @@ package com.example.pcportablevidjay.financesnous;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -32,6 +33,7 @@ public class Login_Activity extends AppCompatActivity  {
     StorageHelper storageHelper;
     private UserLoginTask mAuthTask = null;
     private Utilisateur user;
+    public ProgressDialog pd = null;
 
     // UI references.
     private EditText mEmailView;
@@ -242,9 +244,13 @@ public class Login_Activity extends AppCompatActivity  {
 
             if (success) {
                 storageHelper.storeObject(user);
-//                global.setMainUtilisateur(user);
-                Intent accueil = new Intent(getBaseContext(), Accueil_Activity.class);
-                startActivity(accueil);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent accueil = new Intent(getBaseContext(), Accueil_Activity.class);
+                        startActivity(accueil);
+                    }
+                }).start();
                 finish();
             } else {
                 showProgress(false);

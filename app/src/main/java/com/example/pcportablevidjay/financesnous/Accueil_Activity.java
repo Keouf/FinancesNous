@@ -2,6 +2,7 @@ package com.example.pcportablevidjay.financesnous;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -30,10 +31,12 @@ public class Accueil_Activity extends AppCompatActivity
     StorageHelper storageHelper;
     Utilisateur mainUtilisateur;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_accueil);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -52,11 +55,14 @@ public class Accueil_Activity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        Fragment_Accueil fragment = new Fragment_Accueil();
-        changerFragment(fragment, "Accueil");
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //onNavigationItemSelected(navigationView.getMenu().getItem(0));
+
+        Fragment_Accueil fragment = new Fragment_Accueil();
+        changerFragment(fragment, "Accueil");
+        navigationView.getMenu().getItem(0).setChecked(true);
 
         storageHelper = new StorageHelper(this);
         mainUtilisateur = storageHelper.getUtilisateur();
@@ -65,7 +71,6 @@ public class Accueil_Activity extends AppCompatActivity
 
 //        global.getMainUtilisateur().setMesDepenses(myDBHelper.getMesDepenses(global));
         Log.e("json", "arraylist of all depenses = " + mainUtilisateur.getMesDepenses().toString());
-
     }
 
     @Override
@@ -104,16 +109,17 @@ public class Accueil_Activity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_depense) {
+        if (id == R.id.nav_accueil) {
+            Fragment_Accueil fragment = new Fragment_Accueil();
+            changerFragment(fragment, "Accueil");
+        } else if (id == R.id.nav_depense) {
             Fragment_Recherche_Depense fragment = new Fragment_Recherche_Depense();
             changerFragment(fragment, "Dépenses");
-
         } else if (id == R.id.nav_stats) {
             Fragment_Statistique fragment = new Fragment_Statistique();
             changerFragment(fragment, "Statistiques");

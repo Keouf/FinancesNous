@@ -1,8 +1,9 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.pcportablevidjay.financesnous.Fragment_Accueil">
+    tools:context="com.example.pcportablevidjay.financesnous.Fragment_Accueil"
+    android:gravity="center_horizontal">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -10,25 +11,57 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bienvenue sur Finances&amp;Nous"
-        android:id="@+id/textView17"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold" />
+        android:id="@+id/textBienvenue"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
-        android:layout_gravity="center_horizontal|top"
-        android:src="@mipmap/ic_launcher"
-        android:layout_marginTop="50dp" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scroll_news"
+        android:layout_gravity="center"
+        android:background="@drawable/rectangle_coins_arrondis_back"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/textBienvenue"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Page temporaire"
-        android:id="@+id/textView18"
-        android:layout_gravity="center" />
+    </ScrollView>
 
-</FrameLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:layout_alignTop="@+id/scroll_news"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="QUOI DE NEUF ?"
+            android:id="@+id/textNewsTitre"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_row="0"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_horizontal" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listView"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginBottom="15dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
