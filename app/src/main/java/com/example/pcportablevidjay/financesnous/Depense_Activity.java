@@ -152,7 +152,7 @@ public class Depense_Activity extends AppCompatActivity {
         if (remplit) {
             if (Utils.getConnectivityStatus(getApplicationContext())) {
                 Utilisateur mainUtilisateur = storageHelper.getUtilisateur();
-                Depense maDepense = new Depense(myDBHelper.getLastDepenseID(), date, Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithId(1), "");
+                Depense maDepense = new Depense(myDBHelper.getLastDepenseID(), date, Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString()), "");
                 mainUtilisateur.addDepense(maDepense);
                 storageHelper.storeObject(mainUtilisateur);
 

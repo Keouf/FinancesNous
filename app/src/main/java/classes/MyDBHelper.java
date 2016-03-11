@@ -82,12 +82,11 @@ public class MyDBHelper {
 
     public void ajoutMagasin(Magasin magasin) {
         makeTaskAsynchrone();
-        sendData("http://berghuis-peter.net/FinanceNous/ajoutMagasin.php?id=", magasin.getId() + "&nom=" + magasin.getNom_managasin() + "&adresse=" + magasin.getAdresse1() + "&ville=" + magasin.getAdresse2() + "&codePostal=" + magasin.getCodePostal() + "&site=" + magasin.getSiteWeb() + "&tel=" + magasin.getTelephone());
+        sendData("http://berghuis-peter.net/FinanceNous/ajoutMagasin.php?id=", magasin.getId() + "&nom=" + magasin.getNom_managasin() + "&adresse=" + magasin.getAdresse1() + "&ville=" + magasin.getAdresse2() + "&codePostal=" + magasin.getCodePostal() + "&site=" + magasin.getSiteWeb() + "&tel=" + magasin.getTelephone() + "&idUser=" + storageHelper.getUtilisateur().getId_utilisateur());
     }
 
     public int getLastDepenseID() {
         int id = 0;
-        JSONObject json = null;
         String phpURL = "http://berghuis-peter.net/FinanceNous/getLastDepenseID.php";
 
         makeTaskAsynchrone();
@@ -95,7 +94,7 @@ public class MyDBHelper {
         JSONArray jsonArray = getDataInJson(phpURL);
 
         try {
-            json = jsonArray.getJSONObject(0);
+            JSONObject json = jsonArray.getJSONObject(0);
             id = json.getInt("id_depense");
         } catch (JSONException e) {
             e.printStackTrace();
@@ -132,6 +131,24 @@ public class MyDBHelper {
         JSONObject json = null;
         JsonConverter jsonConverter = new JsonConverter();
         String phpURL = "http://berghuis-peter.net/FinanceNous/getMagasin.php?idMagasin=" + idMagasin;
+
+        makeTaskAsynchrone();
+
+        JSONArray jsonArray = getDataInJson(phpURL);
+
+        try {
+            json = jsonArray.getJSONObject(0);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return jsonConverter.jsonToMagasin(json);
+    }
+
+    public Magasin getMagasinWithReference(String StringMagasin) {
+        JSONObject json = null;
+        JsonConverter jsonConverter = new JsonConverter();
+        String phpURL = "http://berghuis-peter.net/FinanceNous/getMagasinByNameAndUserId.php?refMagasin=" + StringMagasin + "&userID=" + storageHelper.getUtilisateur().getId_utilisateur();
 
         makeTaskAsynchrone();
 
