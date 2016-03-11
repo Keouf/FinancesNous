@@ -5,7 +5,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Options</string>
     <string name="title_activity_login">Finances &amp; Nous</string>
 
     <!-- Strings related to login -->
@@ -27,6 +27,5 @@
 
     <!-- Strings related to login -->
     <string name="creerUneDepense">Créer une dépense</string>
-    <string name="title_activity_depense_bis">depense_bis</string>
 
 </resources>

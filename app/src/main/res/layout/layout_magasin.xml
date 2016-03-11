@@ -1,159 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Magasin_Activity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Créer un magasin"
-        android:id="@+id/textTitreCreerMagasin"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="22dp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Nom * :"
-        android:id="@+id/textView11"
-        android:layout_below="@+id/textTitreCreerMagasin"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp"
-        android:textSize="20dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Adresse :"
-        android:id="@+id/textView12"
+        android:text="CRÉER UN MAGASIN"
+        android:id="@+id/textView7"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:textSize="20dp"
-        android:layout_below="@+id/textView11"
-        android:layout_alignParentStart="true" />
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_marginBottom="5dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Nom : "
+            android:id="@+id/textView9"
+            android:autoText="false"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginLeft="5dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:id="@+id/editTextNomMag"
+            android:layout_alignBottom="@+id/textView16"
+            android:layout_alignEnd="@+id/editTextMontant"
+            android:layout_alignStart="@+id/spinner_domaine" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adresse : "
+            android:id="@+id/textViewAdr"
+            android:autoText="false"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginLeft="5dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:ems="10"
+            android:id="@+id/editTextAdrMag"
+            android:hint="Rue"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/textViewAdr" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editTextCPMag"
+            android:layout_below="@+id/editTextAdrMag"
+            android:layout_alignParentEnd="false"
+            android:layout_alignEnd="@+id/editTextAdrMag"
+            android:layout_alignStart="@+id/editTextAdrMag"
+            android:hint="Code Postale" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:id="@+id/editTextVilleMag"
+            android:layout_below="@+id/editTextCPMag"
+            android:layout_alignStart="@+id/editTextAdrMag"
+            android:layout_alignEnd="@+id/editTextAdrMag"
+            android:hint="Ville"
+            android:inputType="text" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Site : "
+            android:id="@+id/textView10"
+            android:autoText="false"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginLeft="5dp"
+            android:hint="www" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textUri"
+            android:ems="10"
+            android:id="@+id/editTextSiteMag"
+            android:textColor="#a3a3a3"
+            android:layout_alignBottom="@+id/textView16"
+            android:layout_alignEnd="@+id/editTextMontant"
+            android:layout_alignStart="@+id/spinner_domaine"
+            android:hint="www" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Téléphone : "
+            android:id="@+id/textView28"
+            android:autoText="false"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_marginLeft="5dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editTextTelMag"
+            android:textColor="#a3a3a3"
+            android:layout_alignBottom="@+id/textView16"
+            android:layout_alignEnd="@+id/editTextMontant"
+            android:layout_alignStart="@+id/spinner_domaine"
+            android:hint="+033"
+            android:nestedScrollingEnabled="false" />
+    </LinearLayout>
 
     <Button
-        android:layout_width="wrap_content"
+        style="?android:textAppearanceSmall"
+        android:id="@+id/buttonValider"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Valider"
-        android:id="@+id/button"
+        android:textStyle="bold"
         android:background="#66d070"
-        android:layout_below="@+id/textView14"
-        android:layout_toEndOf="@+id/textView12"
-        android:onClick="tryToSendMagasin"
-        android:layout_marginTop="50dp" />
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:onClick="tryToSendMagasin" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Annuler"
-        android:onClick="annulerMagasin"
-        android:id="@+id/button2"
-        android:background="#dd514c"
-        android:layout_alignTop="@+id/button"
-        android:layout_toEndOf="@+id/editTextCPMag" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextNomMag"
-        android:layout_above="@+id/textView12"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/textView13"
-        android:textSize="14dp"
-        android:textColor="#888888"
-        android:layout_marginLeft="25dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextAdrMag"
-        android:textColor="#888888"
-        android:textSize="14dp"
-        android:inputType="textPostalAddress"
-        android:hint="Rue"
-        android:layout_alignBottom="@+id/textView12"
-        android:layout_alignStart="@+id/editTextNomMag"
-        android:layout_alignEnd="@+id/editTextNomMag" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="5"
-        android:id="@+id/editTextCPMag"
-        android:layout_below="@+id/editTextAdrMag"
-        android:layout_alignStart="@+id/editTextAdrMag"
-        android:maxLength="5"
-        android:hint="Code postal"
-        android:textColor="#888888"
-        android:textSize="14dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextVilleMag"
-        android:layout_below="@+id/editTextCPMag"
-        android:hint="Ville"
-        android:layout_alignStart="@+id/editTextCPMag"
-        android:layout_alignEnd="@+id/editTextNomMag"
-        android:textColor="#888888"
-        android:textSize="14dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Site-web :"
-        android:id="@+id/textView13"
-        android:layout_below="@+id/editTextVilleMag"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:textSize="20dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTextSiteMag"
-        android:inputType="textUri"
-        android:textColor="#888888"
-        android:textSize="14dp"
-        android:layout_alignBottom="@+id/textView13"
-        android:layout_alignStart="@+id/editTextVilleMag"
-        android:layout_alignEnd="@+id/editTextVilleMag"
-        android:hint="Exemple : www.magasin.com" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Téléphone :"
-        android:id="@+id/textView14"
-        android:layout_below="@+id/editTextSiteMag"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:textSize="20dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:id="@+id/editTextTelMag"
-        android:layout_alignBottom="@+id/textView14"
-        android:layout_alignStart="@+id/editTextSiteMag"
-        android:maxLength="10"
-        android:textColor="#888888"
-        android:textSize="14dp" />
-
-</RelativeLayout>
+</LinearLayout>
