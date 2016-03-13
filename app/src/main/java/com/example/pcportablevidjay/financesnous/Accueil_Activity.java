@@ -27,7 +27,6 @@ import layout.Fragment_Recherche_Depense;
 public class Accueil_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public MyDBHelper myDBHelper = new MyDBHelper(this);
     StorageHelper storageHelper;
     Utilisateur mainUtilisateur;
 
@@ -66,8 +65,7 @@ public class Accueil_Activity extends AppCompatActivity
 
         storageHelper = new StorageHelper(this);
         mainUtilisateur = storageHelper.getUtilisateur();
-        mainUtilisateur.setMesDepenses(myDBHelper.getMesDepenses(this));
-        storageHelper.storeObject(mainUtilisateur);
+
 
 //        global.getMainUtilisateur().setMesDepenses(myDBHelper.getMesDepenses(global));
         Log.e("json", "arraylist of all depenses = " + mainUtilisateur.getMesDepenses().toString());

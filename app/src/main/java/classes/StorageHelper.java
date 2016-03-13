@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -50,6 +51,11 @@ public class StorageHelper {
             return mainUtilisateur;
         }
 
+    }
+
+    public boolean fileExists() {
+        File file = act.getBaseContext().getFileStreamPath(FILENAME);
+        return file.exists();
     }
 
 

@@ -3,6 +3,7 @@ package com.example.pcportablevidjay.financesnous;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +31,7 @@ import classes.Utils;
 public class Login_Activity extends AppCompatActivity  {
 
 
+    public Activity act;
     public MyDBHelper myDBHelper = new MyDBHelper(this);
     StorageHelper storageHelper;
     private UserLoginTask mAuthTask = null;
@@ -52,6 +55,15 @@ public class Login_Activity extends AppCompatActivity  {
         //mp.start();
 
         storageHelper = new StorageHelper(this);
+        act = this;
+
+        // check if logged in before.
+        if (storageHelper.fileExists()) {
+            Log.e("login", " fileExists!!!!");
+            Intent accueil = new Intent(getBaseContext(), LoadingScreenActivity.class);
+            startActivity(accueil);
+            finish();
+        }
 
         // Set up the login form.
         mEmailView = (EditText)findViewById(R.id.email);
@@ -229,6 +241,7 @@ public class Login_Activity extends AppCompatActivity  {
 
             try {
                 user = myDBHelper.getUtilisateur(mEmail);
+                storageHelper.storeObject(user);
             } catch (UnknownHostException e) {
                 return false;
             } catch (Exception e) {
@@ -243,7 +256,10 @@ public class Login_Activity extends AppCompatActivity  {
             mAuthTask = null;
 
             if (success) {
+                user.setMesDepenses(myDBHelper.getMesDepenses(act));
+                Log.e("login", " test 1");
                 storageHelper.storeObject(user);
+                Log.e("login", " test 2");
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
