@@ -12,21 +12,25 @@
     tools:context="layout.Fragment_Recherche_Depense">
 
     <TextView
-        android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:text="MES 10 DERNIÈRES DÉPENSES"
+        android:id="@+id/titreDepenses"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textSize="20dp"
         android:layout_centerHorizontal="true"
-        android:text="Mes 10 derniers dépenses"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_alignParentTop="true"
+        android:textAlignment="center"
+        android:singleLine="true" />
 
     <ListView
         android:id="@+id/rechercheDepense_listView_10Depenses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView11"
+        android:layout_below="@+id/titreDepenses"
         android:layout_centerHorizontal="true"
-        android:background="#ffffff"
+        android:background="@drawable/rectangle_coins_arrondis_back"
         android:smoothScrollbar="false"
         android:layout_marginTop="5dp"
         android:choiceMode="singleChoice"

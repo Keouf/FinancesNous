@@ -77,6 +77,6 @@
         android:text="Valider"
         android:onClick="tryToCreerCompte"
         android:textStyle="bold"
-        android:background="#66d070" />
+        android:background="@drawable/rectangle_coin_arrondis_button" />
 
 </LinearLayout>

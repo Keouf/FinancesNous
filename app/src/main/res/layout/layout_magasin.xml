@@ -174,7 +174,7 @@
         android:layout_marginTop="20dp"
         android:text="Valider"
         android:textStyle="bold"
-        android:background="#66d070"
+        android:background="@drawable/rectangle_coin_arrondis_button"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:onClick="tryToSendMagasin" />
