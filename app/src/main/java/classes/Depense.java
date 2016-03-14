@@ -12,7 +12,21 @@ public class Depense implements Serializable {
     private String pieceJoint;
     private Magasin magasin;
     private String domaine;
+    private Date garantieDebut;
+    private Date garantieFin;
     private Utilisateur utilisatuer;
+
+    public Depense(Integer idDepense, Date dateDepense, double montant, Utilisateur utilisatuer, String domaine, Magasin magasin, String pieceJoint, Date garantieDebut, Date garantieFin) {
+        this.idDepense = idDepense;
+        this.dateDepense = dateDepense;
+        this.montant = montant;
+        this.utilisatuer = utilisatuer;
+        this.domaine = domaine;
+        this.magasin = magasin;
+        this.pieceJoint = pieceJoint;
+        this.garantieDebut = garantieDebut;
+        this.garantieFin = garantieFin;
+    }
 
     public Depense(Integer idDepense, Date dateDepense, double montant, Utilisateur utilisatuer, String domaine, Magasin magasin, String pieceJoint) {
         this.idDepense = idDepense;
@@ -22,6 +36,8 @@ public class Depense implements Serializable {
         this.domaine = domaine;
         this.magasin = magasin;
         this.pieceJoint = pieceJoint;
+        this.garantieDebut = null;
+        this.garantieFin = null;
     }
 
     public Integer getIdDepense() {
@@ -80,5 +96,20 @@ public class Depense implements Serializable {
         this.utilisatuer = utilisatuer;
     }
 
+    public Date getGarantieDebut() {
+        return garantieDebut;
+    }
+
+    public void setGarantieDebut(Date garantieDebut) {
+        this.garantieDebut = garantieDebut;
+    }
+
+    public Date getGarantieFin() {
+        return garantieFin;
+    }
+
+    public void setGarantieFin(Date garantieFin) {
+        this.garantieFin = garantieFin;
+    }
 }
 

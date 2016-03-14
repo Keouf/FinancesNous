@@ -23,9 +23,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import classes.Depense;
 import classes.MyDBHelper;
@@ -90,6 +92,8 @@ public class Depense_Activity extends AppCompatActivity {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         EditText dateEdit = (EditText) findViewById(R.id.editText_date);
         dateEdit.setText(dateFormat.format(date));
+        EditText garantieDebutEditText = (EditText) findViewById(R.id.editText_DebutGarantie);
+        garantieDebutEditText.setText(dateFormat.format(date));
 
 
         // populate domaine spinner
@@ -140,6 +144,9 @@ public class Depense_Activity extends AppCompatActivity {
         EditText montantEdit = (EditText) findViewById(R.id.editTextMontant);
         Spinner domaineSpinner = (Spinner) findViewById(R.id.spinner_domaine);
         Spinner magasinSpinner = (Spinner) findViewById(R.id.spinner_enseigne);
+        CheckBox garantieCheckBox = (CheckBox) findViewById(R.id.CBGarantie);
+        EditText garantieDebutEditText = (EditText) findViewById(R.id.editText_DebutGarantie);
+        EditText garantieFinEditText = (EditText) findViewById(R.id.editText_DebutGarantie);
 
         boolean remplit = true;
         // check if they are empty
@@ -151,8 +158,23 @@ public class Depense_Activity extends AppCompatActivity {
 
         if (remplit) {
             if (Utils.getConnectivityStatus(getApplicationContext())) {
+                Depense maDepense;
+                if (garantieCheckBox.isChecked()){
+                    DateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
+                    Date garantieDebutDate = null;
+                    Date garantieFinDate = null;
+                    try {
+                        garantieDebutDate = format.parse(garantieDebutEditText.getText().toString());
+                        garantieFinDate = format.parse(garantieFinEditText.getText().toString());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    maDepense = new Depense(myDBHelper.getLastDepenseID(), date, Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString()), "", garantieDebutDate, garantieFinDate);
+                }
+                else{
+                    maDepense = new Depense(myDBHelper.getLastDepenseID(), date, Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString()), "");
+                }
                 Utilisateur mainUtilisateur = storageHelper.getUtilisateur();
-                Depense maDepense = new Depense(myDBHelper.getLastDepenseID(), date, Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString()), "");
                 mainUtilisateur.addDepense(maDepense);
                 storageHelper.storeObject(mainUtilisateur);
 
