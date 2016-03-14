@@ -5,10 +5,14 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
@@ -44,25 +48,51 @@ public class Login_Activity extends AppCompatActivity  {
     private View mProgressView;
     private TextView mProgressTextView;
 
+    boolean mIsReceiverRegistered = false;
+    NetworkChange mReceiver = null;
+
+    /////////////////////////
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Login_Activity.this.receivedBroadcast(intent);
+        }
+    };
+    @Override
+    public void onResume() {
+        super.onResume();
+        IntentFilter iff = new IntentFilter();
+        iff.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        // Put whatever message you want to receive as the action
+        this.registerReceiver(this.mBroadcastReceiver, iff);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        this.unregisterReceiver(this.mBroadcastReceiver);
+    }
+    private void receivedBroadcast(Intent i) {
+        UpdateIHMInternet();
+    }
+    /////////////////////////
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
 
-
-        //final MediaPlayer mp = MediaPlayer.create(this, R.raw.music_fond);
-        //mp.start();
-
         storageHelper = new StorageHelper(this);
         act = this;
 
-        // check if logged in before.
-        if (storageHelper.fileExists()) {
-            Log.e("login", " fileExists!!!!");
-            Intent accueil = new Intent(getBaseContext(), LoadingScreenActivity.class);
-            startActivity(accueil);
-            finish();
+        if (Utils.getConnectivityStatus(getApplicationContext())) {
+            // check if logged in before.
+            if (storageHelper.fileExists()) {
+                Log.e("login", " fileExists!!!!");
+                Intent accueil = new Intent(getBaseContext(), LoadingScreenActivity.class);
+                startActivity(accueil);
+                finish();
+            }
         }
 
         // Set up the login form.
@@ -95,6 +125,7 @@ public class Login_Activity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
                 if (!Utils.getConnectivityStatus(getApplicationContext())) {
+                    UpdateIHMInternet();
                     Toast toast = Toast.makeText(getApplicationContext(), "Activer internet", Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
@@ -114,17 +145,27 @@ public class Login_Activity extends AppCompatActivity  {
 
         mProgressView = findViewById(R.id.login_progress);
         mProgressTextView = (TextView)findViewById(R.id.text_connexion);
+
+        if (!Utils.getConnectivityStatus(getApplicationContext())) {
+           findViewById(R.id.textHorsLigne).setVisibility(View.VISIBLE);
+            findViewById(R.id.buttonConnexionHorsLigne).setVisibility(View.VISIBLE);
+            findViewById(R.id.email_sign_in_button).setEnabled(false);
+        }
+
     }
 
-    public void runProgress(final boolean status){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //Opération consommatrice en temps
-                //Appeler d'une méthode (pour améliorer la lisibilité du code)
-                showProgress(status);
-            }
-        }).start();
+
+    public void UpdateIHMInternet(){
+        if (!Utils.getConnectivityStatus(getApplicationContext())) {
+            findViewById(R.id.textHorsLigne).setVisibility(View.VISIBLE);
+            findViewById(R.id.buttonConnexionHorsLigne).setVisibility(View.VISIBLE);
+            findViewById(R.id.email_sign_in_button).setEnabled(false);
+        }
+        else{
+            findViewById(R.id.textHorsLigne).setVisibility(View.GONE);
+            findViewById(R.id.buttonConnexionHorsLigne).setVisibility(View.GONE);
+            findViewById(R.id.email_sign_in_button).setEnabled(true);
+        }
     }
 
     /**
@@ -281,6 +322,16 @@ public class Login_Activity extends AppCompatActivity  {
             showProgress(false);
         }
 
+    }
+
+    public static class NetworkChange extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            // Post the UI updating code to our Handler
+            //updateUI(intent);
+            Log.e("test", "test connexion");
+        }
     }
 }
 

@@ -2,7 +2,6 @@ package com.example.pcportablevidjay.financesnous;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,14 +11,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import classes.MyDBHelper;
 import classes.StorageHelper;
 import classes.Utilisateur;
 import layout.Fragment_Recherche_Depense;
@@ -60,15 +57,15 @@ public class Accueil_Activity extends AppCompatActivity
         //onNavigationItemSelected(navigationView.getMenu().getItem(0));
 
         Fragment_Accueil fragment = new Fragment_Accueil();
-        changerFragment(fragment, "Accueil");
+        changerFragment(fragment);
         navigationView.getMenu().getItem(0).setChecked(true);
 
         storageHelper = new StorageHelper(this);
         mainUtilisateur = storageHelper.getUtilisateur();
 
 
-//        global.getMainUtilisateur().setMesDepenses(myDBHelper.getMesDepenses(global));
-        Log.e("json", "arraylist of all depenses = " + mainUtilisateur.getMesDepenses().toString());
+        //global.getMainUtilisateur().setMesDepenses(myDBHelper.getMesDepenses(global));
+        //Log.e("json", "arraylist of all depenses = " + mainUtilisateur.getMesDepenses().toString());
     }
 
     @Override
@@ -114,13 +111,13 @@ public class Accueil_Activity extends AppCompatActivity
 
         if (id == R.id.nav_accueil) {
             Fragment_Accueil fragment = new Fragment_Accueil();
-            changerFragment(fragment, "Accueil");
+            changerFragment(fragment);
         } else if (id == R.id.nav_depense) {
             Fragment_Recherche_Depense fragment = new Fragment_Recherche_Depense();
-            changerFragment(fragment, "Dépenses");
+            changerFragment(fragment);
         } else if (id == R.id.nav_stats) {
             Fragment_Statistique fragment = new Fragment_Statistique();
-            changerFragment(fragment, "Statistiques");
+            changerFragment(fragment);
         } else if (id == R.id.nav_garantie) {
 
         } else if (id == R.id.nav_noteDeFrais) {
@@ -137,8 +134,7 @@ public class Accueil_Activity extends AppCompatActivity
         return true;
     }
 
-    public void changerFragment(Fragment fragment, String text) {
-        Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+    public void changerFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame, fragment);
         fragmentTransaction.commit();
