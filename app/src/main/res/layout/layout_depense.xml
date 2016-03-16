@@ -270,7 +270,8 @@
                         android:layout_alignBottom="@+id/textView16"
                         android:layout_alignEnd="@+id/editTextMontant"
                         android:layout_alignStart="@+id/spinner_domaine"
-                        android:layout_marginRight="20dp" />
+                        android:layout_marginRight="20dp"
+                        android:text="2016-12-19" />
                 </LinearLayout>
             </LinearLayout>
 
