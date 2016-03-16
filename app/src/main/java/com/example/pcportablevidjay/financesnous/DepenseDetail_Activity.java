@@ -27,7 +27,7 @@ public class DepenseDetail_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_depense_detail);
+        setContentView(R.layout.layout_depense_details);
 
         Intent i = getIntent();
         depense = (Depense) i.getSerializableExtra("Depense");

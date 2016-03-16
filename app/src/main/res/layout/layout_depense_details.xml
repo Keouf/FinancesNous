@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DÉTAILS"
+        android:id="@+id/textTitre"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_marginBottom="5dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView2"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/rectangle_coins_arrondis_back"
+        android:layout_margin="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Domaine :"
+                android:id="@+id/depense_detail_tv_domaine"
+                android:autoText="false"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginLeft="5dp"
+                android:textIsSelectable="true" />
+
+            <EditText
+                android:id="@+id/depense_detail_et_domaine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/depense_detail_tv_telephone"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentStart="false"
+                android:layout_alignBaseline="@+id/depense_detail_tv_domaine"
+                android:focusable="false"
+                android:clickable="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Enseigne :"
+                android:id="@+id/depense_detail_tv_enseigne"
+                android:autoText="false"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentStart="false"
+                android:layout_below="@+id/depense_detail_tv_domaine"
+                android:layout_marginTop="20dp" />
+
+            <EditText
+                android:id="@+id/depense_detail_et_enseigne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/depense_detail_tv_telephone"
+                android:focusable="false"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentStart="false"
+                android:layout_alignBaseline="@+id/depense_detail_tv_enseigne" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Adresse :"
+                android:id="@+id/depense_detail_tv_adresse"
+                android:autoText="false"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentStart="false"
+                android:layout_below="@+id/depense_detail_tv_enseigne"
+                android:layout_marginTop="20dp" />
+
+            <EditText
+                android:id="@+id/depense_detail_et_adresse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/depense_detail_tv_telephone"
+                android:focusable="false"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentStart="false"
+                android:layout_alignBaseline="@+id/depense_detail_tv_adresse"
+                android:layout_below="@+id/depense_detail_et_enseigne" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/space"
+                android:autoText="false"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentStart="false"
+                android:layout_below="@+id/depense_detail_tv_adresse"
+                android:layout_marginTop="20dp"
+                android:text="space"
+                android:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/depense_detail_et_adresse2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/depense_detail_tv_telephone"
+                android:focusable="false"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentStart="false"
+                android:layout_below="@+id/depense_detail_et_adresse"
+                android:layout_alignBaseline="@+id/space" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Site :"
+                android:id="@+id/depense_detail_tv_site"
+                android:autoText="false"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentStart="false"
+                android:layout_marginTop="30dp"
+                android:layout_below="@+id/space" />
+
+            <EditText
+                android:id="@+id/depense_detail_et_site"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@id/depense_detail_tv_telephone"
+                android:focusable="false"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentStart="false"
+                android:layout_alignBaseline="@+id/depense_detail_tv_site" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Téléphone :"
+                android:id="@+id/depense_detail_tv_telephone"
+                android:autoText="false"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentStart="false"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/depense_detail_tv_site" />
+
+            <EditText
+                android:id="@+id/depense_detail_et_telephone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/depense_detail_tv_telephone"
+                android:focusable="false"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentStart="false"
+                android:layout_alignBaseline="@+id/depense_detail_tv_telephone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Date :"
+                android:id="@+id/depense_detail_tv_date"
+                android:autoText="false"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentStart="false"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/depense_detail_tv_telephone" />
+
+            <EditText
+                android:id="@+id/depense_detail_et_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/depense_detail_tv_telephone"
+                android:focusable="false"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentStart="false"
+                android:layout_alignBaseline="@+id/depense_detail_tv_date" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Montant :"
+                android:id="@+id/depense_detail_tv_montant"
+                android:autoText="false"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentStart="false"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/depense_detail_tv_date" />
+
+            <EditText
+                android:id="@+id/depense_detail_et_montant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/depense_detail_tv_telephone"
+                android:focusable="false"
+                android:layout_marginLeft="5dp"
+                android:layout_alignParentStart="false"
+                android:layout_alignBaseline="@+id/depense_detail_tv_montant" />
+
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>
