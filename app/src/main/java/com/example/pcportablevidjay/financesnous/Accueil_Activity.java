@@ -44,8 +44,14 @@ public class Accueil_Activity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent depense = new Intent(getBaseContext(), Depense_Activity.class);
-                startActivity(depense);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent depenseActivity = new Intent(getBaseContext(), Depense_Activity.class);
+                        startActivity(depenseActivity);
+                    }
+                }).start();
+
             }
         });
 
