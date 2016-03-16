@@ -130,7 +130,8 @@ public class Accueil_Activity extends AppCompatActivity
             Intent about = new Intent(getBaseContext(), About_Activity.class);
             startActivity(about);
         } else if (id == R.id.nav_share) {
-            // TODO MENU
+            Intent about = new Intent(getBaseContext(), About_Activity.class);
+            startActivity(about);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

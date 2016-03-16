@@ -58,7 +58,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Jonathan - Dévellopeur"
+        android:text="Jonathan - Développeur"
         android:id="@+id/textView23"
         android:textStyle="italic"
         android:textSize="10dp"
@@ -69,7 +69,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nicolas - Dévellopeur"
+        android:text="Nicolas - Développeur"
         android:id="@+id/textView24"
         android:textStyle="italic"
         android:textSize="10dp"
@@ -80,7 +80,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Peter - Dévellopeur"
+        android:text="Peter - Développeur"
         android:id="@+id/textView25"
         android:textStyle="italic"
         android:textSize="10dp"
@@ -91,7 +91,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Vidjay - Dévellopeur"
+        android:text="Vidjay - Développeur"
         android:id="@+id/textView26"
         android:textStyle="italic"
         android:textSize="10dp"
