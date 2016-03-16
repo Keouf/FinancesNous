@@ -44,7 +44,8 @@
             android:name=".DepenseDetail_Activity"
             android:theme="@style/AppTheme" />
         <activity android:name=".CreerCompte_Activity" />
-        <activity android:name=".LoadingScreenActivity"></activity>
+        <activity android:name=".LoadingScreenActivity" />
+        <activity android:name=".Social_Activity"></activity>
     </application>
 
 </manifest>

@@ -175,25 +175,27 @@
                 android:layout_marginTop="10dp">
 
                 <Button
-                    android:layout_width="150dp"
+                    android:layout_width="155dp"
                     android:layout_height="wrap_content"
                     android:text="Prendre une photo"
                     android:id="@+id/buttonPrendrePhoto"
                     android:layout_gravity="left"
-                    android:background="#0990d9"
+                    android:background="@drawable/button_coins_arrondis_blue"
                     style="?android:textAppearanceSmall"
-                    android:layout_marginLeft="10dp" />
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold" />
 
                 <Button
-                    android:layout_width="150dp"
+                    android:layout_width="155dp"
                     android:layout_height="wrap_content"
                     android:text="Parcourir"
                     android:id="@+id/buttonParcourir"
                     android:layout_gravity="right"
                     android:layout_alignParentEnd="true"
-                    android:background="#0990d9"
+                    android:background="@drawable/button_coins_arrondis_blue"
                     style="?android:textAppearanceSmall"
-                    android:layout_marginRight="10dp" />
+                    android:layout_marginRight="10dp"
+                    android:textStyle="bold" />
             </RelativeLayout>
 
             <CheckBox
