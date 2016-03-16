@@ -12,7 +12,6 @@ import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
@@ -48,8 +47,6 @@ public class Login_Activity extends AppCompatActivity  {
     private View mProgressView;
     private TextView mProgressTextView;
 
-    boolean mIsReceiverRegistered = false;
-    NetworkChange mReceiver = null;
 
     /////////////////////////
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -58,6 +55,7 @@ public class Login_Activity extends AppCompatActivity  {
             Login_Activity.this.receivedBroadcast(intent);
         }
     };
+
     @Override
     public void onResume() {
         super.onResume();
@@ -143,6 +141,14 @@ public class Login_Activity extends AppCompatActivity  {
             }
         });
 
+        Button mHorsLigneBouton = (Button) findViewById(R.id.buttonConnexionHorsLigne);
+        mCreerCompteBouton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                connexionHorsLigne();
+            }
+        });
+        
         mProgressView = findViewById(R.id.login_progress);
         mProgressTextView = (TextView)findViewById(R.id.text_connexion);
 
@@ -152,6 +158,9 @@ public class Login_Activity extends AppCompatActivity  {
             findViewById(R.id.email_sign_in_button).setEnabled(false);
         }
 
+    }
+
+    private void connexionHorsLigne() {
     }
 
 

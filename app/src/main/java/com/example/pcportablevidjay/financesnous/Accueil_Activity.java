@@ -2,7 +2,10 @@ package com.example.pcportablevidjay.financesnous;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -19,6 +22,7 @@ import android.widget.Toast;
 
 import classes.StorageHelper;
 import classes.Utilisateur;
+import classes.Utils;
 import layout.Fragment_Recherche_Depense;
 
 public class Accueil_Activity extends AppCompatActivity
@@ -119,14 +123,14 @@ public class Accueil_Activity extends AppCompatActivity
             Fragment_Statistique fragment = new Fragment_Statistique();
             changerFragment(fragment);
         } else if (id == R.id.nav_garantie) {
-
+            // TODO MENU
         } else if (id == R.id.nav_noteDeFrais) {
-
+            // TODO MENU
         } else if (id == R.id.nav_about) {
             Intent about = new Intent(getBaseContext(), About_Activity.class);
             startActivity(about);
         } else if (id == R.id.nav_share) {
-
+            // TODO MENU
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -139,4 +143,35 @@ public class Accueil_Activity extends AppCompatActivity
         fragmentTransaction.replace(R.id.frame, fragment);
         fragmentTransaction.commit();
     }
+
+    /////////////////////////
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Accueil_Activity.this.receivedBroadcast(intent);
+        }
+    };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        IntentFilter iff = new IntentFilter();
+        iff.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        // Put whatever message you want to receive as the action
+        this.registerReceiver(this.mBroadcastReceiver, iff);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        this.unregisterReceiver(this.mBroadcastReceiver);
+    }
+    private void receivedBroadcast(Intent i) {
+        if (!Utils.getConnectivityStatus(getApplicationContext())) {
+            Intent login = new Intent(getBaseContext(), Login_Activity.class);
+            startActivity(login);
+            Toast.makeText(getApplicationContext(), "Connexion perdu", Toast.LENGTH_SHORT).show();
+            Accueil_Activity.this.finish();
+        }
+    }
+    /////////////////////////
 }
