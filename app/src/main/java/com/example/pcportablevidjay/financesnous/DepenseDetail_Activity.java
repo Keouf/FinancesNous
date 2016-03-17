@@ -20,7 +20,7 @@ import classes.Utilisateur;
 
 public class DepenseDetail_Activity extends AppCompatActivity {
 
-    MyDBHelper myDBHelper = new MyDBHelper(this);
+    MyDBHelper myDBHelper = new MyDBHelper();
     Depense depense;
     StorageHelper storageHelper;
 
@@ -32,8 +32,6 @@ public class DepenseDetail_Activity extends AppCompatActivity {
         Intent i = getIntent();
         depense = (Depense) i.getSerializableExtra("Depense");
         populateLayout();
-
-        storageHelper = new StorageHelper(this);
     }
 
     @Override
@@ -57,9 +55,9 @@ public class DepenseDetail_Activity extends AppCompatActivity {
                     // if accepted
 
                     myDBHelper.supprimerDepense(depense);
-                    Utilisateur mainUtilisateur = storageHelper.getUtilisateur();
+                    Utilisateur mainUtilisateur = storageHelper.getUtilisateur(getBaseContext());
                     mainUtilisateur.removeDepense(depense);
-                    storageHelper.storeObject(mainUtilisateur);
+                    storageHelper.storeObject(getBaseContext(), mainUtilisateur);
 
                     finish();
                 }

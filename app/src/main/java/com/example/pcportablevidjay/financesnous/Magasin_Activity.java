@@ -15,7 +15,7 @@ import classes.Utils;
 
 public class Magasin_Activity extends AppCompatActivity {
 
-    MyDBHelper myDBHelper = new MyDBHelper(this);
+    MyDBHelper myDBHelper = new MyDBHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +82,7 @@ public class Magasin_Activity extends AppCompatActivity {
         if (remplit) {
             if (Utils.getConnectivityStatus(getApplicationContext())) {
                 Magasin monMagasin = new Magasin(2, nomMagasinEdit.getText().toString(), adresseMagasinEdit.getText().toString(), villeMagasinEdit.getText().toString(), codePostalMagasinEdit.getText().toString(), siteMagasinEdit.getText().toString(), telMagasinEdit.getText().toString());
-                myDBHelper.ajoutMagasin(monMagasin);
+                myDBHelper.ajoutMagasin(monMagasin, this);
                 Toast.makeText(this, "Magasin Crée!", Toast.LENGTH_LONG).show();
                 this.finish();
 

@@ -39,8 +39,7 @@ public class Fragment_Recherche_Depense extends Fragment {
         depensesListView = (ListView) view.findViewById(R.id.rechercheDepense_listView_10Depenses);
 
         // get 10 all depenses
-        storageHelper = new StorageHelper(this.getActivity());
-        ArrayList<Depense> mes10DernierDepenses = storageHelper.getUtilisateur().get10DernierDepenses();
+        ArrayList<Depense> mes10DernierDepenses = storageHelper.getUtilisateur(getActivity().getBaseContext()).get10DernierDepenses();
         Log.e("json", "arraylist of 10 depenses = " + mes10DernierDepenses.toString());
 
         if (mes10DernierDepenses == null || mes10DernierDepenses.isEmpty()) {
@@ -64,9 +63,9 @@ public class Fragment_Recherche_Depense extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("json", "kill me : " + storageHelper.getUtilisateur().getAllDepensesInString());
+        Log.e("json", "kill me : " + storageHelper.getUtilisateur(getActivity().getBaseContext()).getAllDepensesInString());
         adapater.clear();
-        adapater.addAll(storageHelper.getUtilisateur().get10DernierDepenses());
+        adapater.addAll(storageHelper.getUtilisateur(getActivity().getBaseContext()).get10DernierDepenses());
         adapater.notifyDataSetChanged();
         depensesListView.setAdapter(adapater);
         depensesListView.invalidateViews();

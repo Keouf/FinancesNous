@@ -13,19 +13,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class JsonConverter {
+public final class JsonConverter {
 
-    StorageHelper storageHelper;
+    static StorageHelper storageHelper;
 
-    public ArrayList<Depense> convertJsonArrayToDepenseArray(JSONArray jsonArray, Activity act) {
-        storageHelper = new StorageHelper(act);
-        MyDBHelper myDBHelper = new MyDBHelper(act);
+    public static ArrayList<Depense> convertJsonArrayToDepenseArray(JSONArray jsonArray, Activity act) {
+        MyDBHelper myDBHelper = new MyDBHelper();
         JSONObject json;
         ArrayList<Depense> mesDepenses = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
                 json = jsonArray.getJSONObject(i);
-                mesDepenses.add(new Depense(json.getInt("id_depense"), makeDate(json.getString("date_depense")), json.getDouble("montant_depense"), storageHelper.getUtilisateur(), myDBHelper.getDomaineWithId(json.getInt("domaine")), myDBHelper.getMagasinWithId(json.getInt("magasin")), json.getString("piece_jointe")));
+                mesDepenses.add(new Depense(json.getInt("id_depense"), makeDate(json.getString("date_depense")), json.getDouble("montant_depense"), storageHelper.getUtilisateur(act.getBaseContext()), myDBHelper.getDomaineWithId(json.getInt("domaine")), myDBHelper.getMagasinWithId(json.getInt("magasin")), json.getString("piece_jointe")));
             } catch (JSONException e) {
                 Log.e("json", "jsonExeption, vérifie le nomage des champs");
             }
@@ -33,7 +32,7 @@ public class JsonConverter {
         return mesDepenses;
     }
 
-    public Magasin jsonToMagasin(JSONObject json) {
+    public static Magasin jsonToMagasin(JSONObject json) {
         Magasin magasin = null;
         try {
             magasin = new Magasin(json.getInt("id_magasin"), json.getString("ref_magasin"), json.getString("adresse_magasin1"), json.getString("adresse_magasin2"), json.getString("code_postal_magasin"), json.getString("site_web_magasin"), json.getString("telephone_magasin"));
@@ -43,7 +42,7 @@ public class JsonConverter {
         return magasin;
     }
 
-    public Date makeDate(String date) {
+    public static Date makeDate(String date) {
         Date myDate = null;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
 
@@ -55,15 +54,8 @@ public class JsonConverter {
         return myDate;
     }
 
-    public ArrayList<Depense> ConvertDepensesToDepenseArrayList(Activity act) {
-        storageHelper = new StorageHelper(act);
-        ArrayList<Depense> Depenses = new ArrayList<Depense>();
-        for (int i = 1; i <= storageHelper.getUtilisateur().getMesDepenses().size(); i++)
-            Depenses.add(storageHelper.getUtilisateur().getMesDepenses().get(i));
-        return Depenses;
-    }
 
-    public ArrayList<String> ConvertDomaineToStringArrayList(JSONArray myJsonarray) {
+    public static ArrayList<String> ConvertDomaineToStringArrayList(JSONArray myJsonarray) {
         ArrayList<String> Domaines = new ArrayList<String>();
         JSONObject json = null;
 
@@ -78,7 +70,7 @@ public class JsonConverter {
         return Domaines;
     }
 
-    public ArrayList<String> ConvertMagasinToStringArrayList(JSONArray myJsonarray) {
+    public static ArrayList<String> ConvertMagasinToStringArrayList(JSONArray myJsonarray) {
         ArrayList<String> Magasins = new ArrayList<String>();
         JSONObject json = null;
 
@@ -93,7 +85,7 @@ public class JsonConverter {
         return Magasins;
     }
 
-    public Utilisateur ConvertJsonArrayToUtilisateur(JSONArray myJsonarray) throws Exception {
+    public static Utilisateur ConvertJsonArrayToUtilisateur(JSONArray myJsonarray) throws Exception {
         Utilisateur utilisateur = null;
         JSONObject json = null;
 

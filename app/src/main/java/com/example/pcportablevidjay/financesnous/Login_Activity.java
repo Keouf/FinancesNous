@@ -24,23 +24,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.net.UnknownHostException;
+
 import classes.MyDBHelper;
 import classes.StorageHelper;
 import classes.Utilisateur;
 import classes.Utils;
 
 
-public class Login_Activity extends AppCompatActivity  {
+public class Login_Activity extends AppCompatActivity {
 
-
-    public Activity act;
-    public MyDBHelper myDBHelper = new MyDBHelper(this);
+    public MyDBHelper myDBHelper = new MyDBHelper();
+    public ProgressDialog pd = null;
     StorageHelper storageHelper;
     private UserLoginTask mAuthTask = null;
     private Utilisateur user;
-    public ProgressDialog pd = null;
-
     // UI references.
     private EditText mEmailView;
     private EditText mPasswordView;
@@ -64,11 +63,13 @@ public class Login_Activity extends AppCompatActivity  {
         // Put whatever message you want to receive as the action
         this.registerReceiver(this.mBroadcastReceiver, iff);
     }
+
     @Override
     public void onPause() {
         super.onPause();
         this.unregisterReceiver(this.mBroadcastReceiver);
     }
+
     private void receivedBroadcast(Intent i) {
         UpdateIHMInternet();
     }
@@ -80,13 +81,10 @@ public class Login_Activity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
 
-        storageHelper = new StorageHelper(this);
-        act = this;
-
         if (Utils.getConnectivityStatus(getApplicationContext())) {
             // check if logged in before.
-            if (storageHelper.fileExists()) {
-                Log.e("login", " fileExists!!!!");
+            if (storageHelper.fileExists(this.getBaseContext())) {
+                Log.e("peter", " fileExists!!!!");
                 Intent accueil = new Intent(getBaseContext(), LoadingScreenActivity.class);
                 startActivity(accueil);
                 finish();
@@ -94,7 +92,7 @@ public class Login_Activity extends AppCompatActivity  {
         }
 
         // Set up the login form.
-        mEmailView = (EditText)findViewById(R.id.email);
+        mEmailView = (EditText) findViewById(R.id.email);
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -108,7 +106,7 @@ public class Login_Activity extends AppCompatActivity  {
             }
         });
 
-        TextView link_login_activity = (TextView)findViewById(R.id.link_new_account);
+        TextView link_login_activity = (TextView) findViewById(R.id.link_new_account);
         link_login_activity.setClickable(true);
         link_login_activity.setMovementMethod(LinkMovementMethod.getInstance());
         link_login_activity.setOnClickListener(new View.OnClickListener() {
@@ -148,12 +146,12 @@ public class Login_Activity extends AppCompatActivity  {
                 connexionHorsLigne();
             }
         });
-        
+
         mProgressView = findViewById(R.id.login_progress);
-        mProgressTextView = (TextView)findViewById(R.id.text_connexion);
+        mProgressTextView = (TextView) findViewById(R.id.text_connexion);
 
         if (!Utils.getConnectivityStatus(getApplicationContext())) {
-           findViewById(R.id.textHorsLigne).setVisibility(View.VISIBLE);
+            findViewById(R.id.textHorsLigne).setVisibility(View.VISIBLE);
             findViewById(R.id.buttonConnexionHorsLigne).setVisibility(View.VISIBLE);
             findViewById(R.id.email_sign_in_button).setEnabled(false);
         }
@@ -164,13 +162,12 @@ public class Login_Activity extends AppCompatActivity  {
     }
 
 
-    public void UpdateIHMInternet(){
+    public void UpdateIHMInternet() {
         if (!Utils.getConnectivityStatus(getApplicationContext())) {
             findViewById(R.id.textHorsLigne).setVisibility(View.VISIBLE);
             findViewById(R.id.buttonConnexionHorsLigne).setVisibility(View.VISIBLE);
             findViewById(R.id.email_sign_in_button).setEnabled(false);
-        }
-        else{
+        } else {
             findViewById(R.id.textHorsLigne).setVisibility(View.GONE);
             findViewById(R.id.buttonConnexionHorsLigne).setVisibility(View.GONE);
             findViewById(R.id.email_sign_in_button).setEnabled(true);
@@ -224,7 +221,7 @@ public class Login_Activity extends AppCompatActivity  {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
+            mAuthTask = new UserLoginTask(email, password, this);
             mAuthTask.execute();
         }
     }
@@ -272,6 +269,16 @@ public class Login_Activity extends AppCompatActivity  {
 
     }
 
+    public static class NetworkChange extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            // Post the UI updating code to our Handler
+            //updateUI(intent);
+            Log.e("test", "test connexion");
+        }
+    }
+
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -280,10 +287,12 @@ public class Login_Activity extends AppCompatActivity  {
 
         private final String mEmail;
         private final String mPassword;
+        private final Activity act;
 
-        UserLoginTask(String email, String password) {
-            mEmail = email;
-            mPassword = password;
+        UserLoginTask(String email, String password, Activity act) {
+            this.mEmail = email;
+            this.mPassword = password;
+            this.act = act;
         }
 
         @Override
@@ -291,7 +300,7 @@ public class Login_Activity extends AppCompatActivity  {
 
             try {
                 user = myDBHelper.getUtilisateur(mEmail);
-                storageHelper.storeObject(user);
+                storageHelper.storeObject(act.getBaseContext(), user);
             } catch (UnknownHostException e) {
                 return false;
             } catch (Exception e) {
@@ -307,9 +316,7 @@ public class Login_Activity extends AppCompatActivity  {
 
             if (success) {
                 user.setMesDepenses(myDBHelper.getMesDepenses(act));
-                Log.e("login", " test 1");
-                storageHelper.storeObject(user);
-                Log.e("login", " test 2");
+                storageHelper.storeObject(act.getBaseContext(), user);
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -331,16 +338,6 @@ public class Login_Activity extends AppCompatActivity  {
             showProgress(false);
         }
 
-    }
-
-    public static class NetworkChange extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(final Context context, final Intent intent) {
-            // Post the UI updating code to our Handler
-            //updateUI(intent);
-            Log.e("test", "test connexion");
-        }
     }
 }
 

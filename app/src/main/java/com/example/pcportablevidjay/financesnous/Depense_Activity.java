@@ -37,8 +37,10 @@ import classes.Utils;
 public class Depense_Activity extends AppCompatActivity {
 
     StorageHelper storageHelper;
-    MyDBHelper myDBHelper = new MyDBHelper(this);
+    MyDBHelper myDBHelper = new MyDBHelper();
     Date date = new Date();
+    //----------date picker-----------------
+    EditText selectedEditText = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,8 +86,6 @@ public class Depense_Activity extends AppCompatActivity {
                     affichagetest(false, findViewById(R.id.form_noteDeFrais));
             }
         });
-
-        storageHelper = new StorageHelper(this);
 
         // populate date
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -146,7 +146,7 @@ public class Depense_Activity extends AppCompatActivity {
         CheckBox garantieCheckBox = (CheckBox) findViewById(R.id.CBGarantie);
         EditText garantieDebutEditText = (EditText) findViewById(R.id.editText_DebutGarantie);
         EditText garantieFinEditText = (EditText) findViewById(R.id.editText_DureeGarantie);
-        EditText DateEdit = (EditText)findViewById(R.id.editText_date);
+        EditText DateEdit = (EditText) findViewById(R.id.editText_date);
 
         boolean remplit = true;
         // check if they are empty
@@ -159,7 +159,7 @@ public class Depense_Activity extends AppCompatActivity {
         if (remplit) {
             if (Utils.getConnectivityStatus(getApplicationContext())) {
                 Depense maDepense = null;
-                if (garantieCheckBox.isChecked()){
+                if (garantieCheckBox.isChecked()) {
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
                     Date garantieDebutDate = null;
                     Date garantieFinDate = null;
@@ -167,19 +167,16 @@ public class Depense_Activity extends AppCompatActivity {
                         garantieDebutDate = format.parse(garantieDebutEditText.getText().toString());
                         garantieFinDate = format.parse(garantieFinEditText.getText().toString());
 
-                        maDepense = new Depense(myDBHelper.getLastDepenseID(), format.parse(DateEdit.getText().toString()), Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString()), "", garantieDebutDate, garantieFinDate);
-                    }
-
-                   catch (ParseException e) {
+                        maDepense = new Depense(myDBHelper.getLastDepenseID(), format.parse(DateEdit.getText().toString()), Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), "", garantieDebutDate, garantieFinDate);
+                    } catch (ParseException e) {
                         e.printStackTrace();
                     }
+                } else {
+                    maDepense = new Depense(myDBHelper.getLastDepenseID(), date, Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), "");
                 }
-                else{
-                    maDepense = new Depense(myDBHelper.getLastDepenseID(), date, Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString()), "");
-                }
-                Utilisateur mainUtilisateur = storageHelper.getUtilisateur();
+                Utilisateur mainUtilisateur = storageHelper.getUtilisateur(this.getBaseContext());
                 mainUtilisateur.addDepense(maDepense);
-                storageHelper.storeObject(mainUtilisateur);
+                storageHelper.storeObject(this.getBaseContext(), mainUtilisateur);
 
                 myDBHelper.insertDepense(maDepense);
                 Toast.makeText(this, "Dépense Créée !", Toast.LENGTH_LONG).show();
@@ -191,19 +188,32 @@ public class Depense_Activity extends AppCompatActivity {
 
     }
 
-
-    //----------date picker-----------------
     public void selectDate(View view) {
+        switch (view.getId()) {
+            case R.id.editText_date:
+                selectedEditText = (EditText) findViewById(R.id.editText_date);
+                break;
+            case R.id.editText_DebutGarantie:
+                selectedEditText = (EditText) findViewById(R.id.editText_DebutGarantie);
+                break;
+            case R.id.editText_DureeGarantie:
+                selectedEditText = (EditText) findViewById(R.id.editText_DureeGarantie);
+                break;
+        }
         DialogFragment newFragment = new SelectDateFragment();
         newFragment.show(getSupportFragmentManager(), "DatePicker");
     }
 
     public void populateSetDate(int year, int month, int day) {
-        EditText dateEdit = (EditText) findViewById(R.id.editText_date);
-        dateEdit.setText(year + "-" + month + "-" + day);
-        date.setYear(year);
-        date.setMonth(month);
-        date.setDate(day);
+        StringBuilder stringDate = new StringBuilder();
+        stringDate.append(year + "-");
+        if (month < 10)
+            stringDate.append("0");
+        stringDate.append(month + "-");
+        if (day < 10)
+            stringDate.append("0");
+        stringDate.append(day);
+        selectedEditText.setText(stringDate.toString());
     }
 
     @SuppressLint("ValidFragment")

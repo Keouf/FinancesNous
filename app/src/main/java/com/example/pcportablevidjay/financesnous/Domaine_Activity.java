@@ -9,13 +9,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import classes.Domaine;
 import classes.MyDBHelper;
 import classes.Utils;
 
 public class Domaine_Activity extends AppCompatActivity {
 
-    MyDBHelper myDBHelper = new MyDBHelper(this);
+    MyDBHelper myDBHelper = new MyDBHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +49,7 @@ public class Domaine_Activity extends AppCompatActivity {
         }
         if (remplit) {
             if (Utils.getConnectivityStatus(getApplicationContext())) {
-                Domaine monDomaine = new Domaine(0, nomDomaineEdit.getText().toString());
-                myDBHelper.ajoutDomaine(monDomaine);
+                myDBHelper.ajoutDomaine(nomDomaineEdit.getText().toString());
                 Toast.makeText(this, "Le domaine a bien été créé.", Toast.LENGTH_LONG).show();
                 this.finish();
             } else {

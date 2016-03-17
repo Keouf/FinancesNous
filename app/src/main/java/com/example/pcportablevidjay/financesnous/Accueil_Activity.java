@@ -14,6 +14,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,7 +31,13 @@ public class Accueil_Activity extends AppCompatActivity
 
     StorageHelper storageHelper;
     Utilisateur mainUtilisateur;
-
+    /////////////////////////
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Accueil_Activity.this.receivedBroadcast(intent);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,12 +77,10 @@ public class Accueil_Activity extends AppCompatActivity
         changerFragment(fragment);
         navigationView.getMenu().getItem(0).setChecked(true);
 
-        storageHelper = new StorageHelper(this);
-        mainUtilisateur = storageHelper.getUtilisateur();
 
+        mainUtilisateur = storageHelper.getUtilisateur(this.getBaseContext());
 
-        //global.getMainUtilisateur().setMesDepenses(myDBHelper.getMesDepenses(global));
-        //Log.e("json", "arraylist of all depenses = " + mainUtilisateur.getMesDepenses().toString());
+        Log.e("json", "arraylist of all depenses = " + mainUtilisateur.getMesDepenses().toString());
     }
 
     @Override
@@ -151,14 +156,6 @@ public class Accueil_Activity extends AppCompatActivity
         fragmentTransaction.commit();
     }
 
-    /////////////////////////
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Accueil_Activity.this.receivedBroadcast(intent);
-        }
-    };
-
     @Override
     public void onResume() {
         super.onResume();
@@ -167,11 +164,13 @@ public class Accueil_Activity extends AppCompatActivity
         // Put whatever message you want to receive as the action
         this.registerReceiver(this.mBroadcastReceiver, iff);
     }
+
     @Override
     public void onPause() {
         super.onPause();
         this.unregisterReceiver(this.mBroadcastReceiver);
     }
+
     private void receivedBroadcast(Intent i) {
         if (!Utils.getConnectivityStatus(getApplicationContext())) {
             Intent login = new Intent(getBaseContext(), Login_Activity.class);

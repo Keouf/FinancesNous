@@ -1,6 +1,5 @@
 package classes;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
@@ -10,20 +9,17 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class StorageHelper {
+public final class StorageHelper {
 
-    String FILENAME = "UserData.data";
-    Activity act;
-
-    public StorageHelper(Activity activity) {
-        this.act = activity;
+    public StorageHelper() {
     }
 
-    public void storeObject(Object object) {
-        try {
-            act.getApplicationContext().deleteFile(FILENAME);
+    public static void storeObject(Context context, Object object) {
 
-            FileOutputStream fos = act.getApplicationContext().openFileOutput(FILENAME, Context.MODE_PRIVATE);
+        try {
+            context.deleteFile("UserData.data");
+
+            FileOutputStream fos = context.openFileOutput("UserData.data", Context.MODE_PRIVATE);
             ObjectOutputStream os = new ObjectOutputStream(fos);
             os.writeObject(object);
             os.close();
@@ -31,13 +27,14 @@ public class StorageHelper {
         } catch (Exception e) {
             Log.e("userFile", "Error: Failed to save User into internal storage - \n" + e.toString());
         }
+
     }
 
-    public Utilisateur getUtilisateur() {
+    public static Utilisateur getUtilisateur(Context context) {
         Utilisateur mainUtilisateur = null;
 
         try {
-            FileInputStream fis = act.getApplicationContext().openFileInput(FILENAME);
+            FileInputStream fis = context.openFileInput("UserData.data");
             ObjectInputStream is = new ObjectInputStream(fis);
 
             mainUtilisateur = (Utilisateur) is.readObject();
@@ -53,10 +50,8 @@ public class StorageHelper {
 
     }
 
-    public boolean fileExists() {
-        File file = act.getBaseContext().getFileStreamPath(FILENAME);
+    public static boolean fileExists(Context context) {
+        File file = context.getFileStreamPath("UserData.data");
         return file.exists();
     }
-
-
 }
