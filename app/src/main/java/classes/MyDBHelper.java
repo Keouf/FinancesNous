@@ -107,6 +107,24 @@ public final class MyDBHelper {
         return id++;
     }
 
+    public double getDepenseMois(String mois) {
+        double id= 0;
+        String phpURL = "http://berghuis-peter.net/FinanceNous/getTotalDepenseMois.php?mois="+mois;
+
+        makeTaskAsynchrone();
+
+        JSONArray jsonArray = getDataInJson(phpURL);
+
+        try {
+            JSONObject json = jsonArray.getJSONObject(0);
+            id = json.getDouble("totalDepense");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return id;
+    }
+
     public ArrayList<String> getAllDomaines() {
         JSONArray jsonArray = null;
         String phpURL = "http://berghuis-peter.net/FinanceNous/getAllDomaines.php";

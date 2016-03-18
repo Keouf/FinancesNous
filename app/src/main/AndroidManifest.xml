@@ -46,6 +46,7 @@
         <activity android:name=".CreerCompte_Activity" />
         <activity android:name=".LoadingScreenActivity" />
         <activity android:name=".Social_Activity"></activity>
+        <activity android:name="org.achartengine.GraphicalActivity" />
     </application>
 
 </manifest>

@@ -38,4 +38,6 @@ dependencies {
     compile 'junit:junit:4.12'
     compile 'com.android.support:support-annotations:23.2.0'
     compile 'com.google.guava:guava:18.0'
+
+    compile files('libs/achatengine-0.7.0.jar')
 }

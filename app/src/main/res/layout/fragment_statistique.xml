@@ -5,30 +5,93 @@
     tools:context="com.example.pcportablevidjay.financesnous.Fragment_Statistique">
 
     <!-- TODO: Update blank fragment layout -->
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center">
+        android:id="@+id/scrollView"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Statistiques"
-            android:id="@+id/textView15"
-            android:layout_marginTop="30dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:weightSum="1">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Février :"
-            android:id="@+id/textView19"
-            android:layout_marginTop="56dp"
-            android:layout_below="@+id/textView15"
-            android:layout_toStartOf="@+id/textView15" />
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Statistique"
+                android:id="@+id/textTitreDepense"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:layout_marginBottom="5dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:layout_marginTop="10dp"
+                android:layout_weight="0.35">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Graphique des dépenses par mois"
+                    android:id="@+id/checkBoxGraphMois"
+                    android:checked="false"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="40dp" />
+
+                <LinearLayout
+                    android:id="@+id/dashboard_chart_mois"
+                    android:orientation="horizontal"
+                    android:layout_width="385dp"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="-280dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:layout_marginTop="20dp">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Graphique des dépenses par domaine"
+                    android:id="@+id/checkBoxGraphDomaine"
+                    android:checked="false"
+                    android:layout_marginLeft="35dp" />
+
+                <LinearLayout
+                    android:id="@+id/dashboard_chart_domaine"
+                    android:orientation="horizontal"
+                    android:layout_width="390dp"
+                    android:layout_height="300dp"
+                    android:layout_below="@+id/btn_chart_domaine"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="-300dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="20px"
+                android:layout_height="20dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
 </FrameLayout>
