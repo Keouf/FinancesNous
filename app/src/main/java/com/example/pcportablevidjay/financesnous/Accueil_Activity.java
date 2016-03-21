@@ -14,7 +14,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import classes.StorageHelper;
-import classes.Utilisateur;
 import classes.Utils;
 import layout.Fragment_Recherche_Depense;
 
@@ -30,7 +28,6 @@ public class Accueil_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     StorageHelper storageHelper;
-    Utilisateur mainUtilisateur;
     /////////////////////////
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -78,9 +75,6 @@ public class Accueil_Activity extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
 
 
-        mainUtilisateur = storageHelper.getUtilisateur(this.getBaseContext());
-
-        Log.e("json", "arraylist of all depenses = " + mainUtilisateur.getMesDepenses().toString());
     }
 
     @Override
@@ -99,7 +93,7 @@ public class Accueil_Activity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.accueil, menu);
 
         TextView t = (TextView) findViewById(R.id.TV_IDUser);
-        t.setText(mainUtilisateur.getMail());
+        t.setText(storageHelper.getUtilisateur(this.getBaseContext()).getMail());
 
         return true;
     }

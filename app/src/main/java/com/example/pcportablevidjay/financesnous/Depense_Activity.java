@@ -19,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageButton;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -257,9 +258,10 @@ public class Depense_Activity extends AppCompatActivity {
 
 
                 }
-                Utilisateur mainUtilisateur = storageHelper.getUtilisateur(this.getBaseContext());
-                mainUtilisateur.addDepense(maDepense);
-                storageHelper.storeObject(this.getBaseContext(), mainUtilisateur);
+                Utilisateur user = storageHelper.getUtilisateur(this.getBaseContext());
+                Log.e("json", user.getMesDepenses().toString());
+                user.addDepense(maDepense);
+                storageHelper.storeObject(this.getBaseContext(), user);
 
                 myDBHelper.insertDepense(maDepense);
                 Toast.makeText(this, "Dépense Créée !", Toast.LENGTH_LONG).show();
