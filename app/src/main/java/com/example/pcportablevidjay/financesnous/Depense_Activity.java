@@ -258,6 +258,7 @@ public class Depense_Activity extends AppCompatActivity {
 
 
                 }
+
                 Utilisateur user = storageHelper.getUtilisateur(this.getBaseContext());
                 Log.e("json", user.getMesDepenses().toString());
                 user.addDepense(maDepense);
