@@ -54,8 +54,7 @@ public class Depense_Activity extends AppCompatActivity {
     private Bitmap ImageBmp;
     private String lienImage;
     private String lienEnvoie;
-    //----------date picker-----------------
-    EditText selectedEditText = null;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -266,6 +265,9 @@ public class Depense_Activity extends AppCompatActivity {
 
     }
 
+    //----------date picker-----------------
+    EditText selectedEditText = null;
+
     public void selectDate(View view) {
         switch (view.getId()) {
             case R.id.editText_date:
@@ -310,6 +312,8 @@ public class Depense_Activity extends AppCompatActivity {
         }
     }
     //-------------end datepicker------------
+
+
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
