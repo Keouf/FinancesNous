@@ -6,27 +6,38 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageButton;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 import classes.Depense;
 import classes.MyDBHelper;
@@ -39,6 +50,10 @@ public class Depense_Activity extends AppCompatActivity {
     StorageHelper storageHelper;
     MyDBHelper myDBHelper = new MyDBHelper();
     Date date = new Date();
+    private File filePathPhoto;
+    private Bitmap ImageBmp;
+    private String lienImage;
+    private String lienEnvoie;
     //----------date picker-----------------
     EditText selectedEditText = null;
 
@@ -63,6 +78,23 @@ public class Depense_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent creerEnseigne = new Intent(getBaseContext(), Magasin_Activity.class);
                 startActivity(creerEnseigne);
+            }
+        });
+        final Button btnPrendrePhoto = (Button) findViewById(R.id.buttonPrendrePhoto);
+        btnPrendrePhoto.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                photoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(returnFile()));
+                startActivityForResult(photoIntent, 2);
+            }
+        });
+
+        final Button btnParcour = (Button) findViewById(R.id.buttonParcourir);
+        btnParcour.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(Intent.createChooser(intent, "Choisir dossier"), 1);
             }
         });
 
@@ -119,6 +151,36 @@ public class Depense_Activity extends AppCompatActivity {
         }
     }
 
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 1: {
+                if (resultCode == RESULT_OK && data != null && data.getData() != null) {
+                    try {
+                        Uri file = data.getData();
+                        lienEnvoie = file.toString();
+                        ImageBmp = MediaStore.Images.Media.getBitmap(getContentResolver(), file);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+            }
+            case 2: {
+                if (resultCode == RESULT_OK) {
+                    try {
+                        Uri file = Uri.fromFile(filePathPhoto);
+                        lienEnvoie = file.toString();
+                        ImageBmp = MediaStore.Images.Media.getBitmap(getContentResolver(), file);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+            }
+        }
+    }
+
     public void affichagetest(final boolean show, final View mForm) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
@@ -167,12 +229,28 @@ public class Depense_Activity extends AppCompatActivity {
                         garantieDebutDate = format.parse(garantieDebutEditText.getText().toString());
                         garantieFinDate = format.parse(garantieFinEditText.getText().toString());
 
-                        maDepense = new Depense(myDBHelper.getLastDepenseID(), format.parse(DateEdit.getText().toString()), Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), "", garantieDebutDate, garantieFinDate);
+
+                        if(ImageBmp!=null)
+                            uploadImage();
+                        if(lienEnvoie!=null)
+                            maDepense = new Depense(myDBHelper.getLastDepenseID(), format.parse(DateEdit.getText().toString()), Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), lienEnvoie, garantieDebutDate, garantieFinDate);
+                        else{
+                            maDepense = new Depense(myDBHelper.getLastDepenseID(), format.parse(DateEdit.getText().toString()), Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), "", garantieDebutDate, garantieFinDate);
+
+                        }
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 } else {
-                    maDepense = new Depense(myDBHelper.getLastDepenseID(), date, Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), "");
+
+                    if(ImageBmp!=null)
+                        uploadImage();
+                    if(lienEnvoie!=null)
+                        maDepense = new Depense(myDBHelper.getLastDepenseID(), date, Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), lienEnvoie);
+                    else{
+                        maDepense = new Depense(myDBHelper.getLastDepenseID(), date, Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), "");
+
+                    }
                 }
                 Utilisateur mainUtilisateur = storageHelper.getUtilisateur(this.getBaseContext());
                 mainUtilisateur.addDepense(maDepense);
@@ -232,6 +310,51 @@ public class Depense_Activity extends AppCompatActivity {
         }
     }
     //-------------end datepicker------------
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
 
+    private void uploadImage(){
+        class UploadImage extends AsyncTask<Bitmap,Void,String> {
+            //ProgressDialog loading;
+            RequestHandler rh = new RequestHandler();
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+            }
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+            }
+            @Override
+            protected String doInBackground(Bitmap... params) {
+                Bitmap bitmap = params[0];
+                String uploadImage = getStringImage(bitmap);
+                HashMap<String,String> data = new HashMap<>();
+                data.put("image", uploadImage);
+                String result = rh.sendPostRequest("http://berghuis-peter.net/FinanceNous/uploadImage.php", data);
+                return result;
+            }
+        }
+
+        UploadImage ui = new UploadImage();
+        ui.execute(ImageBmp);
+    }
+
+    private File returnFile(){
+        final File path = new File( Environment.getExternalStorageDirectory(), this.getPackageName());
+        if(!path.exists()){
+            path.mkdir();
+        }
+        Calendar calendrier = Calendar.getInstance();
+        SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String date = dateformat.format(calendrier.getTime());
+        filePathPhoto = new File(path, "photo_"+date+".jpg");
+        return filePathPhoto;
+    }
 }
 
