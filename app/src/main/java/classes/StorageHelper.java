@@ -16,7 +16,9 @@ public final class StorageHelper {
     public static void storeObject(Context context, Object object) {
 
         try {
-            context.deleteFile("UserData.data");
+            File dir = context.getFilesDir();
+            File file = new File(dir, "UserData.data");
+            file.delete();
 
             FileOutputStream fos = context.openFileOutput("UserData.data", Context.MODE_PRIVATE);
             ObjectOutputStream os = new ObjectOutputStream(fos);
