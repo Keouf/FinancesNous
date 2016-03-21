@@ -11,8 +11,7 @@ import java.io.ObjectOutputStream;
 
 public final class StorageHelper {
 
-    public StorageHelper() {
-    }
+    public StorageHelper() {}
 
     public static void storeObject(Context context, Object object) {
 

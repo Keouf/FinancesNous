@@ -220,8 +220,8 @@ public class Depense_Activity extends AppCompatActivity {
         if (remplit) {
             if (Utils.getConnectivityStatus(getApplicationContext())) {
                 Depense maDepense = null;
+                DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
                 if (garantieCheckBox.isChecked()) {
-                    SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
                     Date garantieDebutDate = null;
                     Date garantieFinDate = null;
                     try {
@@ -242,14 +242,20 @@ public class Depense_Activity extends AppCompatActivity {
                     }
                 } else {
 
-                    if(ImageBmp!=null)
-                        uploadImage();
-                    if(lienEnvoie!=null)
-                        maDepense = new Depense(myDBHelper.getLastDepenseID(), date, Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), lienEnvoie);
-                    else{
-                        maDepense = new Depense(myDBHelper.getLastDepenseID(), date, Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), "");
+                    try {
+                        if(ImageBmp!=null)
+                            uploadImage();
+                        if(lienEnvoie!=null)
+                            maDepense = new Depense(myDBHelper.getLastDepenseID(), format.parse(DateEdit.getText().toString()), Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), lienEnvoie);
+                        else{
+                            maDepense = new Depense(myDBHelper.getLastDepenseID(), format.parse(DateEdit.getText().toString()), Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), "");
 
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
+
+
                 }
                 Utilisateur mainUtilisateur = storageHelper.getUtilisateur(this.getBaseContext());
                 mainUtilisateur.addDepense(maDepense);
