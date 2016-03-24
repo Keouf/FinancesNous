@@ -84,93 +84,112 @@ public class Fragment_Statistique extends Fragment {
 
     private void graphDepenseMois(){
         int[] x = { 0,1,2,3,4,5,6,7,8,9,10,11,12 };
-        double[] depense = { janvier,fevrier,mars,avril,mai,juin,juillet,aout,septembre,octobre, novembre,decembre,tout };
+        double[] montantDepense = { janvier,fevrier,mars,avril,mai,juin,juillet,aout,septembre,octobre, novembre,decembre,tout };
 
         XYSeries depenseSeries = new XYSeries("Dépenses");
 
         for(int i=0;i<x.length;i++){
-            depenseSeries.add(i,depense[i]);
+            depenseSeries.add(i,montantDepense[i]);
         }
 
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
         dataset.addSeries(depenseSeries);
 
-        XYSeriesRenderer incomeRenderer = new XYSeriesRenderer();
-        incomeRenderer.setColor(Color.parseColor("#40A497"));
-        incomeRenderer.setFillPoints(true);
-        incomeRenderer.setChartValuesTextSize(20);
-        incomeRenderer.setDisplayChartValues(true);
-        incomeRenderer.setLineWidth((float) 0.5);
+        XYSeriesRenderer bar = new XYSeriesRenderer();
+        bar.setColor(Color.parseColor("#66d070"));
+        bar.setFillPoints(true);
+        bar.setChartValuesTextSize(20);
+        bar.setDisplayChartValues(true);
+        bar.setLineWidth((float) 0.5);
 
-        XYMultipleSeriesRenderer multiRenderer = new XYMultipleSeriesRenderer();
-        multiRenderer.setXLabels(0);
-        multiRenderer.setBarSpacing((float) 0.3);
-        multiRenderer.setScale((float) 1);
-        multiRenderer.setYTitle("Dépenses en euros");
-        multiRenderer.setZoomButtonsVisible(true);
-        multiRenderer.setAntialiasing(true);
-        multiRenderer.setXAxisMin(-0.5);
-        multiRenderer.setYAxisMin(0);
-        multiRenderer.setXAxisMax(13);
-        multiRenderer.setYAxisMax(1000);
-        // Size Text
-        multiRenderer.setAxisTitleTextSize(25);
-        multiRenderer.setChartTitleTextSize(40);
-        multiRenderer.setLegendTextSize(60);
-        // Margin
+        XYMultipleSeriesRenderer graphBar = new XYMultipleSeriesRenderer();
+        graphBar.setMarginsColor(Color.parseColor("#eff6ef"));
+        graphBar.setXLabels(0);
+        graphBar.setBarSpacing((float) 0.3);
+        graphBar.setScale((float) 1);
+        graphBar.setZoomButtonsVisible(true);
+        graphBar.setAntialiasing(true);
+        graphBar.setXAxisMin(-0.5);
+        graphBar.setYAxisMin(0);
+        graphBar.setXAxisMax(13);
+        graphBar.setYAxisMax(1000);
+        graphBar.setLabelsColor(Color.BLACK);
+        graphBar.setLabelsTextSize(22);
+        graphBar.setLegendTextSize(35);
         int[] margins = {70, 30, 50, 20};
-        multiRenderer.setMargins(margins);
-        for (int i = 0; i< x.length;i++) {
-            multiRenderer.addXTextLabel(i, lesMois[i]);
+        graphBar.setMargins(margins);
+        for (int i = 0; i < x.length; i++) {
+            graphBar.addXTextLabel(i, lesMois[i]);
         }
-        multiRenderer.addSeriesRenderer(incomeRenderer);
+        graphBar.addSeriesRenderer(bar);
 
         GraphicalView chartViewMois;
-        chartViewMois = ChartFactory.getBarChartView(getActivity().getBaseContext(), dataset, multiRenderer, BarChart.Type.DEFAULT);
+        chartViewMois = ChartFactory.getBarChartView(getActivity().getBaseContext(), dataset, graphBar, BarChart.Type.DEFAULT);
         LinearLayout layoutMois = (LinearLayout) getActivity().findViewById(R.id.dashboard_chart_mois);
         layoutMois.addView(chartViewMois, new LayoutParams(960, LayoutParams.FILL_PARENT));
     }
 
     private void graphDepenseDomaine(){
-        int[] values = { 1, 2, 10, 4, 5 };
-        CategorySeries series = new CategorySeries("Pie Graph");
-        int k = 0;
-        for (int value : values) {
-            series.add("Section " + ++k, value);
+        String[] code = new String[] {
+                "Alimentation : "+alimentation+" €", "Articles d'habillement : "+habillement+" €", "Logement : "+logement+" €",
+                "Jeux : "+jeux+" €", "Cadeaux : "+cadeau+" €", "Voiture : "+voiture+" €"
+        };
+
+        double[] montantDepense = { alimentation, habillement, logement, jeux, cadeau, voiture } ;
+
+        int[] colors = {
+                Color.parseColor("#66d070"), Color.parseColor("#C2F732"), Color.parseColor("#096A09"), Color.parseColor("#B0F2B6"), Color.GRAY, Color.BLACK
+        };
+
+        CategorySeries distributionSeries = new CategorySeries(" Android version distribution as on October 1, 2012");
+        for(int i=0; i < montantDepense.length; i++){
+            distributionSeries.add(code[i], montantDepense[i]);
         }
 
-        int[] colors = new int[] { Color.BLUE, Color.GREEN, Color.MAGENTA, Color.YELLOW, Color.CYAN };
+        DefaultRenderer graphCamembert  = new DefaultRenderer();
+        for(int i = 0 ; i < montantDepense.length ; i++){
+            SimpleSeriesRenderer camenbert = new SimpleSeriesRenderer();
+            camenbert.setColor(colors[i]);
+            camenbert.getChartValuesSpacing();
+            camenbert.getGradientStartValue();
 
-        DefaultRenderer renderer = new DefaultRenderer();
-        for (int color : colors) {
-            SimpleSeriesRenderer r = new SimpleSeriesRenderer();
-            r.setColor(color);
-            r.setChartValuesTextSize(30);
-            renderer.addSeriesRenderer(r);
+            graphCamembert.addSeriesRenderer(camenbert);
         }
-        renderer.setZoomButtonsVisible(true);
+
+        graphCamembert.setZoomButtonsVisible(true);
+        graphCamembert.setLabelsTextSize(20);
+        graphCamembert.setShowLegend(false);
+        graphCamembert.setLabelsColor(Color.BLACK);
 
         GraphicalView chartViewDomaine;
-        chartViewDomaine = ChartFactory.getPieChartView(getActivity().getBaseContext(), series, renderer);
+        chartViewDomaine = ChartFactory.getPieChartView(getActivity().getBaseContext(), distributionSeries , graphCamembert);
         LinearLayout layoutDomaine = (LinearLayout) getActivity().findViewById(R.id.dashboard_chart_domaine);
         layoutDomaine.addView(chartViewDomaine, new LayoutParams(960, LayoutParams.FILL_PARENT));
     }
 
     private String[] lesMois = new String[] {
-            "Janvier", "Fevier" , "Mars", "Avril", "Mai", "Juin", "Juillet", "Août" , "Sept.", "Octobre", "Nov.", "Dec.", "Total"
+            "Janv.", "Fevier" , "Mars", "Avril", "Mai", "Juin", "Juillet", "Août" , "Sept.", "Oct.", "Nov.", "Dec.", "Total"
     };
 
-    double janvier = Math.round(myDBHelper.getDepenseMois("janvier")*100.0)/100.0;
-    double fevrier = Math.round(myDBHelper.getDepenseMois("fevrier")*100.0)/100.0;
-    double mars = Math.round(myDBHelper.getDepenseMois("mars")*100.0)/100.0;
-    double avril = Math.round(myDBHelper.getDepenseMois("avril")*100.0)/100.0;
-    double mai = Math.round(myDBHelper.getDepenseMois("mai")*100.0)/100.0;
-    double juin = Math.round(myDBHelper.getDepenseMois("juin")*100.0)/100.0;
-    double juillet = Math.round(myDBHelper.getDepenseMois("juillet")*100.0)/100.0;
-    double aout = Math.round(myDBHelper.getDepenseMois("aout")*100.0)/100.0;
-    double septembre = Math.round(myDBHelper.getDepenseMois("septembre")*100.0)/100.0;
-    double octobre = Math.round(myDBHelper.getDepenseMois("octobre")*100.0)/100.0;
-    double novembre = Math.round(myDBHelper.getDepenseMois("novembre")*100.0)/100.0;
-    double decembre = Math.round(myDBHelper.getDepenseMois("decembre")*100.0)/100.0;
-    double tout = Math.round(myDBHelper.getDepenseMois("tout")*100.0)/100.0;
+    // Domaine
+    double alimentation = Math.round(myDBHelper.getDepenseByDomaine(1)*100.0)/100.0;
+    double habillement = Math.round(myDBHelper.getDepenseByDomaine(2)*100.0)/100.0;
+    double logement = Math.round(myDBHelper.getDepenseByDomaine(3)*100.0)/100.0;
+    double jeux = Math.round(myDBHelper.getDepenseByDomaine(4)*100.0)/100.0;
+    double cadeau = Math.round(myDBHelper.getDepenseByDomaine(5)*100.0)/100.0;
+    double voiture = Math.round(myDBHelper.getDepenseByDomaine(6)*100.0)/100.0;
+    // Mois
+    double janvier = Math.round(myDBHelper.getDepenseByMois("janvier")*100.0)/100.0;
+    double fevrier = Math.round(myDBHelper.getDepenseByMois("fevrier")*100.0)/100.0;
+    double mars = Math.round(myDBHelper.getDepenseByMois("mars")*100.0)/100.0;
+    double avril = Math.round(myDBHelper.getDepenseByMois("avril")*100.0)/100.0;
+    double mai = Math.round(myDBHelper.getDepenseByMois("mai")*100.0)/100.0;
+    double juin = Math.round(myDBHelper.getDepenseByMois("juin")*100.0)/100.0;
+    double juillet = Math.round(myDBHelper.getDepenseByMois("juillet")*100.0)/100.0;
+    double aout = Math.round(myDBHelper.getDepenseByMois("aout")*100.0)/100.0;
+    double septembre = Math.round(myDBHelper.getDepenseByMois("septembre")*100.0)/100.0;
+    double octobre = Math.round(myDBHelper.getDepenseByMois("octobre")*100.0)/100.0;
+    double novembre = Math.round(myDBHelper.getDepenseByMois("novembre")*100.0)/100.0;
+    double decembre = Math.round(myDBHelper.getDepenseByMois("decembre")*100.0)/100.0;
+    double tout = Math.round(myDBHelper.getDepenseByMois("tout")*100.0)/100.0;
 }
