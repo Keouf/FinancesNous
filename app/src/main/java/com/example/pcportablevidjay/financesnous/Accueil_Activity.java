@@ -113,18 +113,30 @@ public class Accueil_Activity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    public void afficherAjoutDepense(boolean statut){
+        if(statut) {
+            findViewById(R.id.fab).setVisibility(View.VISIBLE);
+        }
+        else{
+            findViewById(R.id.fab).setVisibility(View.GONE);
+        }
+    }
+
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_accueil) {
+            afficherAjoutDepense(true);
             Fragment_Accueil fragment = new Fragment_Accueil();
             changerFragment(fragment);
         } else if (id == R.id.nav_depense) {
+            afficherAjoutDepense(false);
             Fragment_Recherche_Depense fragment = new Fragment_Recherche_Depense();
             changerFragment(fragment);
         } else if (id == R.id.nav_stats) {
+            afficherAjoutDepense(false);
             Fragment_Statistique fragment = new Fragment_Statistique();
             changerFragment(fragment);
         } else if (id == R.id.nav_garantie) {
@@ -132,9 +144,11 @@ public class Accueil_Activity extends AppCompatActivity
         } else if (id == R.id.nav_noteDeFrais) {
             // TODO MENU
         } else if (id == R.id.nav_about) {
+            afficherAjoutDepense(false);
             Intent about = new Intent(getBaseContext(), About_Activity.class);
             startActivity(about);
         } else if (id == R.id.nav_share) {
+            afficherAjoutDepense(false);
             Intent about = new Intent(getBaseContext(), About_Activity.class);
             startActivity(about);
         }
