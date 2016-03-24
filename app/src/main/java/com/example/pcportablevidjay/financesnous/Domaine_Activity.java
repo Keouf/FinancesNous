@@ -35,7 +35,7 @@ public class Domaine_Activity extends AppCompatActivity {
         }
     }
 
-    public void tryToSendDomaine(View v) {
+    public void ajoutDomaine(View v) {
 
         EditText nomDomaineEdit = (EditText) findViewById(R.id.editTextNomDomaine);
 

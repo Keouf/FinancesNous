@@ -37,7 +37,6 @@ public class RequestHandler {
             OutputStream os = conn.getOutputStream();
             BufferedWriter writer = new BufferedWriter(
                     new OutputStreamWriter(os, "UTF-8"));
-            String test = getPostDataString(postDataParams);
             writer.write(getPostDataString(postDataParams));
 
 

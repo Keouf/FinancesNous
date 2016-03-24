@@ -53,7 +53,6 @@ public class Depense_Activity extends AppCompatActivity {
     Date date = new Date();
     private File filePathPhoto;
     private Bitmap ImageBmp;
-    private String lienImage;
     private String lienEnvoie;
 
 
@@ -80,32 +79,32 @@ public class Depense_Activity extends AppCompatActivity {
                 startActivity(creerEnseigne);
             }
         });
+
         final Button btnPrendrePhoto = (Button) findViewById(R.id.buttonPrendrePhoto);
         btnPrendrePhoto.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                photoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(returnFile()));
-                startActivityForResult(photoIntent, 2);
+                Intent prendrePhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                prendrePhoto.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(returnFile()));
+                startActivityForResult(prendrePhoto, 2);
             }
         });
 
-        final Button btnParcour = (Button) findViewById(R.id.buttonParcourir);
-        btnParcour.setOnClickListener(new View.OnClickListener() {
+        final Button btnParcourir = (Button) findViewById(R.id.buttonParcourir);
+        btnParcourir.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(Intent.createChooser(intent, "Choisir dossier"), 1);
+                Intent parcourirPhoto = new Intent(Intent.ACTION_GET_CONTENT);
+                parcourirPhoto.setType("image/*");
+                startActivityForResult(Intent.createChooser(parcourirPhoto, "Choisir dossier"), 1);
             }
         });
 
         final CheckBox checkGarantie = (CheckBox) findViewById(R.id.CBGarantie);
         checkGarantie.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
                 if (checkGarantie.isChecked())
-                    affichagetest(true, findViewById(R.id.form_garantie));
+                    affichageCheckBox(true, findViewById(R.id.form_garantie));
                 else
-                    affichagetest(false, findViewById(R.id.form_garantie));
+                    affichageCheckBox(false, findViewById(R.id.form_garantie));
             }
         });
 
@@ -113,9 +112,9 @@ public class Depense_Activity extends AppCompatActivity {
         checkNoteDeFrais.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (checkNoteDeFrais.isChecked())
-                    affichagetest(true, findViewById(R.id.form_noteDeFrais));
+                    affichageCheckBox(true, findViewById(R.id.form_noteDeFrais));
                 else
-                    affichagetest(false, findViewById(R.id.form_noteDeFrais));
+                    affichageCheckBox(false, findViewById(R.id.form_noteDeFrais));
             }
         });
 
@@ -125,7 +124,6 @@ public class Depense_Activity extends AppCompatActivity {
         dateEdit.setText(dateFormat.format(date));
         EditText garantieDebutEditText = (EditText) findViewById(R.id.editText_DebutGarantie);
         garantieDebutEditText.setText(dateFormat.format(date));
-
 
         // populate domaine spinner
         Spinner spinnerDomaine = (Spinner) findViewById(R.id.spinner_domaine);
@@ -181,7 +179,7 @@ public class Depense_Activity extends AppCompatActivity {
         }
     }
 
-    public void affichagetest(final boolean show, final View mForm) {
+    public void affichageCheckBox(final boolean show, final View mForm) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_mediumAnimTime);
@@ -229,20 +227,17 @@ public class Depense_Activity extends AppCompatActivity {
                         garantieDebutDate = format.parse(garantieDebutEditText.getText().toString());
                         garantieFinDate = format.parse(garantieFinEditText.getText().toString());
 
-
                         if(ImageBmp!=null)
                             uploadImage();
                         if(lienEnvoie!=null)
                             maDepense = new Depense(myDBHelper.getLastDepenseID(), format.parse(DateEdit.getText().toString()), Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), lienEnvoie, garantieDebutDate, garantieFinDate);
                         else{
                             maDepense = new Depense(myDBHelper.getLastDepenseID(), format.parse(DateEdit.getText().toString()), Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), "", garantieDebutDate, garantieFinDate);
-
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                 } else {
-
                     try {
                         if(ImageBmp!=null)
                             uploadImage();
@@ -354,8 +349,8 @@ public class Depense_Activity extends AppCompatActivity {
             }
         }
 
-        UploadImage ui = new UploadImage();
-        ui.execute(ImageBmp);
+        UploadImage uploadImage = new UploadImage();
+        uploadImage.execute(ImageBmp);
     }
 
     private File returnFile(){

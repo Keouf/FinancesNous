@@ -86,14 +86,14 @@ public class Fragment_Statistique extends Fragment {
         int[] x = { 0,1,2,3,4,5,6,7,8,9,10,11,12 };
         double[] montantDepense = { janvier,fevrier,mars,avril,mai,juin,juillet,aout,septembre,octobre, novembre,decembre,tout };
 
-        XYSeries depenseSeries = new XYSeries("Dépenses");
+        XYSeries barSeries = new XYSeries("Dépenses");
 
         for(int i=0;i<x.length;i++){
-            depenseSeries.add(i,montantDepense[i]);
+            barSeries.add(i,montantDepense[i]);
         }
 
         XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();
-        dataset.addSeries(depenseSeries);
+        dataset.addSeries(barSeries);
 
         XYSeriesRenderer bar = new XYSeriesRenderer();
         bar.setColor(Color.parseColor("#66d070"));
@@ -130,26 +130,26 @@ public class Fragment_Statistique extends Fragment {
     }
 
     private void graphDepenseDomaine(){
-        String[] code = new String[] {
+        String[] lesDomaines = new String[] {
                 "Alimentation : "+alimentation+" €", "Articles d'habillement : "+habillement+" €", "Logement : "+logement+" €",
                 "Jeux : "+jeux+" €", "Cadeaux : "+cadeau+" €", "Voiture : "+voiture+" €"
         };
 
         double[] montantDepense = { alimentation, habillement, logement, jeux, cadeau, voiture } ;
 
-        int[] colors = {
+        int[] couleurs = {
                 Color.parseColor("#66d070"), Color.parseColor("#C2F732"), Color.parseColor("#096A09"), Color.parseColor("#B0F2B6"), Color.GRAY, Color.BLACK
         };
 
-        CategorySeries distributionSeries = new CategorySeries(" Android version distribution as on October 1, 2012");
+        CategorySeries camentbertSeries = new CategorySeries(" Android version distribution as on October 1, 2012");
         for(int i=0; i < montantDepense.length; i++){
-            distributionSeries.add(code[i], montantDepense[i]);
+            camentbertSeries.add(lesDomaines[i], montantDepense[i]);
         }
 
         DefaultRenderer graphCamembert  = new DefaultRenderer();
         for(int i = 0 ; i < montantDepense.length ; i++){
             SimpleSeriesRenderer camenbert = new SimpleSeriesRenderer();
-            camenbert.setColor(colors[i]);
+            camenbert.setColor(couleurs[i]);
             camenbert.getChartValuesSpacing();
             camenbert.getGradientStartValue();
 
@@ -162,7 +162,7 @@ public class Fragment_Statistique extends Fragment {
         graphCamembert.setLabelsColor(Color.BLACK);
 
         GraphicalView chartViewDomaine;
-        chartViewDomaine = ChartFactory.getPieChartView(getActivity().getBaseContext(), distributionSeries , graphCamembert);
+        chartViewDomaine = ChartFactory.getPieChartView(getActivity().getBaseContext(), camentbertSeries , graphCamembert);
         LinearLayout layoutDomaine = (LinearLayout) getActivity().findViewById(R.id.dashboard_chart_domaine);
         layoutDomaine.addView(chartViewDomaine, new LayoutParams(960, LayoutParams.FILL_PARENT));
     }
