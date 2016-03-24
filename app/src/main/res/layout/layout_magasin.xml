@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:ems="10"
+            android:textColor="#a3a3a3"
             android:id="@+id/editTextNomMag"
             android:layout_alignBottom="@+id/textView16"
             android:layout_alignEnd="@+id/editTextMontant"
@@ -69,6 +70,7 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:ems="10"
+            android:textColor="#a3a3a3"
             android:id="@+id/editTextAdrMag"
             android:hint="Rue"
             android:layout_alignParentTop="true"
@@ -79,6 +81,8 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
+            android:textColor="#a3a3a3"
+            android:maxLength="5"
             android:id="@+id/editTextCPMag"
             android:layout_below="@+id/editTextAdrMag"
             android:layout_alignParentEnd="false"
@@ -90,6 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:textColor="#a3a3a3"
             android:id="@+id/editTextVilleMag"
             android:layout_below="@+id/editTextCPMag"
             android:layout_alignStart="@+id/editTextAdrMag"
@@ -116,8 +121,7 @@
             android:gravity="center_vertical"
             android:textStyle="bold"
             android:textSize="20dp"
-            android:layout_marginLeft="5dp"
-            android:hint="www" />
+            android:layout_marginLeft="5dp"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -129,7 +133,7 @@
             android:layout_alignBottom="@+id/textView16"
             android:layout_alignEnd="@+id/editTextMontant"
             android:layout_alignStart="@+id/spinner_domaine"
-            android:hint="www" />
+            android:text="www." />
 
     </LinearLayout>
 
@@ -157,12 +161,12 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
+            android:maxLength="10"
             android:id="@+id/editTextTelMag"
             android:textColor="#a3a3a3"
             android:layout_alignBottom="@+id/textView16"
             android:layout_alignEnd="@+id/editTextMontant"
             android:layout_alignStart="@+id/spinner_domaine"
-            android:hint="+033"
             android:nestedScrollingEnabled="false" />
     </LinearLayout>
 
