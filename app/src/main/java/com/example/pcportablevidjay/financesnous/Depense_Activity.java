@@ -49,8 +49,8 @@ import classes.Utils;
 public class Depense_Activity extends AppCompatActivity {
 
     StorageHelper storageHelper;
-    MyDBHelper myDBHelper = new MyDBHelper();
-    Date date = new Date();
+    final private MyDBHelper myDBHelper = new MyDBHelper();
+    private Date date = new Date();
     private File filePathPhoto;
     private Bitmap ImageBmp;
     private String lienEnvoie;
@@ -127,13 +127,13 @@ public class Depense_Activity extends AppCompatActivity {
 
         // populate domaine spinner
         Spinner spinnerDomaine = (Spinner) findViewById(R.id.spinner_domaine);
-        ArrayAdapter<String> adapterDomaine = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, myDBHelper.getAllDomaines());
+        ArrayAdapter<String> adapterDomaine = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, myDBHelper.getAllDomaines());
         adapterDomaine.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerDomaine.setAdapter(adapterDomaine);
 
         // populate magasin spinner
         Spinner spinnerMagasin = (Spinner) findViewById(R.id.spinner_enseigne);
-        ArrayAdapter<String> adapterMagasin = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, myDBHelper.getAllMagasins());
+        ArrayAdapter<String> adapterMagasin = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, myDBHelper.getAllMagasins());
         adapterMagasin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerMagasin.setAdapter(adapterMagasin);
 
@@ -179,7 +179,7 @@ public class Depense_Activity extends AppCompatActivity {
         }
     }
 
-    public void affichageCheckBox(final boolean show, final View mForm) {
+    private void affichageCheckBox(final boolean show, final View mForm) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_mediumAnimTime);
@@ -221,8 +221,8 @@ public class Depense_Activity extends AppCompatActivity {
                 Depense maDepense = null;
                 DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
                 if (garantieCheckBox.isChecked()) {
-                    Date garantieDebutDate = null;
-                    Date garantieFinDate = null;
+                    Date garantieDebutDate;
+                    Date garantieFinDate;
                     try {
                         garantieDebutDate = format.parse(garantieDebutEditText.getText().toString());
                         garantieFinDate = format.parse(garantieFinEditText.getText().toString());
@@ -270,7 +270,7 @@ public class Depense_Activity extends AppCompatActivity {
     }
 
     //----------date picker-----------------
-    EditText selectedEditText = null;
+    private EditText selectedEditText = null;
 
     public void selectDate(View view) {
         switch (view.getId()) {
@@ -288,7 +288,7 @@ public class Depense_Activity extends AppCompatActivity {
         newFragment.show(getSupportFragmentManager(), "DatePicker");
     }
 
-    public void populateSetDate(int year, int month, int day) {
+    private void populateSetDate(int year, int month, int day) {
         StringBuilder stringDate = new StringBuilder();
         stringDate.append(year + "-");
         if (month < 10)
@@ -318,18 +318,17 @@ public class Depense_Activity extends AppCompatActivity {
     //-------------end datepicker------------
 
 
-    public String getStringImage(Bitmap bmp){
+    private String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodedImage;
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 
     private void uploadImage(){
         class UploadImage extends AsyncTask<Bitmap,Void,String> {
             //ProgressDialog loading;
-            RequestHandler rh = new RequestHandler();
+            final RequestHandler rh = new RequestHandler();
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -344,8 +343,7 @@ public class Depense_Activity extends AppCompatActivity {
                 String uploadImage = getStringImage(bitmap);
                 HashMap<String,String> data = new HashMap<>();
                 data.put("image", uploadImage);
-                String result = rh.sendPostRequest("http://berghuis-peter.net/FinanceNous/uploadImage.php", data);
-                return result;
+                return rh.sendPostRequest("http://berghuis-peter.net/FinanceNous/uploadImage.php", data);
             }
         }
 
