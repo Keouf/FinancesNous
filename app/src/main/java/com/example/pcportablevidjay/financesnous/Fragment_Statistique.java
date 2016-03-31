@@ -126,7 +126,7 @@ public class Fragment_Statistique extends Fragment {
         GraphicalView chartViewMois;
         chartViewMois = ChartFactory.getBarChartView(getActivity().getBaseContext(), dataset, graphBar, BarChart.Type.DEFAULT);
         LinearLayout layoutMois = (LinearLayout) getActivity().findViewById(R.id.dashboard_chart_mois);
-        layoutMois.addView(chartViewMois, new LayoutParams(960, LayoutParams.FILL_PARENT));
+        layoutMois.addView(chartViewMois, new LayoutParams(960, LayoutParams.MATCH_PARENT));
     }
 
     private void graphDepenseDomaine(){
@@ -164,7 +164,7 @@ public class Fragment_Statistique extends Fragment {
         GraphicalView chartViewDomaine;
         chartViewDomaine = ChartFactory.getPieChartView(getActivity().getBaseContext(), camentbertSeries , graphCamembert);
         LinearLayout layoutDomaine = (LinearLayout) getActivity().findViewById(R.id.dashboard_chart_domaine);
-        layoutDomaine.addView(chartViewDomaine, new LayoutParams(960, LayoutParams.FILL_PARENT));
+        layoutDomaine.addView(chartViewDomaine, new LayoutParams(960, LayoutParams.MATCH_PARENT));
     }
 
     private String[] lesMois = new String[] {
