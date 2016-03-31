@@ -47,17 +47,17 @@ public class DepenseDetail_Activity extends AppCompatActivity {
 
         if (id == R.id.depense_detail_bt_supprimer) {
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            adb.setTitle("Delete?");
-            adb.setMessage("Are you sure you want to delete ");
-            adb.setNegativeButton("Cancel", null);
-            adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+            adb.setTitle("Suppression?");
+            adb.setMessage("Etes vous sur de vouloir supprimer cette dépense ?");
+            adb.setNegativeButton("Annuler", null);
+            adb.setPositiveButton("Oui, supprime cette dépense", new AlertDialog.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // if accepted
 
                     myDBHelper.supprimerDepense(depense);
-                    Utilisateur mainUtilisateur = storageHelper.getUtilisateur(getBaseContext());
-                    mainUtilisateur.removeDepense(depense);
-                    storageHelper.storeObject(getBaseContext(), mainUtilisateur);
+                    Utilisateur user = storageHelper.getUtilisateur(getBaseContext());
+                    user.removeDepense(depense);
+                    storageHelper.storeObject(getBaseContext(), user);
 
                     finish();
                 }
