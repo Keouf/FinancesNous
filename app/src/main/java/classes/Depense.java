@@ -44,40 +44,20 @@ public class Depense implements Serializable {
         return idDepense;
     }
 
-    public void setIdDepense(Integer idDepense) {
-        this.idDepense = idDepense;
-    }
-
     public Date getDateDepense() {
         return dateDepense;
-    }
-
-    public void setDateDepense(Date dateDepense) {
-        this.dateDepense = dateDepense;
     }
 
     public double getMontant() {
         return montant;
     }
 
-    public void setMontant(double montant) {
-        this.montant = montant;
-    }
-
     public String getPieceJoint() {
         return pieceJoint;
     }
 
-    public void setPieceJoint(String pieceJoint) {
-        this.pieceJoint = pieceJoint;
-    }
-
     public Magasin getMagasin() {
         return magasin;
-    }
-
-    public void setMagasin(Magasin magasin) {
-        this.magasin = magasin;
     }
 
     public String getDomaine() {
@@ -92,24 +72,13 @@ public class Depense implements Serializable {
         return utilisatuer;
     }
 
-    public void setUtilisatuer(Utilisateur utilisatuer) {
-        this.utilisatuer = utilisatuer;
-    }
-
     public Date getGarantieDebut() {
         return garantieDebut;
-    }
-
-    public void setGarantieDebut(Date garantieDebut) {
-        this.garantieDebut = garantieDebut;
     }
 
     public Date getGarantieFin() {
         return garantieFin;
     }
 
-    public void setGarantieFin(Date garantieFin) {
-        this.garantieFin = garantieFin;
-    }
 }
 

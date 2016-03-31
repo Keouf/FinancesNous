@@ -18,7 +18,7 @@ import classes.Utils;
 
 public class CreerCompte_Activity extends AppCompatActivity {
 
-    MyDBHelper myDBHelper = new MyDBHelper();
+    private final MyDBHelper myDBHelper = new MyDBHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -15,7 +15,7 @@ import classes.Utils;
 
 public class Magasin_Activity extends AppCompatActivity {
 
-    MyDBHelper myDBHelper = new MyDBHelper();
+    private final MyDBHelper myDBHelper = new MyDBHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,10 +90,6 @@ public class Magasin_Activity extends AppCompatActivity {
                 Toast.makeText(this, "Pas de connection internet, veuillez réessayer plus tard", Toast.LENGTH_LONG).show();
         }
 
-    }
-
-    public void annulerMagasin(View v) {
-        this.finish();
     }
 
 }

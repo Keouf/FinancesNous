@@ -13,9 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public final class JsonConverter {
-
-    static StorageHelper storageHelper;
+final class JsonConverter {
 
     public static ArrayList<Depense> convertJsonArrayToDepenseArray(JSONArray jsonArray, Activity act) {
         MyDBHelper myDBHelper = new MyDBHelper();
@@ -24,7 +22,7 @@ public final class JsonConverter {
         for (int i = 0; i < jsonArray.length(); i++) {
             try {
                 json = jsonArray.getJSONObject(i);
-                mesDepenses.add(new Depense(json.getInt("id_depense"), makeDate(json.getString("date_depense")), json.getDouble("montant_depense"), storageHelper.getUtilisateur(act.getBaseContext()), myDBHelper.getDomaineWithId(json.getInt("domaine")), myDBHelper.getMagasinWithId(json.getInt("magasin")), json.getString("piece_jointe")));
+                mesDepenses.add(new Depense(json.getInt("id_depense"), makeDate(json.getString("date_depense")), json.getDouble("montant_depense"), StorageHelper.getUtilisateur(act.getBaseContext()), myDBHelper.getDomaineWithId(json.getInt("domaine")), myDBHelper.getMagasinWithId(json.getInt("magasin")), json.getString("piece_jointe")));
             } catch (JSONException e) {
                 Log.e("json", "jsonExeption, vérifie le nomage des champs");
             }
@@ -42,7 +40,7 @@ public final class JsonConverter {
         return magasin;
     }
 
-    public static Date makeDate(String date) {
+    private static Date makeDate(String date) {
         Date myDate = null;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd", java.util.Locale.getDefault());
 

@@ -21,9 +21,6 @@ import java.util.ArrayList;
 
 public final class MyDBHelper {
 
-    JsonConverter jsonConverter;
-    StorageHelper storageHelper;
-
     public MyDBHelper() {
     }
 
@@ -42,7 +39,7 @@ public final class MyDBHelper {
         JSONArray jsonArray = getDataInJson(phpURL);
 
         try {
-            Utilisateur user = jsonConverter.ConvertJsonArrayToUtilisateur(jsonArray);
+            Utilisateur user = JsonConverter.ConvertJsonArrayToUtilisateur(jsonArray);
             if (user == null)
                 throw new Exception("Utilisateur introuvable");
             return user;
@@ -54,11 +51,11 @@ public final class MyDBHelper {
     public ArrayList<Depense> getMesDepenses(Activity act) {
         makeTaskAsynchrone();
 
-        String phpURL = "http://berghuis-peter.net/FinanceNous/getMesDepenses.php?idUtilisateur=" + storageHelper.getUtilisateur(act.getBaseContext()).getId_utilisateur();
+        String phpURL = "http://berghuis-peter.net/FinanceNous/getMesDepenses.php?idUtilisateur=" + StorageHelper.getUtilisateur(act.getBaseContext()).getId_utilisateur();
 
         JSONArray jsonArray = getDataInJson(phpURL);
 
-        return jsonConverter.convertJsonArrayToDepenseArray(jsonArray, act);
+        return JsonConverter.convertJsonArrayToDepenseArray(jsonArray, act);
     }
 
     public void insertDepense(Depense depense) {
@@ -85,7 +82,7 @@ public final class MyDBHelper {
 
     public void ajoutMagasin(Magasin magasin, Activity act) {
         makeTaskAsynchrone();
-        sendData("http://berghuis-peter.net/FinanceNous/ajoutMagasin.php?id=", magasin.getId() + "&nom=" + magasin.getNom_managasin() + "&adresse=" + magasin.getAdresse1() + "&ville=" + magasin.getAdresse2() + "&codePostal=" + magasin.getCodePostal() + "&site=" + magasin.getSiteWeb() + "&tel=" + magasin.getTelephone() + "&idUser=" + storageHelper.getUtilisateur(act.getBaseContext()).getId_utilisateur());
+        sendData("http://berghuis-peter.net/FinanceNous/ajoutMagasin.php?id=", magasin.getId() + "&nom=" + magasin.getNom_managasin() + "&adresse=" + magasin.getAdresse1() + "&ville=" + magasin.getAdresse2() + "&codePostal=" + magasin.getCodePostal() + "&site=" + magasin.getSiteWeb() + "&tel=" + magasin.getTelephone() + "&idUser=" + StorageHelper.getUtilisateur(act.getBaseContext()).getId_utilisateur());
     }
 
     public int getLastDepenseID() {
@@ -150,7 +147,7 @@ public final class MyDBHelper {
 
         jsonArray = getDataInJson(phpURL);
 
-        return jsonConverter.ConvertDomaineToStringArrayList(jsonArray);
+        return JsonConverter.ConvertDomaineToStringArrayList(jsonArray);
     }
 
     public ArrayList<String> getAllMagasins() {
@@ -160,7 +157,7 @@ public final class MyDBHelper {
 
         JSONArray jsonArray = getDataInJson(phpURL);
 
-        return jsonConverter.ConvertMagasinToStringArrayList(jsonArray);
+        return JsonConverter.ConvertMagasinToStringArrayList(jsonArray);
     }
 
 
@@ -178,12 +175,12 @@ public final class MyDBHelper {
             e.printStackTrace();
         }
 
-        return jsonConverter.jsonToMagasin(json);
+        return JsonConverter.jsonToMagasin(json);
     }
 
     public Magasin getMagasinWithReference(String StringMagasin, Activity act) {
         JSONObject json = null;
-        String phpURL = "http://berghuis-peter.net/FinanceNous/getMagasinByNameAndUserId.php?refMagasin=" + StringMagasin + "&userID=" + storageHelper.getUtilisateur(act.getBaseContext()).getId_utilisateur();
+        String phpURL = "http://berghuis-peter.net/FinanceNous/getMagasinByNameAndUserId.php?refMagasin=" + StringMagasin + "&userID=" + StorageHelper.getUtilisateur(act.getBaseContext()).getId_utilisateur();
 
         makeTaskAsynchrone();
 
@@ -195,7 +192,7 @@ public final class MyDBHelper {
             e.printStackTrace();
         }
 
-        return jsonConverter.jsonToMagasin(json);
+        return JsonConverter.jsonToMagasin(json);
     }
 
     public String getDomaineWithId(int idDomaine) {

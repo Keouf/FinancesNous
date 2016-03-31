@@ -28,7 +28,7 @@ import classes.MyDBHelper;
 
 public class Fragment_Statistique extends Fragment {
 
-    MyDBHelper myDBHelper = new MyDBHelper();
+    private final MyDBHelper myDBHelper = new MyDBHelper();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

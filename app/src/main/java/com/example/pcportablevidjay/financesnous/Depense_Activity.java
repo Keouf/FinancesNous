@@ -48,9 +48,8 @@ import classes.Utils;
 
 public class Depense_Activity extends AppCompatActivity {
 
-    StorageHelper storageHelper;
     final private MyDBHelper myDBHelper = new MyDBHelper();
-    private Date date = new Date();
+    private final Date date = new Date();
     private File filePathPhoto;
     private Bitmap ImageBmp;
     private String lienEnvoie;
@@ -230,9 +229,9 @@ public class Depense_Activity extends AppCompatActivity {
                         if(ImageBmp!=null)
                             uploadImage();
                         if(lienEnvoie!=null)
-                            maDepense = new Depense(myDBHelper.getLastDepenseID(), format.parse(DateEdit.getText().toString()), Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), lienEnvoie, garantieDebutDate, garantieFinDate);
+                            maDepense = new Depense(myDBHelper.getLastDepenseID(), format.parse(DateEdit.getText().toString()), Double.parseDouble(montantEdit.getText().toString()), StorageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), lienEnvoie, garantieDebutDate, garantieFinDate);
                         else{
-                            maDepense = new Depense(myDBHelper.getLastDepenseID(), format.parse(DateEdit.getText().toString()), Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), "", garantieDebutDate, garantieFinDate);
+                            maDepense = new Depense(myDBHelper.getLastDepenseID(), format.parse(DateEdit.getText().toString()), Double.parseDouble(montantEdit.getText().toString()), StorageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), "", garantieDebutDate, garantieFinDate);
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -242,9 +241,9 @@ public class Depense_Activity extends AppCompatActivity {
                         if(ImageBmp!=null)
                             uploadImage();
                         if(lienEnvoie!=null)
-                            maDepense = new Depense(myDBHelper.getLastDepenseID(), format.parse(DateEdit.getText().toString()), Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), lienEnvoie);
+                            maDepense = new Depense(myDBHelper.getLastDepenseID(), format.parse(DateEdit.getText().toString()), Double.parseDouble(montantEdit.getText().toString()), StorageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), lienEnvoie);
                         else{
-                            maDepense = new Depense(myDBHelper.getLastDepenseID(), format.parse(DateEdit.getText().toString()), Double.parseDouble(montantEdit.getText().toString()), storageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), "");
+                            maDepense = new Depense(myDBHelper.getLastDepenseID(), format.parse(DateEdit.getText().toString()), Double.parseDouble(montantEdit.getText().toString()), StorageHelper.getUtilisateur(this.getBaseContext()), domaineSpinner.getItemAtPosition(domaineSpinner.getSelectedItemPosition()).toString(), myDBHelper.getMagasinWithReference(magasinSpinner.getItemAtPosition(magasinSpinner.getSelectedItemPosition()).toString(), this), "");
 
                         }
                     } catch (ParseException e) {
@@ -254,10 +253,10 @@ public class Depense_Activity extends AppCompatActivity {
 
                 }
 
-                Utilisateur user = storageHelper.getUtilisateur(this.getBaseContext());
+                Utilisateur user = StorageHelper.getUtilisateur(this.getBaseContext());
                 Log.e("json", user.getMesDepenses().toString());
                 user.addDepense(maDepense);
-                storageHelper.storeObject(this.getBaseContext(), user);
+                StorageHelper.storeObject(this.getBaseContext(), user);
 
                 myDBHelper.insertDepense(maDepense);
                 Toast.makeText(this, "Dépense Créée !", Toast.LENGTH_LONG).show();
@@ -343,7 +342,7 @@ public class Depense_Activity extends AppCompatActivity {
                 String uploadImage = getStringImage(bitmap);
                 HashMap<String,String> data = new HashMap<>();
                 data.put("image", uploadImage);
-                return rh.sendPostRequest("http://berghuis-peter.net/FinanceNous/uploadImage.php", data);
+                return rh.sendPostRequest(data);
             }
         }
 

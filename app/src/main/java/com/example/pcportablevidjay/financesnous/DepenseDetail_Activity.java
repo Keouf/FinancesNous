@@ -20,9 +20,8 @@ import classes.Utilisateur;
 
 public class DepenseDetail_Activity extends AppCompatActivity {
 
-    MyDBHelper myDBHelper = new MyDBHelper();
-    Depense depense;
-    StorageHelper storageHelper;
+    private final MyDBHelper myDBHelper = new MyDBHelper();
+    private Depense depense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +54,9 @@ public class DepenseDetail_Activity extends AppCompatActivity {
                     // if accepted
 
                     myDBHelper.supprimerDepense(depense);
-                    Utilisateur user = storageHelper.getUtilisateur(getBaseContext());
+                    Utilisateur user = StorageHelper.getUtilisateur(getBaseContext());
                     user.removeDepense(depense);
-                    storageHelper.storeObject(getBaseContext(), user);
+                    StorageHelper.storeObject(getBaseContext(), user);
 
                     finish();
                 }

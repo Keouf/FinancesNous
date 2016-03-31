@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class DepenseAdapter extends ArrayAdapter<Depense> {
 
-    Context context;
+    private final Context context;
 
     public DepenseAdapter(Context context, ArrayList<Depense> depenses) {
         super(context, 0, depenses);

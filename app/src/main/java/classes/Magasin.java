@@ -35,47 +35,24 @@ public class Magasin implements Serializable {
         return nom_managasin;
     }
 
-    public void setNom_managasin(String nom_managasin) {
-        this.nom_managasin = nom_managasin;
-    }
-
     public String getAdresse1() {
         return adresse1;
-    }
-
-    public void setAdresse1(String adresse1) {
-        this.adresse1 = adresse1;
     }
 
     public String getAdresse2() {
         return adresse2;
     }
 
-    public void setAdresse2(String adresse2) {
-        this.adresse2 = adresse2;
-    }
-
     public String getCodePostal() {
         return codePostal;
-    }
-
-    public void setCodePostal(String codePostal) {
-        this.codePostal = codePostal;
     }
 
     public String getSiteWeb() {
         return siteWeb;
     }
 
-    public void setSiteWeb(String siteWeb) {
-        this.siteWeb = siteWeb;
-    }
-
     public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
 }

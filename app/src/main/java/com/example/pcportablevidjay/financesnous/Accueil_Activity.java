@@ -27,9 +27,7 @@ import layout.Fragment_Recherche_Depense;
 public class Accueil_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    StorageHelper storageHelper;
-    /////////////////////////
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Accueil_Activity.this.receivedBroadcast(intent);
@@ -93,7 +91,7 @@ public class Accueil_Activity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.accueil, menu);
 
         TextView t = (TextView) findViewById(R.id.TV_IDUser);
-        t.setText(storageHelper.getUtilisateur(this.getBaseContext()).getMail());
+        t.setText(StorageHelper.getUtilisateur(this.getBaseContext()).getMail());
 
         return true;
     }
@@ -144,7 +142,7 @@ public class Accueil_Activity extends AppCompatActivity
         return true;
     }
 
-    public void changerFragment(Fragment fragment) {
+    private void changerFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame, fragment);
         fragmentTransaction.commit();
