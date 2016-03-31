@@ -62,7 +62,7 @@ public class Fragment_Statistique extends Fragment {
         return view;
     }
 
-    public void affichagetest(final boolean show, final View mForm) {
+    private void affichagetest(final boolean show, final View mForm) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_mediumAnimTime);
@@ -167,29 +167,29 @@ public class Fragment_Statistique extends Fragment {
         layoutDomaine.addView(chartViewDomaine, new LayoutParams(960, LayoutParams.MATCH_PARENT));
     }
 
-    private String[] lesMois = new String[] {
+    private final String[] lesMois = new String[] {
             "Janv.", "Fevier" , "Mars", "Avril", "Mai", "Juin", "Juillet", "Août" , "Sept.", "Oct.", "Nov.", "Dec.", "Total"
     };
 
     // Domaine
-    double alimentation = Math.round(myDBHelper.getDepenseByDomaine(1)*100.0)/100.0;
-    double habillement = Math.round(myDBHelper.getDepenseByDomaine(2)*100.0)/100.0;
-    double logement = Math.round(myDBHelper.getDepenseByDomaine(3)*100.0)/100.0;
-    double jeux = Math.round(myDBHelper.getDepenseByDomaine(4)*100.0)/100.0;
-    double cadeau = Math.round(myDBHelper.getDepenseByDomaine(5)*100.0)/100.0;
-    double voiture = Math.round(myDBHelper.getDepenseByDomaine(6)*100.0)/100.0;
+    private final double alimentation = Math.round(myDBHelper.getDepenseByDomaine(1)*100.0)/100.0;
+    private final double habillement = Math.round(myDBHelper.getDepenseByDomaine(2)*100.0)/100.0;
+    private final double logement = Math.round(myDBHelper.getDepenseByDomaine(3)*100.0)/100.0;
+    private final double jeux = Math.round(myDBHelper.getDepenseByDomaine(4)*100.0)/100.0;
+    private final double cadeau = Math.round(myDBHelper.getDepenseByDomaine(5)*100.0)/100.0;
+    private final double voiture = Math.round(myDBHelper.getDepenseByDomaine(6)*100.0)/100.0;
     // Mois
-    double janvier = Math.round(myDBHelper.getDepenseByMois("janvier")*100.0)/100.0;
-    double fevrier = Math.round(myDBHelper.getDepenseByMois("fevrier")*100.0)/100.0;
-    double mars = Math.round(myDBHelper.getDepenseByMois("mars")*100.0)/100.0;
-    double avril = Math.round(myDBHelper.getDepenseByMois("avril")*100.0)/100.0;
-    double mai = Math.round(myDBHelper.getDepenseByMois("mai")*100.0)/100.0;
-    double juin = Math.round(myDBHelper.getDepenseByMois("juin")*100.0)/100.0;
-    double juillet = Math.round(myDBHelper.getDepenseByMois("juillet")*100.0)/100.0;
-    double aout = Math.round(myDBHelper.getDepenseByMois("aout")*100.0)/100.0;
-    double septembre = Math.round(myDBHelper.getDepenseByMois("septembre")*100.0)/100.0;
-    double octobre = Math.round(myDBHelper.getDepenseByMois("octobre")*100.0)/100.0;
-    double novembre = Math.round(myDBHelper.getDepenseByMois("novembre")*100.0)/100.0;
-    double decembre = Math.round(myDBHelper.getDepenseByMois("decembre")*100.0)/100.0;
-    double tout = Math.round(myDBHelper.getDepenseByMois("tout")*100.0)/100.0;
+    private final double janvier = Math.round(myDBHelper.getDepenseByMois("janvier")*100.0)/100.0;
+    private final double fevrier = Math.round(myDBHelper.getDepenseByMois("fevrier")*100.0)/100.0;
+    private final double mars = Math.round(myDBHelper.getDepenseByMois("mars")*100.0)/100.0;
+    private final double avril = Math.round(myDBHelper.getDepenseByMois("avril")*100.0)/100.0;
+    private final double mai = Math.round(myDBHelper.getDepenseByMois("mai")*100.0)/100.0;
+    private final double juin = Math.round(myDBHelper.getDepenseByMois("juin")*100.0)/100.0;
+    private final double juillet = Math.round(myDBHelper.getDepenseByMois("juillet")*100.0)/100.0;
+    private final double aout = Math.round(myDBHelper.getDepenseByMois("aout")*100.0)/100.0;
+    private final double septembre = Math.round(myDBHelper.getDepenseByMois("septembre")*100.0)/100.0;
+    private final double octobre = Math.round(myDBHelper.getDepenseByMois("octobre")*100.0)/100.0;
+    private final double novembre = Math.round(myDBHelper.getDepenseByMois("novembre")*100.0)/100.0;
+    private final double decembre = Math.round(myDBHelper.getDepenseByMois("decembre")*100.0)/100.0;
+    private final double tout = Math.round(myDBHelper.getDepenseByMois("tout")*100.0)/100.0;
 }
