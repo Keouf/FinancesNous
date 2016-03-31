@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -64,7 +63,7 @@ public final class MyDBHelper {
 
     public void insertDepense(Depense depense) {
         makeTaskAsynchrone();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd", java.util.Locale.getDefault());
         if (depense.getGarantieDebut() == null) {
             sendData("http://berghuis-peter.net/FinanceNous/insertDepense.php?date=", dateFormat.format(depense.getDateDepense()) + "&montant=" + depense.getMontant() + "&pieceJoint=" + depense.getPieceJoint() + "&refMagasin=" + depense.getMagasin().getNom_managasin() + "&refDomaine=" + depense.getDomaine() + "&idUtilisateur=" + depense.getUtilisatuer().getId_utilisateur());
             Log.e("json", "http://berghuis-peter.net/FinanceNous/insertDepense.php?date=" + dateFormat.format(depense.getDateDepense()) + "&montant=" + depense.getMontant() + "&pieceJoint=" + depense.getPieceJoint() + "&refMagasin=" + depense.getMagasin().getNom_managasin() + "&refDomaine=" + depense.getDomaine() + "&idUtilisateur=" + depense.getUtilisatuer().getId_utilisateur());
@@ -144,7 +143,7 @@ public final class MyDBHelper {
     }
 
     public ArrayList<String> getAllDomaines() {
-        JSONArray jsonArray = null;
+        JSONArray jsonArray;
         String phpURL = "http://berghuis-peter.net/FinanceNous/getAllDomaines.php";
 
         makeTaskAsynchrone();
@@ -231,10 +230,6 @@ public final class MyDBHelper {
             StringBuilder sb = getData(urlConnection);
             jsonArray = new JSONArray(sb.toString());
 
-        } catch (MalformedURLException e) {
-            Log.e("json", e.toString());
-        } catch (IOException e) {
-            Log.e("json", e.toString());
         } catch (Exception e) {
             Log.e("json", e.toString());
         }
@@ -267,7 +262,7 @@ public final class MyDBHelper {
         StringBuilder sb = new StringBuilder();
         String line;
         while ((line = br.readLine()) != null) {
-            sb.append(line + "\n");
+            sb.append(line).append("\n");
         }
         br.close();
         urlConnection.disconnect();

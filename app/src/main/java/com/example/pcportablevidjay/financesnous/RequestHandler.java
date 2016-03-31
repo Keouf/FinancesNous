@@ -50,7 +50,7 @@ public class RequestHandler {
                 sb = new StringBuilder();
                 String response;
                 while ((response = br.readLine()) != null) {
-                    sb.append(response + " test");
+                    sb.append(response).append(" test");
                 }
             }
 

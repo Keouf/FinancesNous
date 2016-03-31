@@ -119,7 +119,7 @@ public class Depense_Activity extends AppCompatActivity {
         });
 
         // populate date
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
         EditText dateEdit = (EditText) findViewById(R.id.editText_date);
         dateEdit.setText(dateFormat.format(date));
         EditText garantieDebutEditText = (EditText) findViewById(R.id.editText_DebutGarantie);
@@ -219,7 +219,7 @@ public class Depense_Activity extends AppCompatActivity {
         if (remplit) {
             if (Utils.getConnectivityStatus(getApplicationContext())) {
                 Depense maDepense = null;
-                DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+                DateFormat format = new SimpleDateFormat("yyyy-mm-dd", java.util.Locale.getDefault());
                 if (garantieCheckBox.isChecked()) {
                     Date garantieDebutDate;
                     Date garantieFinDate;
@@ -290,10 +290,10 @@ public class Depense_Activity extends AppCompatActivity {
 
     private void populateSetDate(int year, int month, int day) {
         StringBuilder stringDate = new StringBuilder();
-        stringDate.append(year + "-");
+        stringDate.append(year).append("-");
         if (month < 10)
             stringDate.append("0");
-        stringDate.append(month + "-");
+        stringDate.append(month).append("-");
         if (day < 10)
             stringDate.append("0");
         stringDate.append(day);
@@ -357,7 +357,7 @@ public class Depense_Activity extends AppCompatActivity {
             path.mkdir();
         }
         Calendar calendrier = Calendar.getInstance();
-        SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", java.util.Locale.getDefault());
         String date = dateformat.format(calendrier.getTime());
         filePathPhoto = new File(path, "photo_"+date+".jpg");
         return filePathPhoto;

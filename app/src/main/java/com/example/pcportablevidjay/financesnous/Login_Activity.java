@@ -139,7 +139,7 @@ public class Login_Activity extends AppCompatActivity {
             }
         });
 
-        Button mHorsLigneBouton = (Button) findViewById(R.id.buttonConnexionHorsLigne);
+
         mCreerCompteBouton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

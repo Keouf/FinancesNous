@@ -44,7 +44,7 @@ public final class JsonConverter {
 
     public static Date makeDate(String date) {
         Date myDate = null;
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd", java.util.Locale.getDefault());
 
         try {
             myDate = formatter.parse(date);
@@ -56,8 +56,8 @@ public final class JsonConverter {
 
 
     public static ArrayList<String> ConvertDomaineToStringArrayList(JSONArray myJsonarray) {
-        ArrayList<String> Domaines = new ArrayList<String>();
-        JSONObject json = null;
+        ArrayList<String> Domaines = new ArrayList<>();
+        JSONObject json;
 
         for (int i = 0; i < myJsonarray.length(); i++) {
             try {
@@ -71,8 +71,8 @@ public final class JsonConverter {
     }
 
     public static ArrayList<String> ConvertMagasinToStringArrayList(JSONArray myJsonarray) {
-        ArrayList<String> Magasins = new ArrayList<String>();
-        JSONObject json = null;
+        ArrayList<String> Magasins = new ArrayList<>();
+        JSONObject json;
 
         for (int i = 0; i < myJsonarray.length(); i++) {
             try {
@@ -87,7 +87,7 @@ public final class JsonConverter {
 
     public static Utilisateur ConvertJsonArrayToUtilisateur(JSONArray myJsonarray) throws Exception {
         Utilisateur utilisateur = null;
-        JSONObject json = null;
+        JSONObject json;
 
         for (int i = 0; i < myJsonarray.length(); i++) {
             try {

@@ -26,7 +26,7 @@ public class DepenseAdapter extends ArrayAdapter<Depense> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd", java.util.Locale.getDefault());
 
         final Depense depense = getItem(position);
 

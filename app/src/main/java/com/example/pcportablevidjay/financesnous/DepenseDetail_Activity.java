@@ -70,7 +70,7 @@ public class DepenseDetail_Activity extends AppCompatActivity {
     }
 
     private void populateLayout() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd", java.util.Locale.getDefault());
 
         EditText ed_enseigne = (EditText) findViewById(R.id.depense_detail_et_enseigne);
         EditText ed_date = (EditText) findViewById(R.id.depense_detail_et_date);
