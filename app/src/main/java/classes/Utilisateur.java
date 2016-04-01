@@ -23,24 +23,12 @@ public class Utilisateur implements Serializable {
         return id_utilisateur;
     }
 
-    public void setId_utilisateur(int id_utilisateur) {
-        this.id_utilisateur = id_utilisateur;
-    }
-
     public String getMail() {
         return mail;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
     public String getMotDePasse() {
         return motDePasse;
-    }
-
-    public void setMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
     }
 
     public ArrayList<Depense> getMesDepenses() {

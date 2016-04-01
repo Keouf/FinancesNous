@@ -14,7 +14,7 @@ import classes.Utils;
 
 public class Domaine_Activity extends AppCompatActivity {
 
-    MyDBHelper myDBHelper = new MyDBHelper();
+    private final MyDBHelper myDBHelper = new MyDBHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

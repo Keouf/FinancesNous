@@ -35,9 +35,7 @@ import classes.Utils;
 
 public class Login_Activity extends AppCompatActivity {
 
-    public MyDBHelper myDBHelper = new MyDBHelper();
-    public ProgressDialog pd = null;
-    StorageHelper storageHelper;
+    private final MyDBHelper myDBHelper = new MyDBHelper();
     private UserLoginTask mAuthTask = null;
     private Utilisateur user;
     // UI references.
@@ -48,7 +46,7 @@ public class Login_Activity extends AppCompatActivity {
 
 
     /////////////////////////
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             Login_Activity.this.receivedBroadcast(intent);
@@ -83,7 +81,7 @@ public class Login_Activity extends AppCompatActivity {
 
         if (Utils.getConnectivityStatus(getApplicationContext())) {
             // check if logged in before.
-            if (storageHelper.fileExists(this.getBaseContext())) {
+            if (StorageHelper.fileExists(this.getBaseContext())) {
                 Log.e("peter", " fileExists!!!!");
                 Intent accueil = new Intent(getBaseContext(), LoadingScreenActivity.class);
                 startActivity(accueil);
@@ -139,14 +137,6 @@ public class Login_Activity extends AppCompatActivity {
             }
         });
 
-        Button mHorsLigneBouton = (Button) findViewById(R.id.buttonConnexionHorsLigne);
-        mCreerCompteBouton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                connexionHorsLigne();
-            }
-        });
-
         mProgressView = findViewById(R.id.login_progress);
         mProgressTextView = (TextView) findViewById(R.id.text_connexion);
 
@@ -158,11 +148,7 @@ public class Login_Activity extends AppCompatActivity {
 
     }
 
-    private void connexionHorsLigne() {
-    }
-
-
-    public void UpdateIHMInternet() {
+    private void UpdateIHMInternet() {
         if (!Utils.getConnectivityStatus(getApplicationContext())) {
             findViewById(R.id.textHorsLigne).setVisibility(View.VISIBLE);
             findViewById(R.id.buttonConnexionHorsLigne).setVisibility(View.VISIBLE);
@@ -300,7 +286,7 @@ public class Login_Activity extends AppCompatActivity {
 
             try {
                 user = myDBHelper.getUtilisateur(mEmail);
-                storageHelper.storeObject(act.getBaseContext(), user);
+                StorageHelper.storeObject(act.getBaseContext(), user);
             } catch (UnknownHostException e) {
                 return false;
             } catch (Exception e) {
@@ -316,7 +302,7 @@ public class Login_Activity extends AppCompatActivity {
 
             if (success) {
                 user.setMesDepenses(myDBHelper.getMesDepenses(act));
-                storageHelper.storeObject(act.getBaseContext(), user);
+                StorageHelper.storeObject(act.getBaseContext(), user);
                 new Thread(new Runnable() {
                     @Override
                     public void run() {

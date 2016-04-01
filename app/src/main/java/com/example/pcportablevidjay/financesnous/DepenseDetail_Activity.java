@@ -20,9 +20,8 @@ import classes.Utilisateur;
 
 public class DepenseDetail_Activity extends AppCompatActivity {
 
-    MyDBHelper myDBHelper = new MyDBHelper();
-    Depense depense;
-    StorageHelper storageHelper;
+    private final MyDBHelper myDBHelper = new MyDBHelper();
+    private Depense depense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +46,17 @@ public class DepenseDetail_Activity extends AppCompatActivity {
 
         if (id == R.id.depense_detail_bt_supprimer) {
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            adb.setTitle("Delete?");
-            adb.setMessage("Are you sure you want to delete ");
-            adb.setNegativeButton("Cancel", null);
-            adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+            adb.setTitle("Suppression?");
+            adb.setMessage("Etes vous sur de vouloir supprimer cette dépense ?");
+            adb.setNegativeButton("Annuler", null);
+            adb.setPositiveButton("Oui, supprime cette dépense", new AlertDialog.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // if accepted
 
                     myDBHelper.supprimerDepense(depense);
-                    Utilisateur mainUtilisateur = storageHelper.getUtilisateur(getBaseContext());
-                    mainUtilisateur.removeDepense(depense);
-                    storageHelper.storeObject(getBaseContext(), mainUtilisateur);
+                    Utilisateur user = StorageHelper.getUtilisateur(getBaseContext());
+                    user.removeDepense(depense);
+                    StorageHelper.storeObject(getBaseContext(), user);
 
                     finish();
                 }
@@ -70,7 +69,7 @@ public class DepenseDetail_Activity extends AppCompatActivity {
     }
 
     private void populateLayout() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd", java.util.Locale.getDefault());
 
         EditText ed_enseigne = (EditText) findViewById(R.id.depense_detail_et_enseigne);
         EditText ed_date = (EditText) findViewById(R.id.depense_detail_et_date);

@@ -15,16 +15,15 @@ import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class RequestHandler {
+class RequestHandler {
 
-    public String sendPostRequest(String requestURL,
-                                  HashMap<String, String> postDataParams) {
+    public String sendPostRequest(HashMap<String, String> postDataParams) {
 
         URL url;
 
         StringBuilder sb = new StringBuilder();
         try {
-            url = new URL(requestURL);
+            url = new URL("http://berghuis-peter.net/FinanceNous/uploadImage.php");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(15000);
@@ -50,7 +49,7 @@ public class RequestHandler {
                 sb = new StringBuilder();
                 String response;
                 while ((response = br.readLine()) != null) {
-                    sb.append(response + " test");
+                    sb.append(response).append(" test");
                 }
             }
 
