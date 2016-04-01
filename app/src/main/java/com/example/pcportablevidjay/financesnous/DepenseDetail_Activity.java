@@ -3,14 +3,21 @@ package com.example.pcportablevidjay.financesnous;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -35,6 +42,17 @@ public class DepenseDetail_Activity extends AppCompatActivity {
         Intent i = getIntent();
         depense = (Depense) i.getSerializableExtra("Depense");
         populateLayout();
+
+
+        if (!depense.getPieceJoint().equals("")) {
+            Toast.makeText(getApplicationContext(), "GOOD.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), depense.getPieceJoint(), Toast.LENGTH_SHORT).show();
+            Log.e("OpenGLRenderer", depense.getPieceJoint());
+            new DownloadImageTask((ImageView) findViewById(R.id.imageView_photo))
+                    .execute(depense.getPieceJoint());
+        }
+
+
     }
 
     @Override
@@ -94,5 +112,32 @@ public class DepenseDetail_Activity extends AppCompatActivity {
         ed_montant.setText(Double.toString(depense.getMontant()) + " €");
         ed_site.setText(depense.getMagasin().getSiteWeb());
         ed_telephone.setText(depense.getMagasin().getTelephone());
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+                in.close();
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            Bitmap scaled = Bitmap.createScaledBitmap(result, result.getWidth()/3, result.getHeight()/3, false);
+            bmImage.setImageBitmap(scaled);
+        }
     }
 }
