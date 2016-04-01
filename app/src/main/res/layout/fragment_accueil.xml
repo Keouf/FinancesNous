@@ -51,6 +51,37 @@
                 android:layout_alignParentTop="true"
                 android:layout_gravity="center_horizontal" />
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="v0.3 : Ajout des statistiques (accessible depuis le menu latéral)"
+                    android:id="@+id/textView12"
+                    android:layout_margin="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="v0.2 : Fonctionnalité ajouter et prendre des photos (dans créer dépense)"
+                    android:id="@+id/textView13"
+                    android:layout_margin="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="v0.1 : Création d&apos;une dépense"
+                    android:id="@+id/textView14"
+                    android:layout_margin="10dp" />
+            </LinearLayout>
+
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
