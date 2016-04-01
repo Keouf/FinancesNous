@@ -49,33 +49,23 @@ public class Magasin_Activity extends AppCompatActivity {
 
         // Vérifier si les champs ont bien été rempli
         if (TextUtils.isEmpty(nomMagasinEdit.getText())) {
-            nomMagasinEdit.setError("Veuillez entrer le nom du magasin svp");
+            nomMagasinEdit.setError("Veuillez entrer le nom du magasin");
             nomMagasinEdit.setFocusable(true);
             remplit = false;
         }
-        if (TextUtils.isEmpty(adresseMagasinEdit.getText())) {
-            adresseMagasinEdit.setError("Veuillez entrer l'adresse du magasin svp");
-            adresseMagasinEdit.setFocusable(true);
-            remplit = false;
-        }
-        if (TextUtils.isEmpty(codePostalMagasinEdit.getText())) {
-            codePostalMagasinEdit.setError("Veuillez entrer le code postal du magasin svp");
-            codePostalMagasinEdit.setFocusable(true);
-            remplit = false;
-        }
         if (TextUtils.isEmpty(villeMagasinEdit.getText())) {
-            villeMagasinEdit.setError("Veuillez entrer la ville du magasin svp");
+            villeMagasinEdit.setError("Veuillez entrer la ville du magasin");
             villeMagasinEdit.setFocusable(true);
             remplit = false;
         }
-        if (TextUtils.isEmpty(siteMagasinEdit.getText())) {
-            siteMagasinEdit.setError("Veuillez entrer l'adresse internet du magasin svp");
-            siteMagasinEdit.setFocusable(true);
+        if(telMagasinEdit.getText().length() < 10){
+            telMagasinEdit.setError("Le numéro de téléphone doit obligatoirement contenir 10 chiffres");
+            telMagasinEdit.setFocusable(true);
             remplit = false;
         }
-        if (TextUtils.isEmpty(telMagasinEdit.getText())) {
-            telMagasinEdit.setError("Veuillez entrer le numéro de téléphone du magasin svp");
-            telMagasinEdit.setFocusable(true);
+        if(codePostalMagasinEdit.getText().length() < 5){
+            codePostalMagasinEdit.setError("Le code postal doit obligatoirement contenir 5 chiffres");
+            codePostalMagasinEdit.setFocusable(true);
             remplit = false;
         }
 
@@ -83,7 +73,7 @@ public class Magasin_Activity extends AppCompatActivity {
             if (Utils.getConnectivityStatus(getApplicationContext())) {
                 Magasin monMagasin = new Magasin(2, nomMagasinEdit.getText().toString(), adresseMagasinEdit.getText().toString(), villeMagasinEdit.getText().toString(), codePostalMagasinEdit.getText().toString(), siteMagasinEdit.getText().toString(), telMagasinEdit.getText().toString());
                 myDBHelper.ajoutMagasin(monMagasin, this);
-                Toast.makeText(this, "Magasin Crée!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Le magasin a bien été crée", Toast.LENGTH_LONG).show();
                 this.finish();
 
             } else
