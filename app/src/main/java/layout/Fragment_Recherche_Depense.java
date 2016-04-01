@@ -63,11 +63,14 @@ public class Fragment_Recherche_Depense extends Fragment {
     public void onResume() {
         super.onResume();
         Log.e("json", "kill me : " + StorageHelper.getUtilisateur(getActivity().getBaseContext()).getAllDepensesInString());
-        adapater.clear();
-        adapater.addAll(StorageHelper.getUtilisateur(getActivity().getBaseContext()).get10DernierDepenses());
-        adapater.notifyDataSetChanged();
-        depensesListView.setAdapter(adapater);
-        depensesListView.invalidateViews();
+        if (StorageHelper.getUtilisateur(getActivity().getBaseContext()).getMesDepenses().size() > 0)
+        {
+            adapater.clear();
+            adapater.addAll(StorageHelper.getUtilisateur(getActivity().getBaseContext()).get10DernierDepenses());
+            adapater.notifyDataSetChanged();
+            depensesListView.setAdapter(adapater);
+            depensesListView.invalidateViews();
+        }
     }
 
     @Override
