@@ -4,6 +4,7 @@ package com.example.pcportablevidjay.financesnous;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -28,6 +29,9 @@ public class DepenseDetail_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_depense_details);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         Intent i = getIntent();
         depense = (Depense) i.getSerializableExtra("Depense");
         populateLayout();
@@ -42,30 +46,32 @@ public class DepenseDetail_Activity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.depense_detail_bt_supprimer:
+                AlertDialog.Builder adb = new AlertDialog.Builder(this);
+                adb.setTitle("Suppression ?");
+                adb.setMessage("Êtes vous sur de vouloir supprimer cette dépense ?");
+                adb.setNegativeButton("Annuler", null);
+                adb.setPositiveButton("Oui", new AlertDialog.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // if accepted
 
-        if (id == R.id.depense_detail_bt_supprimer) {
-            AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            adb.setTitle("Suppression?");
-            adb.setMessage("Etes vous sur de vouloir supprimer cette dépense ?");
-            adb.setNegativeButton("Annuler", null);
-            adb.setPositiveButton("Oui, supprime cette dépense", new AlertDialog.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    // if accepted
+                        myDBHelper.supprimerDepense(depense);
+                        Utilisateur user = StorageHelper.getUtilisateur(getBaseContext());
+                        user.removeDepense(depense);
+                        StorageHelper.storeObject(getBaseContext(), user);
 
-                    myDBHelper.supprimerDepense(depense);
-                    Utilisateur user = StorageHelper.getUtilisateur(getBaseContext());
-                    user.removeDepense(depense);
-                    StorageHelper.storeObject(getBaseContext(), user);
-
-                    finish();
-                }
-            });
-            adb.show();
-            return true;
+                        finish();
+                    }
+                });
+                adb.show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 
     private void populateLayout() {

@@ -19,7 +19,6 @@ public class About_Activity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.fragment_recherche_menu, menu);
         return true;
     }
 
@@ -27,22 +26,8 @@ public class About_Activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                ((Accueil_Activity)getParent()).afficherAjoutDepense(true);
                 onBackPressed();
-            /*case R.id.menu_about:
-                // Comportement du bouton "A Propos"
-                return true;
-            case R.id.menu_help:
-                // Comportement du bouton "Aide"
-                return true;
-            case R.id.menu_refresh:
-                // Comportement du bouton "Rafraichir"
-                return true;
-            case R.id.menu_search:
-                // Comportement du bouton "Recherche"
-                return true;
-            case R.id.menu_settings:
-                // Comportement du bouton "Paramétres"
-                return true;*/
             default:
                 return super.onOptionsItemSelected(item);
         }

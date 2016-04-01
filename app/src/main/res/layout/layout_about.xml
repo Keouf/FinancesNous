@@ -25,7 +25,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nous sommes une petite équipe de Toulouse qui travaillons sur ce projet afin de valider notre troisième année post-BAC. Nous éspérons que l&apos;application aura réussi a subvenir a vos besoins et vous aura aidé au quotidien. Nous avons pris beaucoup de plaisir a travailler dessus."
+        android:text="Nous sommes une petite équipe de Toulouse qui travaillons sur ce projet afin de valider notre troisième année post-BAC. Nous espérons que l&apos;application vous aide au quotidien. Nous avons pris beaucoup de plaisir a travailler dessus."
         android:id="@+id/textView20"
         android:layout_marginTop="16dp"
         android:textColor="#232323"
@@ -47,14 +47,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Assma - Dévellopeur"
+        android:text="Assma - Product Owner"
         android:id="@+id/textView22"
         android:textStyle="italic"
         android:textSize="10dp"
         android:textColor="#585858"
-        android:layout_below="@+id/textView23"
+        android:layout_below="@+id/textView21"
         android:layout_centerHorizontal="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,7 +62,7 @@
         android:textStyle="italic"
         android:textSize="10dp"
         android:textColor="#585858"
-        android:layout_below="@+id/textView21"
+        android:layout_below="@+id/textView22"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -74,7 +73,7 @@
         android:textStyle="italic"
         android:textSize="10dp"
         android:textColor="#585858"
-        android:layout_below="@+id/textView25"
+        android:layout_below="@+id/textView23"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -85,7 +84,7 @@
         android:textStyle="italic"
         android:textSize="10dp"
         android:textColor="#585858"
-        android:layout_below="@+id/textView26"
+        android:layout_below="@+id/textView24"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -96,7 +95,7 @@
         android:textStyle="italic"
         android:textSize="10dp"
         android:textColor="#585858"
-        android:layout_below="@+id/textView22"
+        android:layout_below="@+id/textView25"
         android:layout_centerHorizontal="true" />
 
     <TextView

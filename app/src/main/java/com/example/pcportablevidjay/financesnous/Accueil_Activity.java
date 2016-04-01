@@ -147,7 +147,7 @@ public class Accueil_Activity extends AppCompatActivity
             startActivity(about);
         } else if (id == R.id.nav_share) {
             afficherAjoutDepense(false);
-            Intent about = new Intent(getBaseContext(), About_Activity.class);
+            Intent about = new Intent(getBaseContext(), Social_Activity.class);
             startActivity(about);
         }
 

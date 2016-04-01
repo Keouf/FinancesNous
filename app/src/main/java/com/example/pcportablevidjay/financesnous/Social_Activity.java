@@ -18,15 +18,10 @@ public class Social_Activity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.fragment_recherche_menu, menu);
-        return true;
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                ((Accueil_Activity)getParent()).afficherAjoutDepense(true);
                 onBackPressed();
                 return true;
             default:
