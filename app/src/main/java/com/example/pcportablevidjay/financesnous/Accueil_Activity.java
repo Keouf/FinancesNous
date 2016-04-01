@@ -130,7 +130,6 @@ public class Accueil_Activity extends AppCompatActivity
             Fragment_Accueil fragment = new Fragment_Accueil();
             changerFragment(fragment);
         } else if (id == R.id.nav_depense) {
-            afficherAjoutDepense(false);
             Fragment_Recherche_Depense fragment = new Fragment_Recherche_Depense();
             changerFragment(fragment);
         } else if (id == R.id.nav_stats) {
@@ -138,9 +137,9 @@ public class Accueil_Activity extends AppCompatActivity
             Fragment_Statistique fragment = new Fragment_Statistique();
             changerFragment(fragment);
         } else if (id == R.id.nav_garantie) {
-            // TODO MENU
+            Toast.makeText(getApplicationContext(), "Disponible dans la prochaine mise à jour.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_noteDeFrais) {
-            // TODO MENU
+            Toast.makeText(getApplicationContext(), "Disponible dans la prochaine mise à jour.", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_about) {
             afficherAjoutDepense(false);
             Intent about = new Intent(getBaseContext(), About_Activity.class);
