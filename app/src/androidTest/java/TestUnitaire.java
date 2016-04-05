@@ -53,7 +53,7 @@ public class TestUnitaire extends AndroidTestCase {
     }*/
 
     public void testSurCombienDepense() throws Exception {
-        assertEquals(1725.79, dpTest.getDepenseByDomaine(1));
+        assertEquals(321.0, dpTest.getDepenseByDomaine(6));
     }
 
     public void testMotDePasseUtilisateur() throws Exception {
@@ -78,10 +78,11 @@ public class TestUnitaire extends AndroidTestCase {
         assertEquals(nbDeDepense, dpTest.getLastDepenseID());
     }
 
-    public void testSurLaCreationDeDepense() throws Exception {
-        int nbDeDepense = dpTest.getLastDepenseID();
-        dpTest.insertDepense(testVrai);
-        assertEquals(nbDeDepense, dpTest.getLastDepenseID());
+    public void testSurAllDepense() throws Exception {
+        assertEquals("", utilisateur.getAllDepensesInString());
+    }
+    public void testSurDixDerniereDepense() throws Exception {
+        assertEquals(10, utilisateur.get10DernierDepenses().size());
     }
 
 }
