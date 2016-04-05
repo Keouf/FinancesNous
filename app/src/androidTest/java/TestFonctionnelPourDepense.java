@@ -1,4 +1,7 @@
+import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.action.ViewActions;
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.DatePicker;
 
@@ -11,7 +14,9 @@ import com.example.pcportablevidjay.financesnous.R;
 import junit.framework.TestCase;
 
 import org.hamcrest.Matchers;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.Date;
 
@@ -22,6 +27,7 @@ import classes.Utilisateur;
 
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -31,6 +37,8 @@ import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 //import static android.support.test.espresso.core.deps.guava.base.CharMatcher.is;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -42,52 +50,12 @@ import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.not;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 
-
-public class ExempleTestFonction extends ActivityInstrumentationTestCase2<Login_Activity> {
-    public ExempleTestFonction() {
-        super(Login_Activity.class);
-    }
-
-    @Override
-    public void setUp() throws Exception {
-        super.setUp();
-        // Call the activity before each test.
-        getActivity();
-    }
-
-    public void testNextActivity() {
-
-        //onView(withId(R.id.btn_creer_compte)).check(matches(withText("Créer un compte")));
-        onView(withId(R.id.link_new_account)).perform(click());
-
-        onView(withId(R.id.editTextCreerEmail)).perform(typeText("ça fonctionne pas !"));
-        onView(withId(R.id.editTextCreerMdp)).perform(typeText("mdptest"));
-        //onView(withId(R.id.button3)).perform(click());
-
-        onView(withId(R.id.editTextCreerEmail)).perform(clearText());
-        onView(withId(R.id.editTextCreerMdp)).perform(clearText());
-
-        onView(withId(R.id.editTextCreerEmail)).perform(closeSoftKeyboard());
-        pressBack();
-
-        /*creer un compte mail*/
-        //onView(withId(R.id.editTextCreerEmail)).perform(typeText("test@mail.com"));
-        //onView(withId(R.id.editTextCreerMdp)).perform(typeText("mdptest"));
-        //onView(withId(R.id.button3)).perform(click());
-
-
-        onView(withId(R.id.email_sign_in_button)).check(matches(withText("Connexion")));
-        onView(withId(R.id.email_sign_in_button)).perform(click());
-        //pressBack();
-        try {
-            Thread.sleep(1000);
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
-        //onView(withId(R.id.email_sign_in_button)).check(matches(withText("Connexion")));
-        //onView(withId(R.id.email_sign_in_button)).perform(click());
-        //onView(withId(R.id.drawer_layout)).perform(click());
-        onView(withId(R.id.fab)).perform(click());
+@RunWith(AndroidJUnit4.class)
+public class TestFonctionnelPourDepense {
+    @Rule
+    public ActivityTestRule<Depense_Activity> mactivityrule = new ActivityTestRule<>(Depense_Activity.class);
+    @Test
+    public void creationDepense() {
         onView(withId(R.id.editTextMontant)).perform(closeSoftKeyboard());
         onView(withId(R.id.buttonValiderDépense)).perform(click());
         onView(withId(R.id.editTextMontant)).perform(typeText("123"));
@@ -111,12 +79,5 @@ public class ExempleTestFonction extends ActivityInstrumentationTestCase2<Login_
         onView(withId(R.id.CBNoteDeFrais)).perform(click());
 
         onView(withId(R.id.buttonValiderDépense)).perform(scrollTo(), click());
-
-        //onView(withId(R.id.spinner_enseigne)).perform(pre);
-        //onView(withId(R.id.buttonValider)).perform(click());
-
-        //onView(withId(R.id.editTextMontant)).perform(clearText());
-
     }
-
 }

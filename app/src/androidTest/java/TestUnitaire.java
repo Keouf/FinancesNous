@@ -69,7 +69,7 @@ public class TestUnitaire extends AndroidTestCase {
     }
 
     public void testSurLeNombreDeDomaines() throws Exception {
-        assertEquals(7, dpTest.getAllDomaines().size());
+        assertEquals(6, dpTest.getAllDomaines().size());
     }
 
     public void testSurLaCreationDeDepenseFaux() throws Exception {
