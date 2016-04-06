@@ -47,7 +47,6 @@ public class Utilisateur implements Serializable {
         ArrayList<Depense> mes10Depenses = new ArrayList<>();
 
         if (getMesDepenses().size() >= 10) {
-            // get last 10 depenses
             for (int i = getMesDepenses().size() - 1; i > (getMesDepenses().size() - 11); i--) {
                 mes10Depenses.add(mesDepenses.get(i));
             }

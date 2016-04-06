@@ -76,8 +76,6 @@ public class Fragment_Statistique extends Fragment {
                 }
             });
         } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
             mForm.setVisibility(show ? View.VISIBLE : View.GONE);
         }
     }

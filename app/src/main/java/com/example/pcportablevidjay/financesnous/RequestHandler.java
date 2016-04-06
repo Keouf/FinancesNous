@@ -21,19 +21,19 @@ class RequestHandler {
 
         URL url;
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder stringReponseTotal = new StringBuilder();
         try {
             url = new URL("http://berghuis-peter.net/FinanceNous/uploadImage.php");
 
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setReadTimeout(15000);
-            conn.setConnectTimeout(15000);
-            conn.setRequestMethod("POST");
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
+            HttpURLConnection connexion = (HttpURLConnection) url.openConnection();
+            connexion.setReadTimeout(15000);
+            connexion.setConnectTimeout(15000);
+            connexion.setRequestMethod("POST");
+            connexion.setDoInput(true);
+            connexion.setDoOutput(true);
 
 
-            OutputStream os = conn.getOutputStream();
+            OutputStream os = connexion.getOutputStream();
             BufferedWriter writer = new BufferedWriter(
                     new OutputStreamWriter(os, "UTF-8"));
             writer.write(getPostDataString(postDataParams));
@@ -42,29 +42,29 @@ class RequestHandler {
             writer.flush();
             writer.close();
             os.close();
-            int responseCode = conn.getResponseCode();
+            int responseCode = connexion.getResponseCode();
 
             if (responseCode == HttpsURLConnection.HTTP_OK) {
-                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                sb = new StringBuilder();
-                String response;
-                while ((response = br.readLine()) != null) {
-                    sb.append(response).append(" test");
+                BufferedReader receptionReponse = new BufferedReader(new InputStreamReader(connexion.getInputStream()));
+                stringReponseTotal = new StringBuilder();
+                String reponse;
+                while ((reponse = receptionReponse.readLine()) != null) {
+                    stringReponseTotal.append(reponse);
                 }
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return sb.toString();
+        return stringReponseTotal.toString();
     }
 
     private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
-        boolean first = true;
+        boolean premierResultat = true;
         for (Map.Entry<String, String> entry : params.entrySet()) {
-            if (first)
-                first = false;
+            if (premierResultat)
+                premierResultat = false;
             else
                 result.append("&");
 

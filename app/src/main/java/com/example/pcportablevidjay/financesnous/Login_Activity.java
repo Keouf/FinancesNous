@@ -45,7 +45,6 @@ public class Login_Activity extends AppCompatActivity {
     private TextView mProgressTextView;
 
 
-    /////////////////////////
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -71,7 +70,6 @@ public class Login_Activity extends AppCompatActivity {
     private void receivedBroadcast(Intent i) {
         UpdateIHMInternet();
     }
-    /////////////////////////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +87,6 @@ public class Login_Activity extends AppCompatActivity {
             }
         }
 
-        // Set up the login form.
         mEmailView = (EditText) findViewById(R.id.email);
 
         mPasswordView = (EditText) findViewById(R.id.password);

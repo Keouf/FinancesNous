@@ -45,14 +45,14 @@ public class CreerCompte_Activity extends AppCompatActivity {
         EditText emailEdit = (EditText) findViewById(R.id.editTextCreerEmail);
         EditText mdpEdit = (EditText) findViewById(R.id.editTextCreerMdp);
 
-        final String loginTxt = emailEdit.getText().toString();
+        final String champMail = emailEdit.getText().toString();
 
         boolean remplit = true;
 
         // pattern pour vérifier adresse mail
-        Pattern p = Pattern.compile(".+@.+\\.[a-z]+");
+        Pattern regxpDeMail = Pattern.compile(".+@.+\\.[a-z]+");
         // matcher qui compare
-        Matcher m = p.matcher(loginTxt);
+        Matcher m = regxpDeMail.matcher(champMail);
 
         // Vérifier champ mail rempli
         if (TextUtils.isEmpty(emailEdit.getText())) {

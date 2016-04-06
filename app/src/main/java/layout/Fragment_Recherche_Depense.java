@@ -32,8 +32,6 @@ public class Fragment_Recherche_Depense extends Fragment {
 
         setHasOptionsMenu(true);
 
-        //ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
-
         tvMessage = (TextView) view.findViewById(R.id.recherche_tv_messageHolder);
         depensesListView = (ListView) view.findViewById(R.id.rechercheDepense_listView_10Depenses);
 
@@ -78,7 +76,6 @@ public class Fragment_Recherche_Depense extends Fragment {
         // handle item selection
         switch (item.getItemId()) {
             case R.id.action_favorite:
-                // do s.th.
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

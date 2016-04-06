@@ -249,8 +249,6 @@ public class Depense_Activity extends AppCompatActivity {
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-
-
                 }
 
                 Utilisateur user = StorageHelper.getUtilisateur(this.getBaseContext());
@@ -317,16 +315,15 @@ public class Depense_Activity extends AppCompatActivity {
     //-------------end datepicker------------
 
 
-    private String getStringImage(Bitmap bmp){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
+    private String getStringImageCompress(Bitmap bmp){
+        ByteArrayOutputStream stockImageCompress = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, stockImageCompress);
+        byte[] imageBytes = stockImageCompress.toByteArray();
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 
     private void uploadImage(){
         class UploadImage extends AsyncTask<Bitmap,Void,String> {
-            //ProgressDialog loading;
             final RequestHandler rh = new RequestHandler();
             @Override
             protected void onPreExecute() {
@@ -339,7 +336,7 @@ public class Depense_Activity extends AppCompatActivity {
             @Override
             protected String doInBackground(Bitmap... params) {
                 Bitmap bitmap = params[0];
-                String uploadImage = getStringImage(bitmap);
+                String uploadImage = getStringImageCompress(bitmap);
                 HashMap<String,String> data = new HashMap<>();
                 data.put("image", uploadImage);
                 return rh.sendPostRequest(data);
