@@ -21,9 +21,7 @@ public class Social_Activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                ((Accueil_Activity)getParent()).afficherAjoutDepense(true);
                 onBackPressed();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

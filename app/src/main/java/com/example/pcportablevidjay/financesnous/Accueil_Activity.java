@@ -27,6 +27,8 @@ import layout.Fragment_Recherche_Depense;
 public class Accueil_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private String fragmentCourant;
+
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -75,6 +77,7 @@ public class Accueil_Activity extends AppCompatActivity
 
     }
 
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -115,28 +118,32 @@ public class Accueil_Activity extends AppCompatActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
+        int item_id = item.getItemId();
 
-        if (id == R.id.nav_accueil) {
+        if (item_id == R.id.nav_accueil) {
             afficherAjoutDepense(true);
-            Fragment_Accueil fragment = new Fragment_Accueil();
-            changerFragment(fragment);
-        } else if (id == R.id.nav_depense) {
-            Fragment_Recherche_Depense fragment = new Fragment_Recherche_Depense();
-            changerFragment(fragment);
-        } else if (id == R.id.nav_stats) {
+            Fragment_Accueil fragmentAccueil = new Fragment_Accueil();
+            fragmentCourant = "accueil";
+            changerFragment(fragmentAccueil);
+        } else if (item_id == R.id.nav_depense) {
+            afficherAjoutDepense(true);
+            Fragment_Recherche_Depense fragmentRechercheDepense = new Fragment_Recherche_Depense();
+            fragmentCourant = "rechercheDepense";
+            changerFragment(fragmentRechercheDepense);
+        } else if (item_id == R.id.nav_stats) {
             afficherAjoutDepense(false);
-            Fragment_Statistique fragment = new Fragment_Statistique();
-            changerFragment(fragment);
-        } else if (id == R.id.nav_garantie) {
+            Fragment_Statistique fragmentStatistique = new Fragment_Statistique();
+            fragmentCourant = "statistique";
+            changerFragment(fragmentStatistique);
+        } else if (item_id == R.id.nav_garantie) {
             Toast.makeText(getApplicationContext(), "Disponible dans la prochaine mise à jour.", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_noteDeFrais) {
+        } else if (item_id == R.id.nav_noteDeFrais) {
             Toast.makeText(getApplicationContext(), "Disponible dans la prochaine mise à jour.", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_about) {
+        } else if (item_id == R.id.nav_about) {
             afficherAjoutDepense(false);
             Intent about = new Intent(getBaseContext(), About_Activity.class);
             startActivity(about);
-        } else if (id == R.id.nav_share) {
+        } else if (item_id == R.id.nav_share) {
             afficherAjoutDepense(false);
             Intent about = new Intent(getBaseContext(), Social_Activity.class);
             startActivity(about);
@@ -156,10 +163,23 @@ public class Accueil_Activity extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
+
         IntentFilter iff = new IntentFilter();
         iff.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        // Put whatever message you want to receive as the action
         this.registerReceiver(this.mBroadcastReceiver, iff);
+
+        if(fragmentCourant != null) {
+            switch (fragmentCourant) {
+                case "accueil":
+                case "rechercheDepense":
+                    afficherAjoutDepense(true);
+                    break;
+                case "statistique":
+                    afficherAjoutDepense(false);
+                    break;
+            }
+        }
+
     }
 
     @Override

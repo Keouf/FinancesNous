@@ -26,7 +26,7 @@ public class About_Activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                ((Accueil_Activity)getParent()).afficherAjoutDepense(true);
+                //((Accueil_Activity)getParent()).afficherAjoutDepense(true);
                 onBackPressed();
             default:
                 return super.onOptionsItemSelected(item);
