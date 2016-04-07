@@ -129,14 +129,14 @@ public class Fragment_Statistique extends Fragment {
 
     private void graphDepenseDomaine(){
         String[] lesDomaines = new String[] {
-                "Alimentation : "+alimentation+" €", "Articles d'habillement : "+habillement+" €", "Logement : "+logement+" €",
+                "Alimentation : "+alimentation+" €", "Articles d'habillement : "+habillement+" €",
                 "Jeux : "+jeux+" €", "Cadeaux : "+cadeau+" €", "Voiture : "+voiture+" €"
         };
 
-        double[] montantDepense = { alimentation, habillement, logement, jeux, cadeau, voiture } ;
+        double[] montantDepense = { alimentation, habillement, jeux, cadeau, voiture } ;
 
         int[] couleurs = {
-                Color.parseColor("#66d070"), Color.parseColor("#C2F732"), Color.parseColor("#096A09"), Color.parseColor("#B0F2B6"), Color.GRAY, Color.BLACK
+                Color.parseColor("#66d070"), Color.parseColor("#C2F732"), Color.parseColor("#B0F2B6"), Color.GRAY, Color.BLACK
         };
 
         CategorySeries camentbertSeries = new CategorySeries(" Android version distribution as on October 1, 2012");
@@ -172,10 +172,10 @@ public class Fragment_Statistique extends Fragment {
     // Domaine
     private final double alimentation = Math.round(myDBHelper.getDepenseByDomaine(1)*100.0)/100.0;
     private final double habillement = Math.round(myDBHelper.getDepenseByDomaine(2)*100.0)/100.0;
-    private final double logement = Math.round(myDBHelper.getDepenseByDomaine(3)*100.0)/100.0;
-    private final double jeux = Math.round(myDBHelper.getDepenseByDomaine(4)*100.0)/100.0;
-    private final double cadeau = Math.round(myDBHelper.getDepenseByDomaine(5)*100.0)/100.0;
-    private final double voiture = Math.round(myDBHelper.getDepenseByDomaine(6)*100.0)/100.0;
+    private final double voiture = Math.round(myDBHelper.getDepenseByDomaine(3)*100.0)/100.0;
+    private final double cadeau = Math.round(myDBHelper.getDepenseByDomaine(6)*100.0)/100.0;
+    private final double jeux = Math.round(myDBHelper.getDepenseByDomaine(15)*100.0)/100.0;
+
     // Mois
     private final double janvier = Math.round(myDBHelper.getDepenseByMois("janvier")*100.0)/100.0;
     private final double fevrier = Math.round(myDBHelper.getDepenseByMois("fevrier")*100.0)/100.0;
