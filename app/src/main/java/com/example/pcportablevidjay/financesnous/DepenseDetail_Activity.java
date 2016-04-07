@@ -45,8 +45,6 @@ public class DepenseDetail_Activity extends AppCompatActivity {
 
 
         if (!depense.getPieceJoint().equals("")) {
-            Toast.makeText(getApplicationContext(), "GOOD.", Toast.LENGTH_SHORT).show();
-            Toast.makeText(getApplicationContext(), depense.getPieceJoint(), Toast.LENGTH_SHORT).show();
             Log.e("OpenGLRenderer", depense.getPieceJoint());
             new DownloadImageTask((ImageView) findViewById(R.id.imageView_photo))
                     .execute(depense.getPieceJoint());
