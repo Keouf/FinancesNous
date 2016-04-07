@@ -56,10 +56,6 @@ public class TestUnitaire extends AndroidTestCase {
         assertEquals(321.0, dpTest.getDepenseByDomaine(6));
     }
 
-    public void testMotDePasseUtilisateur() throws Exception {
-        assertEquals("test", dpTest.getUtilisateur("test@fn.fr").getMotDePasse());
-    }
-
     public void testIdUtilisateur() throws Exception {
         assertEquals(1, dpTest.getUtilisateur("test@fn.fr").getId_utilisateur());
     }
