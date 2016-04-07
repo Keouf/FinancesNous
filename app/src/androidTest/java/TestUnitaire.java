@@ -1,14 +1,22 @@
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.support.test.runner.AndroidJUnit4;
 import android.test.AndroidTestCase;
 import java.util.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import com.example.pcportablevidjay.financesnous.Depense_Activity;
-
+import com.example.pcportablevidjay.financesnous.Magasin_Activity;
+import android.support.test.rule.ActivityTestRule;
 import junit.framework.TestCase;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,19 +26,16 @@ import classes.Magasin;
 import classes.MyDBHelper;
 import classes.Utilisateur;
 
+import static android.app.PendingIntent.getActivity;
 import static android.support.v4.app.ActivityCompat.startActivity;
-
 
 public class TestUnitaire extends AndroidTestCase {
 
 
     Date fictif = new Date();
-    Utilisateur utilisateurBidon = new Utilisateur(12,"bidon","1234");
-    Utilisateur utilisateur = new Utilisateur(1,"test@fn.fr","test");
+    Utilisateur utilisateurBidon = new Utilisateur(13,"bidon@fn.fr","1234");
     Magasin magasinTest = new Magasin(10,"test","test","test","test","test","test");
-    Magasin magasinTestDeux = new Magasin(11,"test2","test2","test2","test2","test2","test2");
     Depense test = new Depense(10,fictif,14,utilisateurBidon,"domaine",magasinTest,"rien");
-    Depense testVrai = new Depense(10,fictif,14.00,utilisateur,"Alimentation",magasinTest,"");
     MyDBHelper dpTest = new MyDBHelper();
 
     public void testsurDepense() throws Exception {
@@ -45,27 +50,8 @@ public class TestUnitaire extends AndroidTestCase {
         assertEquals("Auchan", dpTest.getMagasinWithId(1).getNom_managasin());
     }
 
-    /*public void testsurMagasinAuchan() throws Exception  {
-    Looper.prepare();
-                Depense_Activity hActivity = new Depense_Activity();
-                assertEquals("Auchan", dpTest.getMagasinWithReference("Auchan", hActivity).toString());
-    Looper.loop();
-    }*/
-
-    public void testSurCombienDepense() throws Exception {
-        assertEquals(321.0, dpTest.getDepenseByDomaine(6));
-    }
-
     public void testIdUtilisateur() throws Exception {
         assertEquals(1, dpTest.getUtilisateur("test@fn.fr").getId_utilisateur());
-    }
-
-    public void testSurLeNombreDeMagasins() throws Exception {
-        assertEquals(2, dpTest.getAllMagasins().size());
-    }
-
-    public void testSurLeNombreDeDomaines() throws Exception {
-        assertEquals(6, dpTest.getAllDomaines().size());
     }
 
     public void testSurLaCreationDeDepenseFaux() throws Exception {
@@ -74,8 +60,14 @@ public class TestUnitaire extends AndroidTestCase {
         assertEquals(nbDeDepense, dpTest.getLastDepenseID());
     }
 
-    public void testSurDixDerniereDepense() throws Exception {
-        assertEquals(10, utilisateur.get10DernierDepenses().size());
+
+    public void testAjoutDomaine() throws Exception {
+        assertEquals(true, dpTest.ajoutDomaine("TestUnit"));
     }
+
+    public void testAjoutUtilisateur() throws Exception {
+        assertEquals(true, dpTest.creerCompte(utilisateurBidon));
+    }
+
 
 }
