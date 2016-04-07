@@ -65,14 +65,4 @@ public class Utilisateur implements Serializable {
             }
         }
     }
-
-    public String getAllDepensesInString() {
-        String depenses = "";
-
-        for (Depense maDepense : mesDepenses) {
-            depenses += (Integer.toString(maDepense.getIdDepense())) + " - ";
-        }
-
-        return depenses;
-    }
 }
