@@ -78,9 +78,6 @@ public class TestUnitaire extends AndroidTestCase {
         assertEquals(nbDeDepense, dpTest.getLastDepenseID());
     }
 
-    public void testSurAllDepense() throws Exception {
-        assertEquals("", utilisateur.getAllDepensesInString());
-    }
     public void testSurDixDerniereDepense() throws Exception {
         assertEquals(10, utilisateur.get10DernierDepenses().size());
     }
