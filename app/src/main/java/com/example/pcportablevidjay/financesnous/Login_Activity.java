@@ -38,7 +38,6 @@ public class Login_Activity extends AppCompatActivity {
     private final MyDBHelper myDBHelper = new MyDBHelper();
     private UserLoginTask mAuthTask = null;
     private Utilisateur user;
-    // UI references.
     private EditText mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
@@ -157,35 +156,26 @@ public class Login_Activity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
-     */
     private void attemptLogin() {
         if (mAuthTask != null) {
             return;
         }
 
-        // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
 
-        // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
         }
 
-        // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
@@ -197,12 +187,8 @@ public class Login_Activity extends AppCompatActivity {
         }
 
         if (cancel) {
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
             focusView.requestFocus();
         } else {
-            // Show a progress spinner, and kick off a background task to
-            // perform the user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password, this);
             mAuthTask.execute();
@@ -217,18 +203,11 @@ public class Login_Activity extends AppCompatActivity {
         return password.length() > 2;
     }
 
-    /**
-     * Shows the progress UI and hides the login form.
-     */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //code exécuté par l'UI thread
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
                     int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
@@ -242,8 +221,6 @@ public class Login_Activity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    // The ViewPropertyAnimator APIs are not available, so simply show
-                    // and hide the relevant UI components.
                     mProgressView.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
                     mProgressTextView.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
                 }
@@ -256,16 +233,11 @@ public class Login_Activity extends AppCompatActivity {
 
         @Override
         public void onReceive(final Context context, final Intent intent) {
-            // Post the UI updating code to our Handler
-            //updateUI(intent);
             Log.e("test", "test connexion");
         }
     }
 
-    /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
-     */
+
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;

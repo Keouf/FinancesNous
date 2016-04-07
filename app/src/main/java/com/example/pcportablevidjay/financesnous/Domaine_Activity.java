@@ -41,7 +41,6 @@ public class Domaine_Activity extends AppCompatActivity {
 
         boolean remplit = true;
 
-        // Vérifier si les champs ont bien été rempli
         if (TextUtils.isEmpty(nomDomaineEdit.getText())) {
             nomDomaineEdit.setError("Veuillez entrer un nom de domaine");
             nomDomaineEdit.setFocusable(true);

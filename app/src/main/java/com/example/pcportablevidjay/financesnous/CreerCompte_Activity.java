@@ -52,7 +52,7 @@ public class CreerCompte_Activity extends AppCompatActivity {
         // pattern pour vérifier adresse mail
         Pattern regxpDeMail = Pattern.compile(".+@.+\\.[a-z]+");
         // matcher qui compare
-        Matcher m = regxpDeMail.matcher(champMail);
+        Matcher matchSurLaRegexp = regxpDeMail.matcher(champMail);
 
         // Vérifier champ mail rempli
         if (TextUtils.isEmpty(emailEdit.getText())) {
@@ -61,7 +61,7 @@ public class CreerCompte_Activity extends AppCompatActivity {
             remplit = false;
         }
         // Vérifier que l'adresse mail est correct
-        if (!m.matches()) {
+        if (!matchSurLaRegexp.matches()) {
             emailEdit.setError("L'adresse mail que vous avez entrer n'est pas valide");
             emailEdit.setFocusable(true);
             remplit = false;
