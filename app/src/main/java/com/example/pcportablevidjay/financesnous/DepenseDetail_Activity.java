@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -110,6 +111,13 @@ public class DepenseDetail_Activity extends AppCompatActivity {
         ed_montant.setText(Double.toString(depense.getMontant()) + " €");
         ed_site.setText(depense.getMagasin().getSiteWeb());
         ed_telephone.setText(depense.getMagasin().getTelephone());
+    }
+
+    public void goToimageActivity(View v){
+        Intent intent = new Intent(getBaseContext(), image_Activity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("url", depense.getPieceJoint());
+        getBaseContext().startActivity(intent);
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

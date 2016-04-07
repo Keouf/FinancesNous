@@ -58,31 +58,31 @@ public final class MyDBHelper {
         return JsonConverter.convertJsonArrayToDepenseArray(jsonArray, act);
     }
 
-    public void insertDepense(Depense depense) {
+    public boolean insertDepense(Depense depense) {
         makeTaskAsynchrone();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd", java.util.Locale.getDefault());
         if (depense.getGarantieDebut() == null) {
-            sendData("http://berghuis-peter.net/FinanceNous/insertDepense.php?date=", dateFormat.format(depense.getDateDepense()) + "&montant=" + depense.getMontant() + "&pieceJoint=" + depense.getPieceJoint() + "&refMagasin=" + depense.getMagasin().getNom_managasin() + "&refDomaine=" + depense.getDomaine() + "&idUtilisateur=" + depense.getUtilisatuer().getId_utilisateur());
             Log.e("json", "http://berghuis-peter.net/FinanceNous/insertDepense.php?date=" + dateFormat.format(depense.getDateDepense()) + "&montant=" + depense.getMontant() + "&pieceJoint=" + depense.getPieceJoint() + "&refMagasin=" + depense.getMagasin().getNom_managasin() + "&refDomaine=" + depense.getDomaine() + "&idUtilisateur=" + depense.getUtilisatuer().getId_utilisateur());
+            return sendData("http://berghuis-peter.net/FinanceNous/insertDepense.php?date=", dateFormat.format(depense.getDateDepense()) + "&montant=" + depense.getMontant() + "&pieceJoint=" + depense.getPieceJoint() + "&refMagasin=" + depense.getMagasin().getNom_managasin() + "&refDomaine=" + depense.getDomaine() + "&idUtilisateur=" + depense.getUtilisatuer().getId_utilisateur());
         } else {
-            sendData("http://berghuis-peter.net/FinanceNous/insertDepense.php?date=", dateFormat.format(depense.getDateDepense()) + "&montant=" + depense.getMontant() + "&pieceJoint=" + depense.getPieceJoint() + "&refMagasin=" + depense.getMagasin().getNom_managasin() + "&refDomaine=" + depense.getDomaine() + "&idUtilisateur=" + depense.getUtilisatuer().getId_utilisateur() + "&garantieDebut=" + dateFormat.format(depense.getGarantieDebut()) + "&garantieFin=" + dateFormat.format(depense.getGarantieFin()));
             Log.e("json", "http://berghuis-peter.net/FinanceNous/insertDepense.php?date=" + dateFormat.format(depense.getDateDepense()) + "&montant=" + depense.getMontant() + "&pieceJoint=" + depense.getPieceJoint() + "&refMagasin=" + depense.getMagasin().getNom_managasin() + "&refDomaine=" + depense.getDomaine() + "&idUtilisateur=" + depense.getUtilisatuer().getId_utilisateur() + "&garantieDebut=" + dateFormat.format(depense.getGarantieDebut()) + "&garantieFin=" + dateFormat.format(depense.getGarantieFin()));
+            return sendData("http://berghuis-peter.net/FinanceNous/insertDepense.php?date=", dateFormat.format(depense.getDateDepense()) + "&montant=" + depense.getMontant() + "&pieceJoint=" + depense.getPieceJoint() + "&refMagasin=" + depense.getMagasin().getNom_managasin() + "&refDomaine=" + depense.getDomaine() + "&idUtilisateur=" + depense.getUtilisatuer().getId_utilisateur() + "&garantieDebut=" + dateFormat.format(depense.getGarantieDebut()) + "&garantieFin=" + dateFormat.format(depense.getGarantieFin()));
         }
     }
 
-    public void ajoutDomaine(String domaine) {
+    public boolean ajoutDomaine(String domaine) {
         makeTaskAsynchrone();
-        sendData("http://berghuis-peter.net/FinanceNous/ajoutDomaine.php?nom=", domaine);
+        return sendData("http://berghuis-peter.net/FinanceNous/ajoutDomaine.php?nom=", domaine);
     }
 
-    public void creerCompte(Utilisateur utilisateur) {
+    public boolean creerCompte(Utilisateur utilisateur) {
         makeTaskAsynchrone();
-        sendData("http://berghuis-peter.net/FinanceNous/creerCompte.php?mail=", utilisateur.getMail() + "&mdp=" + utilisateur.getMotDePasse());
+        return sendData("http://berghuis-peter.net/FinanceNous/creerCompte.php?mail=", utilisateur.getMail() + "&mdp=" + utilisateur.getMotDePasse());
     }
 
-    public void ajoutMagasin(Magasin magasin, Activity act) {
+    public boolean ajoutMagasin(Magasin magasin, Activity act) {
         makeTaskAsynchrone();
-        sendData("http://berghuis-peter.net/FinanceNous/ajoutMagasin.php?id=", magasin.getId() + "&nom=" + magasin.getNom_managasin() + "&adresse=" + magasin.getAdresse1() + "&ville=" + magasin.getAdresse2() + "&codePostal=" + magasin.getCodePostal() + "&site=" + magasin.getSiteWeb() + "&tel=" + magasin.getTelephone() + "&idUser=" + StorageHelper.getUtilisateur(act.getBaseContext()).getId_utilisateur());
+        return sendData("http://berghuis-peter.net/FinanceNous/ajoutMagasin.php?id=", magasin.getId() + "&nom=" + magasin.getNom_managasin() + "&adresse=" + magasin.getAdresse1() + "&ville=" + magasin.getAdresse2() + "&codePostal=" + magasin.getCodePostal() + "&site=" + magasin.getSiteWeb() + "&tel=" + magasin.getTelephone() + "&idUser=" + StorageHelper.getUtilisateur(act.getBaseContext()).getId_utilisateur());
     }
 
     public int getLastDepenseID() {
@@ -238,7 +238,7 @@ public final class MyDBHelper {
         StrictMode.setThreadPolicy(policy);
     }
 
-    private void sendData(String phpURL, String urlParameters) {
+    private boolean sendData(String phpURL, String urlParameters) {
         HttpURLConnection urlConnection = null;
         try {
             URL url = new URL(phpURL + urlParameters);
@@ -246,9 +246,11 @@ public final class MyDBHelper {
             urlConnection.getInputStream();
         } catch (Exception e) {
             Log.e("json", "could not insert");
+            return false;
         } finally {
             urlConnection.disconnect();
         }
+        return true;
     }
 
 

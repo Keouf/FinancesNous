@@ -18,7 +18,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/scrollView2"
-        android:layout_gravity="center_horizontal"
         android:background="@drawable/rectangle_coins_arrondis_back"
         android:layout_margin="10dp">
 
@@ -241,9 +240,10 @@
                 android:layout_height="fill_parent"
                 android:id="@+id/imageView_photo"
                 android:layout_gravity="center_horizontal"
+                android:layout_alignStart="@+id/depense_detail_tv_montant"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignStart="@+id/depense_detail_tv_montant" />
+                android:clickable="true"
+                android:onClick="goToimageActivity" />
 
         </RelativeLayout>
     </ScrollView>
