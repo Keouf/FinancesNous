@@ -60,7 +60,6 @@ public class Fragment_Recherche_Depense extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("json", "all 10 depenses : " + StorageHelper.getUtilisateur(getActivity().getBaseContext()));
         if (StorageHelper.getUtilisateur(getActivity().getBaseContext()).getMesDepenses().size() > 0)
         {
             adapater.clear();
