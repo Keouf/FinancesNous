@@ -1,4 +1,5 @@
-import android.app.Activity;
+package TestUnitaire;
+
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
@@ -10,7 +11,6 @@ import com.example.pcportablevidjay.financesnous.Accueil_Activity;
 import com.example.pcportablevidjay.financesnous.CreerCompte_Activity;
 import com.example.pcportablevidjay.financesnous.Depense_Activity;
 import com.example.pcportablevidjay.financesnous.Login_Activity;
-import com.example.pcportablevidjay.financesnous.Magasin_Activity;
 import com.example.pcportablevidjay.financesnous.R;
 
 import junit.framework.TestCase;
@@ -24,10 +24,10 @@ import java.util.Date;
 
 import classes.Depense;
 import classes.Magasin;
-import classes.MyDBHelper;
 import classes.Utilisateur;
 
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
@@ -54,34 +54,28 @@ import static org.hamcrest.Matchers.not;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 
 @RunWith(AndroidJUnit4.class)
-public class TestFonctionnelPourMagasins {
-    MyDBHelper dpTest = new MyDBHelper();
+public class TestFonctionnelPourAccueil {
     @Rule
-    public ActivityTestRule<Magasin_Activity> mactivityrule = new ActivityTestRule<>(Magasin_Activity.class);
+    public ActivityTestRule<Accueil_Activity> mactivityrule = new ActivityTestRule<>(Accueil_Activity.class);
     @Test
-    public void creationDeMagasins() {
-        onView(withId(R.id.buttonValider)).perform(click());
-        onView(withId(R.id.editTextNomMag)).perform(typeText("MagasinsTest"));
-        onView(withId(R.id.editTextNomMag)).perform(closeSoftKeyboard());
-        onView(withId(R.id.buttonValider)).perform(click());
-        onView(withId(R.id.editTextAdrMag)).perform(typeText("rue des faux magasins"));
-        onView(withId(R.id.editTextCPMag)).perform(typeText("4152"));
-        onView(withId(R.id.editTextVilleMag)).perform(typeText("EspressoCity"));
-        onView(withId(R.id.editTextSiteMag)).perform(typeText("pasDeSite"));
-        onView(withId(R.id.editTextTelMag)).perform(typeText("067069835"));
-        onView(withId(R.id.editTextTelMag)).perform(closeSoftKeyboard());
-        onView(withId(R.id.buttonValider)).perform(click());
-        onView(withId(R.id.editTextTelMag)).perform(clearText());
-        onView(withId(R.id.editTextTelMag)).perform(typeText("0670698353"));
-        onView(withId(R.id.editTextTelMag)).perform(closeSoftKeyboard());
-        onView(withId(R.id.buttonValider)).perform(click());
-        onView(withId(R.id.editTextSiteMag)).perform(clearText());
-        onView(withId(R.id.editTextSiteMag)).perform(typeText("www.pasDeSite.com"));
-        onView(withId(R.id.editTextSiteMag)).perform(closeSoftKeyboard());
-        onView(withId(R.id.buttonValider)).perform(click());
-        onView(withId(R.id.editTextCPMag)).perform(clearText());
-        onView(withId(R.id.editTextCPMag)).perform(typeText("41520"));
-        onView(withId(R.id.editTextCPMag)).perform(closeSoftKeyboard());
-        onView(withId(R.id.buttonValider)).perform(click());
+    public void testStat() {
+        onView(withId(R.id.textBienvenue)).check(matches(withText("Bienvenue sur Finances&Nous")));
+        onView(withContentDescription("Open navigation drawer")).perform(click());
+        onView(withText("Statistique")).perform(click());
+        onView(withId(R.id.checkBoxGraphMois)).perform(click());
+        onView(withId(R.id.checkBoxGraphDomaine)).perform(click());
+        onView(withId(R.id.checkBoxGraphMois)).perform(click());
+    }
+    @Test
+    public void testDepense() {
+        onView(withId(R.id.textBienvenue)).check(matches(withText("Bienvenue sur Finances&Nous")));
+        onView(withContentDescription("Open navigation drawer")).perform(click());
+        onView(withText("Dépense")).perform(click());
+    }
+    @Test
+    public void testAPropos() {
+        onView(withId(R.id.textBienvenue)).check(matches(withText("Bienvenue sur Finances&Nous")));
+        onView(withContentDescription("Open navigation drawer")).perform(click());
+        onView(withText("A propos")).perform(click());
     }
 }

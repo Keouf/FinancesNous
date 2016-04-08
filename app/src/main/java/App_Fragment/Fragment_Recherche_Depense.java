@@ -1,4 +1,4 @@
-package layout;
+package App_Fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -42,7 +42,7 @@ public class Fragment_Recherche_Depense extends Fragment {
         if (mes10DernierDepenses == null || mes10DernierDepenses.isEmpty()) {
             depensesListView.setVisibility(View.GONE);
             tvMessage.setVisibility(View.VISIBLE);
-            tvMessage.setText("Vous n'avez pas de depenses crée");
+            tvMessage.setText("Vous n'avez pas de depenses crée.");
         } else {
             try {
                 tvMessage.setVisibility(View.INVISIBLE);

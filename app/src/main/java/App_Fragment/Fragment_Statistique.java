@@ -1,4 +1,4 @@
-package com.example.pcportablevidjay.financesnous;
+package App_Fragment;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.view.ViewGroup.LayoutParams;
+
+import com.example.pcportablevidjay.financesnous.R;
 
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;

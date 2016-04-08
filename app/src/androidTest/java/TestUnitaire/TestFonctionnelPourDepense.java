@@ -1,3 +1,5 @@
+package TestUnitaire;
+
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
@@ -25,7 +27,6 @@ import classes.Magasin;
 import classes.Utilisateur;
 
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
@@ -52,28 +53,33 @@ import static org.hamcrest.Matchers.not;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 
 @RunWith(AndroidJUnit4.class)
-public class TestFonctionnelPourAccueil {
+public class TestFonctionnelPourDepense {
     @Rule
-    public ActivityTestRule<Accueil_Activity> mactivityrule = new ActivityTestRule<>(Accueil_Activity.class);
+    public ActivityTestRule<Depense_Activity> mactivityrule = new ActivityTestRule<>(Depense_Activity.class);
     @Test
-    public void testStat() {
-        onView(withId(R.id.textBienvenue)).check(matches(withText("Bienvenue sur Finances&Nous")));
-        onView(withContentDescription("Open navigation drawer")).perform(click());
-        onView(withText("Statistique")).perform(click());
-        onView(withId(R.id.checkBoxGraphMois)).perform(click());
-        onView(withId(R.id.checkBoxGraphDomaine)).perform(click());
-        onView(withId(R.id.checkBoxGraphMois)).perform(click());
-    }
-    @Test
-    public void testDepense() {
-        onView(withId(R.id.textBienvenue)).check(matches(withText("Bienvenue sur Finances&Nous")));
-        onView(withContentDescription("Open navigation drawer")).perform(click());
-        onView(withText("Dépense")).perform(click());
-    }
-    @Test
-    public void testAPropos() {
-        onView(withId(R.id.textBienvenue)).check(matches(withText("Bienvenue sur Finances&Nous")));
-        onView(withContentDescription("Open navigation drawer")).perform(click());
-        onView(withText("A propos")).perform(click());
+    public void creationDepense() {
+        onView(withId(R.id.editTextMontant)).perform(closeSoftKeyboard());
+        onView(withId(R.id.buttonValiderDépense)).perform(click());
+        onView(withId(R.id.editTextMontant)).perform(typeText("123"));
+        onView(withId(R.id.editTextMontant)).perform(closeSoftKeyboard());
+
+        onView(withId(R.id.spinner_domaine)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Alimentation"))).perform(click());
+
+        onView(withId(R.id.spinner_enseigne)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Leclerc"))).perform(click());
+
+        onView(withId(R.id.editText_date)).perform(click());
+        pressBack();
+        onView(withId(R.id.CBGarantie)).perform(click());
+        onView(withId(R.id.CBGarantie)).perform(click());
+        onView(withId(R.id.CBNoteDeFrais)).perform(click());
+        onView(withId(R.id.CBNoteDeFrais)).perform(click());
+        onView(withId(R.id.CBGarantie)).perform(click());
+        onView(withId(R.id.CBNoteDeFrais)).perform(click());
+        onView(withId(R.id.CBGarantie)).perform(click());
+        onView(withId(R.id.CBNoteDeFrais)).perform(click());
+
+        onView(withId(R.id.buttonValiderDépense)).perform(scrollTo(), click());
     }
 }

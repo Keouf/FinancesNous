@@ -22,12 +22,13 @@ import android.widget.Toast;
 
 import classes.StorageHelper;
 import classes.Utils;
-import layout.Fragment_Recherche_Depense;
+
+import App_Fragment.*;
 
 public class Accueil_Activity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private String fragmentCourant;
+    private String fragmentCourant = "";
 
     private final BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -168,18 +169,17 @@ public class Accueil_Activity extends AppCompatActivity
         iff.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         this.registerReceiver(this.mBroadcastReceiver, iff);
 
-        if(fragmentCourant != null) {
-            switch (fragmentCourant) {
-                case "accueil":
-                case "rechercheDepense":
-                    afficherAjoutDepense(true);
-                    break;
-                case "statistique":
-                    afficherAjoutDepense(false);
-                    break;
-            }
+        switch (fragmentCourant) {
+               case "accueil":
+               case "rechercheDepense":
+                   afficherAjoutDepense(true);
+                   break;
+               case "statistique":
+                   afficherAjoutDepense(false);
+                   break;
+               default:
+                   afficherAjoutDepense(true);
         }
-
     }
 
     @Override

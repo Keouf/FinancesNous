@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.pcportablevidjay.financesnous.Fragment_Accueil"
+    tools:context="App_Fragment.Fragment_Accueil"
     android:gravity="center_horizontal">
 
     <!-- TODO: Update blank fragment layout -->

@@ -1,3 +1,5 @@
+package TestUnitaire;
+
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;

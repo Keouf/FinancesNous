@@ -1,3 +1,5 @@
+package TestUnitaire;
+
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
@@ -8,7 +10,9 @@ import android.widget.DatePicker;
 import com.example.pcportablevidjay.financesnous.Accueil_Activity;
 import com.example.pcportablevidjay.financesnous.CreerCompte_Activity;
 import com.example.pcportablevidjay.financesnous.Depense_Activity;
+import com.example.pcportablevidjay.financesnous.Domaine_Activity;
 import com.example.pcportablevidjay.financesnous.Login_Activity;
+import com.example.pcportablevidjay.financesnous.Magasin_Activity;
 import com.example.pcportablevidjay.financesnous.R;
 
 import junit.framework.TestCase;
@@ -51,33 +55,14 @@ import static org.hamcrest.Matchers.not;
 import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 
 @RunWith(AndroidJUnit4.class)
-public class TestFonctionnelPourDepense {
+public class TestFonctionnelPourDomaine {
     @Rule
-    public ActivityTestRule<Depense_Activity> mactivityrule = new ActivityTestRule<>(Depense_Activity.class);
+    public ActivityTestRule<Domaine_Activity> mactivityrule = new ActivityTestRule<>(Domaine_Activity.class);
     @Test
-    public void creationDepense() {
-        onView(withId(R.id.editTextMontant)).perform(closeSoftKeyboard());
-        onView(withId(R.id.buttonValiderDépense)).perform(click());
-        onView(withId(R.id.editTextMontant)).perform(typeText("123"));
-        onView(withId(R.id.editTextMontant)).perform(closeSoftKeyboard());
-
-        onView(withId(R.id.spinner_domaine)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("Alimentation"))).perform(click());
-
-        onView(withId(R.id.spinner_enseigne)).perform(click());
-        onData(allOf(is(instanceOf(String.class)), is("Leclerc"))).perform(click());
-
-        onView(withId(R.id.editText_date)).perform(click());
-        pressBack();
-        onView(withId(R.id.CBGarantie)).perform(click());
-        onView(withId(R.id.CBGarantie)).perform(click());
-        onView(withId(R.id.CBNoteDeFrais)).perform(click());
-        onView(withId(R.id.CBNoteDeFrais)).perform(click());
-        onView(withId(R.id.CBGarantie)).perform(click());
-        onView(withId(R.id.CBNoteDeFrais)).perform(click());
-        onView(withId(R.id.CBGarantie)).perform(click());
-        onView(withId(R.id.CBNoteDeFrais)).perform(click());
-
-        onView(withId(R.id.buttonValiderDépense)).perform(scrollTo(), click());
+    public void creationDeDomaine() {
+        onView(withId(R.id.buttonValider)).perform(click());
+        onView(withId(R.id.editTextNomDomaine)).perform(typeText("Cafe"));
+        onView(withId(R.id.editTextNomDomaine)).perform(closeSoftKeyboard());
+        onView(withId(R.id.buttonValider)).perform(click());
     }
 }

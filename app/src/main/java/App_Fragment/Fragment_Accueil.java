@@ -1,10 +1,12 @@
-package com.example.pcportablevidjay.financesnous;
+package App_Fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.pcportablevidjay.financesnous.R;
 
 
 public class Fragment_Accueil extends Fragment {
