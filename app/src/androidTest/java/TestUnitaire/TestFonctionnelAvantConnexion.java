@@ -96,7 +96,7 @@ public class TestFonctionnelAvantConnexion {
         onView(withId(R.id.password)).perform(typeText("test"));
         onView(withId(R.id.email_sign_in_button)).perform(click());
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
