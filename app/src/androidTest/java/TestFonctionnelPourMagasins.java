@@ -1,3 +1,4 @@
+import android.app.Activity;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
@@ -23,6 +24,7 @@ import java.util.Date;
 
 import classes.Depense;
 import classes.Magasin;
+import classes.MyDBHelper;
 import classes.Utilisateur;
 
 
@@ -53,6 +55,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 
 @RunWith(AndroidJUnit4.class)
 public class TestFonctionnelPourMagasins {
+    MyDBHelper dpTest = new MyDBHelper();
     @Rule
     public ActivityTestRule<Magasin_Activity> mactivityrule = new ActivityTestRule<>(Magasin_Activity.class);
     @Test

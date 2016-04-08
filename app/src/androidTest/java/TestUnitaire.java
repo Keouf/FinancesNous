@@ -69,5 +69,15 @@ public class TestUnitaire extends AndroidTestCase {
         assertEquals(true, dpTest.creerCompte(utilisateurBidon));
     }
 
+   /* public void testDepenseParMois() throws Exception {
+        assertEquals(913.0, dpTest.getDepenseByMois("Janvier"));
+    }*/
 
+    /*public void testDepenseParDomaine() throws Exception {
+        assertEquals(342.0, dpTest.getDepenseByDomaine(1));
+    }*/
+
+    /*public void testDerniereDepense() throws Exception {
+        assertEquals(317, dpTest.getLastDepenseID());
+    }*/
 }
