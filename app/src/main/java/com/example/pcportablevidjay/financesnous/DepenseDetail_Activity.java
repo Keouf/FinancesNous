@@ -3,22 +3,15 @@ package com.example.pcportablevidjay.financesnous;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
 
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -45,10 +38,8 @@ public class DepenseDetail_Activity extends AppCompatActivity {
         populateLayout();
 
 
-        if (!depense.getPieceJoint().equals("")) {
-            Log.e("OpenGLRenderer", depense.getPieceJoint());
-            new DownloadImageTask((ImageView) findViewById(R.id.imageView_photo))
-                    .execute(depense.getPieceJoint());
+        if (depense.getPieceJoint().equals("")) {
+            findViewById(R.id.depense_detail_bt_voirImage).setVisibility(View.INVISIBLE);
         }
 
 
@@ -118,32 +109,5 @@ public class DepenseDetail_Activity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("url", depense.getPieceJoint());
         getBaseContext().startActivity(intent);
-    }
-
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
-
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-                in.close();
-            } catch (Exception e) {
-                Log.e("Error", e.getMessage());
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            Bitmap scaled = Bitmap.createScaledBitmap(result, result.getWidth()/3, result.getHeight()/3, false);
-            bmImage.setImageBitmap(scaled);
-        }
     }
 }

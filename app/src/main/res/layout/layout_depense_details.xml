@@ -235,14 +235,13 @@
                 android:layout_alignParentStart="false"
                 android:layout_alignBaseline="@+id/depense_detail_tv_montant" />
 
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/imageView_photo"
-                android:layout_gravity="center_horizontal"
-                android:layout_alignStart="@+id/depense_detail_tv_montant"
-                android:layout_alignParentBottom="true"
-                android:clickable="true"
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="afficher image"
+                android:id="@+id/depense_detail_bt_voirImage"
+                android:layout_below="@+id/depense_detail_tv_montant"
+                android:layout_toEndOf="@+id/depense_detail_tv_telephone"
                 android:onClick="goToimageActivity" />
 
         </RelativeLayout>
