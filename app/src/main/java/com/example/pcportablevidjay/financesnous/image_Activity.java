@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
@@ -22,6 +23,8 @@ public class image_Activity extends AppCompatActivity {
         Intent i = getIntent();
         String url = (String) i.getSerializableExtra("url");
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         new DownloadImageTask((ImageView) findViewById(R.id.activity_image_imageView))
                 .execute(url);
@@ -32,7 +35,6 @@ public class image_Activity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
